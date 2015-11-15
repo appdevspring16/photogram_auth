@@ -146,7 +146,7 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
 1. Create an RCAV: When I visit [http://localhost:3000/users](http://localhost:3000/users), I should see an index of all users. This RCAV does not exist right now, since we used Devise to generate the User resource rather than starter_generators. Devise only builds the RCAVs required for sign-up/sign-in/sign-out/etc; it doesn't build the standard Golden Seven. But that's okay, because we can easily add the ones that we want ourselves (if any). Once done, add a link to the navbar.
 
-1. Create an RCAV: When I visit [http://localhost:3000/users/1](http://localhost:3000/users/1), I should see the details of user #1 along with all of his or her photos. Once done, and a link to the navbar that leads to the current user's show page. (This may lead to a problem when no one is signed in -- how can you fix it? Also, be careful where you add this route in `routes.rb` -- it needs to be below the line `devise_for :users`, otherwise it will conflict with `/users/sign_in` and `/users/sign_up`.)
+1. Create an RCAV: When I visit [http://localhost:3000/users/1](http://localhost:3000/users/1), I should see the details of user #1 along with all of his or her photos. Once done, add a link to the navbar that leads to the current user's show page. (This may lead to a problem when no one is signed in -- how can you fix it? Also, be careful where you add this route in `routes.rb` -- it needs to be below the line `devise_for :users`, otherwise it will conflict with `/users/sign_in` and `/users/sign_up`.)
 
 1. Create an RCAV: When I visit [http://localhost:3000/my_likes](http://localhost:3000/my_likes), I should see only the photos that I have liked.  Once done, add a link to the navbar.
 
