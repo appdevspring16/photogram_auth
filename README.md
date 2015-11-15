@@ -124,7 +124,7 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
     rake db:seed
     ```
 
-    Now click around the app and see what we've got.
+    Now click around the app and see what we've got. (If you're curious, I used the [faker gem](https://github.com/stympy/faker) to create the silly random seed comments. It's very useful for quickly generating random names, addresses, etc.)
 
 1. Let's require that someone be signed in before they can do anything else. In `application_controller.rb`, add the line
 
