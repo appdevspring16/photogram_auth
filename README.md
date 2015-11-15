@@ -6,8 +6,6 @@ We'll be building a simple clone of [Instagram](https://www.instagram.com/).
 
 [Here is your target for the required parts of the assignment](https://photogram-auth-target.herokuapp.com/) (associations, authentication).
 
-[Additionally, here is a target for the optional parts of the assignment](https://photogram-final-target.herokuapp.com/) (file uploads, social network).
-
 ## Domain Model
 
 Suppose we design the following domain model for our application:
@@ -164,5 +162,7 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 
 1. Optional: Use [the Carrierwave cheatsheet](https://gist.github.com/rbetina/ec1b65713e9e8f863539) to enable image uploads (rather than pasting in existing URLs). You'll find an accompanying video in Additional Videos in Canvas.
 1. Optional: Follow [the Tweeter example project](https://github.com/firstdraft/tweeter) to enable followers/timeline. You'll find an accompanying video titled "Social Network" in Additional Videos in Canvas.
+
+[Here is a target for the optional parts of the assignment](https://photogram-final-target.herokuapp.com/) (file uploads, social network).
 
 ## Good luck! Ask lots of questions!
