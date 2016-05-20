@@ -160,8 +160,8 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 1. **Make the heart to quick-add/delete a like directly below a photo work.**
 1. [Customize the generated sign-in/sign-out/edit profile forms](https://gist.github.com/raghubetina/9ef4a9ffa4604df74bb5#customizing-devise-views) to a) include a field for username, b) make them look nicer. [Here are some Bootstrapped Devise forms that you can build off of](https://github.com/firstdraft/bootstrapped_devise_forms), but you need to add a field for username, and then [let that param through additional security](https://gist.github.com/raghubetina/9ef4a9ffa4604df74bb5#step-three-allow-additional-parameters-through-security) before the form will work.
 
-1. Optional: Use [the Carrierwave cheatsheet](https://gist.github.com/raghubetina/ec1b65713e9e8f863539) to enable image uploads (rather than pasting in existing URLs). You'll find an accompanying video in Additional Videos in Canvas.
-1. Optional: Follow [the Tweeter example project](https://github.com/firstdraft/tweeter) to enable followers/timeline. You'll find an accompanying video titled "Social Network" in Additional Videos in Canvas.
+1. Optional: Use [the Carrierwave cheatsheet](https://gist.github.com/raghubetina/ec1b65713e9e8f863539) to enable image uploads (rather than pasting in existing URLs). You'll find an accompanying video under Pages in Canvas.
+1. Optional: Follow [the Tweeter example project](https://github.com/firstdraft/tweeter) to enable followers/timeline. You'll find an accompanying video titled "Social Network" under Pages in Canvas.
 
 [Here is a target for the optional parts of the assignment](https://photogram-final-target.herokuapp.com/) (file uploads, social network).
 
