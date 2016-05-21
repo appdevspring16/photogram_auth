@@ -1,0 +1,14 @@
+<div class="page-header">
+  <h1>
+    All Users
+  </h1>
+</div>
+<div class="row panel">
+    <ul>
+      <% User.all.each do |user| %>
+      <li>
+        <a href="/users/<%= user.id %>"><%= user.email %></a>
+      </li>
+      <% end %>
+    </ul>
+</div>

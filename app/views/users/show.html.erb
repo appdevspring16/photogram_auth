@@ -1,0 +1,14 @@
+<div class="page-header">
+  <h1>
+    <%= @user.email %>
+  </h1>
+</div>
+<div class="row panel">
+    <ul>
+      <% @user.photos.each do |user| %>
+      <li>
+        <img src="<%= user.image %>" alt="" />
+      </li>
+      <% end %>
+    </ul>
+</div>
