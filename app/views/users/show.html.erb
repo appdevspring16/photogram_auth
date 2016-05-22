@@ -1,0 +1,24 @@
+<div class="page-header">
+  <h3><%= @user.username %></h3>
+</div>
+
+<div class="row">
+
+  <% @user.photos.each do |photo| %>
+
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt></dt>
+      <dd><h5><%= photo.caption %></h5></dd>
+
+      <dt></dt>
+      <dd><img src="<%= photo.image %>" height="300" alt="Photo not found"></img></dd>
+    </dl>
+
+  </div>
+
+  <% end %>
+
+
+
+</div>
