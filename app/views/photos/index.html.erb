@@ -1,32 +1,46 @@
-<div class="page-header">
-  <h1>
-    Photos
-    <a href="/photos/new" class="btn btn-lg btn-success">New Photo</a>
-  </h1>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-striped table-hover">
-      <tr>
-        <th>Caption</th>
-        <th>Image</th>
-        <th>User</th>
-        <th>Actions</th>
-      </tr>
-
-      <% @photos.each do |photo| %>
-      <tr>
-        <td><%= photo.caption %></td>
-        <td><%= photo.image %></td>
-        <td><%= photo.user_id %></td>
-        <td>
-          <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
-          <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
+<div class="container">
+  <hr>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <a href="/photos/new" class="btn btn-default btn-block"><i class="fa fa-plus"></i></a>
+    </div>
   </div>
+  <hr>
+
+  <% @photos.each do |photo| %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><a href="/users/<%= photo.user.id %>"><%= photo.user.username %></a></h3>
+          <small></small>
+        </div>
+        <div class="panel-body">
+          <a href="/photos/<%= photo.id %> "><img src="<%= photo.image %>" alt="" class="img-responsive" /></a>
+          <p>
+            <a href="/photos" class="btn btn-link"><i class="fa fa-heart"></i></a>
+            <%# photo.likes.pluck(user.username) %> likes this
+          </p>
+          <ul class="media-list">
+            <li class="media"><a href="/users/<%= photo.user.id %>"><%= photo.user.username %></a><%= photo.caption %></li>
+            <% photo.comments.each do |comment| %>
+            <li class="media"> <a href="/users/<%= comment.user.id %>" ><%= comment.user.username %></a> <%= comment.body %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
 </div>
+
+
+
+
+<%# hour_since_post = TimeDifference.between(photo.created_at, Time.new).in_hours.round %>
+<%# if hour_since_post < 24 %>
+<%# time = "#{hour_since_post} hours ago" %>
+<%# elseif hour_since_post / 24 < 31  %>
+<%# time = "#{hour_since_post/24.round} days ago" %>
+<%# else time = "#{hour_since_post/24/30.round} months ago" %>
+<%# end %>
