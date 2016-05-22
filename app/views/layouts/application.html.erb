@@ -41,7 +41,8 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <% if current_user.present? %>
-          <li><a href="/users/<%= current_user.id %>">Profile</a></li>
+          <li><a href="/users/<%= current_user.id %>">My Profile</a></li>
+          <li><a href="/my_likes">My Likes</a></li>
           <% end %>
           <li><a href="/comments">Comments</a></li>
           <li><a href="/likes">Likes</a></li>
