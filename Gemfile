@@ -1,5 +1,9 @@
 source 'http://rubygems.org'
 
+gem 'devise'
+
+gem "starter_generators", :git => "http://github.com/raghubetina/starter_generators.git"
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
