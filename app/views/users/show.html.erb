@@ -15,8 +15,49 @@
       <div class="panel-heading"><%= User.find_by( :id => photo.user_id ).username %></div>
       <div class="panel-body">
         <div><img src="<%= photo.image %>" class="img-responsive" alt="Photo not found"></img></div>
-        <div><%= User.find_by( :id => photo.user_id ).username %></div>
+
+        <!-- likes -->
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <% photo.likes.each do |like| %>
+        <%= like.user.username %>
+        <% end %>
+
+        <!-- post caption -->
+        <div>
+          <a href="/users/<%= photo.user.id %>"><%= photo.user.username %></a>
+          <small><%= time_ago_in_words( photo.created_at ) %> ago</small>
+        </div>
         <div><%= photo.caption %></div>
+
+        <!-- comments -->
+        <% photo.comments.each do |comment| %>
+        <div>
+          <a href="/users/<%= comment.user.id %>"><%= comment.user.username %></a>
+          <small><%= time_ago_in_words( comment.created_at ) %> ago</small>
+        </div>
+        <div><%= comment.body %></div>
+        <% end %>
+
+        <!-- add comment -->
+        <form action="/create_comment" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <!-- Label and input for photo_id -->
+            <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+          <!-- Label and input for body -->
+          <div class="form-group">
+            <input type="text" name="body" placeholder="Add a comment..." class="form-control" rows="3"></input>
+          </div>
+
+          <!-- Label and input for user_id -->
+            <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+
+        </form>
+
+
 
       </div>
     </div>
