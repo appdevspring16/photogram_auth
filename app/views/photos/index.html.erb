@@ -39,7 +39,24 @@
         <div><%= comment.body %></div>
         <% end %>
 
+        <!-- add comment -->
+        <form action="/create_comment" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
+          <!-- Label and input for photo_id -->
+            <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+          <!-- Label and input for body -->
+          <div class="form-group">
+            <input type="text" name="body" placeholder="Add a comment..." class="form-control" rows="3"></input>
+          </div>
+
+          <!-- Label and input for user_id -->
+            <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+
+        </form>
 
       </div>
     </div>
