@@ -10,9 +10,9 @@ feature "Devise:", js: do_not_show_tests_in_browser do
 
     visit "/"
     if page.has_selector?("label", text: "Email")
-      fill_in("Email", :with => user.email)
-      fill_in("Password", :with => user.password)
-      click_on("Log in")
+      fill_in "Email", :with => user.email
+      fill_in "Password", :with => user.password
+      click_on "Log in"
     end
 
     expect(page).to have_link(nil, href: "/photos/new")
@@ -43,9 +43,9 @@ feature "Devise:", js: do_not_show_tests_in_browser do
     user = FactoryGirl.create(:user)
 
     visit "/"
-    fill_in("Email", :with => user.email)
-    fill_in("Password", :with => user.password)
-    click_on("Log in")
+    fill_in "Email", :with => user.email
+    fill_in "Password", :with => user.password
+    click_on "Log in"
 
     expect(page).to have_content("Signed in successfully.")
   end
