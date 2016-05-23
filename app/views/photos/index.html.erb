@@ -7,7 +7,7 @@
   </div>
   <hr>
 
-  <% @photos.each do |photo| %>
+  <% @photos.order(created_at: :desc).each do |photo| %>
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
@@ -16,14 +16,26 @@
           <small></small>
         </div>
         <div class="panel-body">
-          <a href="/photos/<%= photo.id %> "><img src="<%= photo.image %>" alt="" class="img-responsive" /></a>
+          <a href="/photos/<%= photo.id %>"><img src="<%= photo.image %>" alt="" class="img-responsive" /></a>
           <p>
+            <% if photo.fans.where({ :id => (current_user.id) }).present? %>
             <a href="/photos" class="btn btn-link"><i class="fa fa-heart"></i></a>
-            <%# photo.likes.pluck(user.username) %> likes this
+            <% else %>
+            <a href="/photos" class="btn btn-link"><i class="fa fa-heart-o"></i></a>
+            <% end %>
+            <% if photo.fans.count == 0 %>
+            <small>be the first to like this</small>
+            <% else%>
+            <% if photo.fans.count == 1  %>
+            <%= photo.fans.pluck(:username).to_sentence %> likes this
+            <% else %>
+            <%= photo.fans.pluck(:username).to_sentence %> like this
+            <% end %>
+            <% end %>
           </p>
           <ul class="media-list">
-            <li class="media"><a href="/users/<%= photo.user.id %>"><%= photo.user.username %></a><%= photo.caption %></li>
-            <% photo.comments.each do |comment| %>
+            <li class="media"><a href="/users/<%= photo.user.id %>"><%= photo.user.username %></a> <%= photo.caption %></li>
+            <% photo.comments.order(created_at: :desc).each do |comment| %>
             <li class="media"> <a href="/users/<%= comment.user.id %>" ><%= comment.user.username %></a> <%= comment.body %></li>
             <% end %>
           </ul>
