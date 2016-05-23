@@ -1,3 +1,33 @@
+<div class="jumbotron">
+  <h3><%= @user.username %></h3>
+</div>
+
+<div class="page-header">
+  <a href="/photos/new" class="btn btn-default btn-group-justified"><i class="fa fa-plus" aria-hidden="true"></i></a>
+</div>
+
+<div class="row">
+
+  <% @user.photos.each do |photo| %>
+  <div class="col-md-8 col-md-offset-2">
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= User.find_by( :id => photo.user_id ).username %></div>
+      <div class="panel-body">
+        <div><img src="<%= photo.image %>" class="img-responsive" alt="Photo not found"></img></div>
+        <div><%= User.find_by( :id => photo.user_id ).username %></div>
+        <div><%= photo.caption %></div>
+
+      </div>
+    </div>
+
+  </div>
+<% end %>
+</div>
+
+
+
+
 <div class="page-header">
   <h3><%= @user.username %></h3>
 </div>
