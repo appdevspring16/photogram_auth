@@ -1,0 +1,57 @@
+<div class="row">
+
+  <% @myLike.each do |like| %>
+  <div class="col-md-8 col-md-offset-2">
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= User.find_by( :id => Photo.find_by( :id => Like.find_by( :id => like.photo_id )).user_id ).username %></div>
+      <div class="panel-body">
+        <div><img src="<%= Photo.find_by( :id => Like.find_by( :id => like.photo_id )).image %>" class="img-responsive" alt="Photo not found"></img></div>
+
+        <!-- likes -->
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <% like.photo.likes.each do |each_like| %>
+        <%= each_like.user.username %>
+        <% end %>
+
+        <!-- post caption -->
+        <div>
+          <a href="/users/<%= like.user.id %>"><%= like.photo.user.username %></a>
+          <small><%= time_ago_in_words( like.photo.created_at ) %> ago</small>
+        </div>
+        <div><%= like.photo.caption %></div>
+
+        <!-- comments -->
+        <% like.photo.comments.each do |comment| %>
+        <div>
+          <a href="/users/<%= comment.user.id %>"><%= comment.user.username %></a>
+          <small><%= time_ago_in_words( comment.created_at ) %> ago</small>
+        </div>
+        <div><%= comment.body %></div>
+        <% end %>
+
+        <!-- add comment -->
+        <form action="/create_comment" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <!-- Label and input for photo_id -->
+            <input type="hidden" name="photo_id" value="<%= like.photo.id %>">
+
+          <!-- Label and input for body -->
+          <div class="form-group">
+            <input type="text" name="body" placeholder="Add a comment..." class="form-control" rows="3"></input>
+          </div>
+
+          <!-- Label and input for user_id -->
+            <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+<% end %>
+</div>
