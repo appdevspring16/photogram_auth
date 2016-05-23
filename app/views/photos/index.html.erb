@@ -18,10 +18,24 @@
         <div><img src="<%= photo.image %>" class="img-responsive" alt="Photo not found"></div>
 
         <!-- likes -->
-        <i class="fa fa-heart-o" aria-hidden="true"></i>
-        <% Like.where( :photo_id => photo.id).each do |like| %>
-        <%= User.find_by( :id => like.user_id ).username %>
-        <% end %>
+
+        <form action="/create_like" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+          <!-- Label and input for user_id -->
+            <input type="hidden" name="user_id" value="<%= current_user.id %>">
+          <!-- Label and input for photo_id -->
+            <input type="hidden" name="photo_id" value="<%= photo.id %>">
+          <div class="btn-group">
+          <button class="like-btn btn-small">
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+          </button>
+          <% Like.where( :photo_id => photo.id).each do |like| %>
+          <%= User.find_by( :id => like.user_id ).username %>
+          <% end %>
+          </div>
+        </form>
+
 
         <!-- post caption -->
         <div>

@@ -17,10 +17,25 @@
         <div><img src="<%= photo.image %>" class="img-responsive" alt="Photo not found"></img></div>
 
         <!-- likes -->
-        <i class="fa fa-heart-o" aria-hidden="true"></i>
-        <% photo.likes.each do |like| %>
-        <%= like.user.username %>
-        <% end %>
+
+        <form action="/create_like" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+          <!-- Label and input for user_id -->
+            <input type="hidden" name="user_id" value="<%= current_user.id %>">
+          <!-- Label and input for photo_id -->
+            <input type="hidden" name="photo_id" value="<%= photo.id %>">
+          <div class="btn-group">
+          <button class="like-btn btn-small">
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+          </button>
+          <% photo.likes.each do |like| %>
+          <%= like.user.username %>
+          <% end %>
+          </div>
+        </form>
+
+
 
         <!-- post caption -->
         <div>
