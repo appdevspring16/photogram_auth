@@ -10,7 +10,7 @@
   <style>
     /* Only necessary if you are using navbar-fixed-top */
     body {
-      padding-top: 60px;
+      padding-top: 80px;
     }
   </style>
 
@@ -44,6 +44,10 @@
           <li><a href="/likes">Likes</a></li>
           <li><a href="/photos">Photos</a></li>
           <li><a href="/users">All Users</a></li>
+
+   <% if current_user.present? %>
+          <li><a href="/users/<%=current_user.id%>">My Wall</a></li>
+   <%end%>
           <li><a href="/rails/info">Sitemap</a></li>
         </ul>
 

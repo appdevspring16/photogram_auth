@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get "/delete_comment/:id", :controller => "comments", :action => "destroy"
   #------------------------------
 
+  get "/my_likes", :controller => "my_likes", :action => "index"
+
   # Routes for the Like resource:
   # CREATE
   get "/likes/new", :controller => "likes", :action => "new"
@@ -56,9 +58,11 @@ Rails.application.routes.draw do
   get "/users", :controller => "users", :action => "index"
 
   devise_for :users
-  
+
   get "/users/:id", :controller => "users", :action => "show"
-  
+
+  get "/my_likes", :controller => "likes", :action => "index"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,9 @@
+<% @user.liked_photos.each do |my_like| %>
+ <tr>
+        <td><%= my_like.caption %></td>
+        <td><img src="<%= my_like.image %>" class="img-responsive"></td>
+
+
+      </tr>
+      <% end %>
+  
