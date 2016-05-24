@@ -12,8 +12,9 @@
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title"><a href="/users/<%= photo.user.id %>"><%= photo.user.username %></a></h3>
-          <small></small>
+          <h3 class="panel-title"><a href="/users/<%= photo.user.id %>"><%= photo.user.username %></a>
+            <small><%= time_ago_in_words(photo.created_at) %> ago</small>
+          </h3>
         </div>
         <div class="panel-body">
           <a href="/photos/<%= photo.id %>"><img src="<%= photo.image %>" alt="" class="img-responsive" /></a>
