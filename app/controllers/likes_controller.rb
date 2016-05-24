@@ -1,7 +1,9 @@
 class LikesController < ApplicationController
+
   def index
-    @likes = Like.all
+    @user = User.find(current_user.id)
   end
+
 
   def show
     @like = Like.find(params[:id])
