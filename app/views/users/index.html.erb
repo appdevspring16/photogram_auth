@@ -12,6 +12,7 @@
         <th>User ID
         </th>
         <th>Email</th>
+        <th>Actions</th>
       </tr>
 
       <% @users.each do |user| %>
@@ -20,6 +21,9 @@
         <td><%= user.id %></td>
         <td>
           <%= user.email %>
+        </td>
+        <td>
+          <a href="/users/<%= user.id %>" class="btn btn-primary">Show</a>
         </td>
       </tr>
       <% end %>
