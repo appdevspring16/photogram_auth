@@ -22,7 +22,7 @@
   <div class="panel-heading">
     <h3 class="panel-title"><a href="/users/<%= photo.user_id %>"><%= photo.user.username %></a>
 
-      <small><%= time_ago_in_words(photo.created_at) %></small></h3>
+      <small><%= time_ago_in_words(photo.created_at) %> ago</small></h3>
   </div>
 
   <!-- shows the image -->
@@ -72,7 +72,7 @@
     <li class="media">
       <div class="media-body">
     <h6 class="media-heading">
-      <a href="/users/<%= photo.user.id %>"><%= photo.user.username %></a><small> <%= time_ago_in_words(photo.created_at) %></small></h6>
+      <a href="/users/<%= photo.user.id %>"><%= photo.user.username %></a><small> <%= time_ago_in_words(photo.created_at) %> ago</small></h6>
       <p><%= photo.caption %></p>
   </div>
     </li>
@@ -84,14 +84,14 @@
         <% if (comment.user.id==current_user.id) %>
 
         <h6 class="media-heading">
-          <a href="/users/<%= comment.user.id %>"><%= comment.user.username %></a><small> <%= time_ago_in_words(comment.created_at) %><a href="/delete_comment/<%=comment.id%>"> <i class="fa fa-trash fa-small" style="color:blue"></i></a> </small> </h6>
+          <a href="/users/<%= comment.user.id %>"><%= comment.user.username %></a><small> <%= time_ago_in_words(comment.created_at) %> ago<a href="/delete_comment/<%=comment.id%>"> <i class="fa fa-trash fa-small" style="color:blue"></i></a> </small> </h6>
 
             <% else %>
 
 
     <h6 class="media-heading">
 
-      <a href="/users/<%= comment.user.id %>"><%= comment.user.username %></a><small> <%= time_ago_in_words(comment.created_at) %></h6></small>
+      <a href="/users/<%= comment.user.id %>"><%= comment.user.username %></a><small> <%= time_ago_in_words(comment.created_at) %> ago</h6></small>
       <% end %>
 
   <p><%= comment.body %></p>
