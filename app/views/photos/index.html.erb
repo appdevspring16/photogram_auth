@@ -6,27 +6,65 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
-    <table class="table table-striped table-hover">
-      <tr>
-        <th>Caption</th>
-        <th>Image</th>
-        <th>Actions</th>
-      </tr>
+  <div class="col-md-8 col-md-offset-2">
+    <% @photos.each do |photo| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <%= photo.id %>
+          <a href="/users/<%= photo.user_id %>"><%= photo.user.username %></a>
+          <small>
+            <%= time_ago_in_words(photo.created_at) %>
+          </small>
+        </h3>
+      </div>
 
-      <% @photos.each do |photo| %>
-      <tr>
-        <td><%= photo.caption %></td>
-        <td><img src="<%= photo.image %>" height=150px></td>
-        <td>
-          <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
-          <% if current_user.id == photo.user_id %>
-            <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
-            <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-          <% end %>        
-        </td>
-      </tr>
-      <% end %>
-    </table>
+      <div class="panel-body">
+        <a href="/photos/<%= photo.id %>">
+          <img src="<%= photo.image %>" class="img-responsive">
+        </a>
+
+        <p><%= photo.likes.where({:user_id => current_user.id}).pluck(:id)[0] %></p>
+
+        <p>
+          <% if photo.likes.pluck(:user_id).include?(current_user.id) == true %>
+            <form action="/delete_like/<%= photo.likes.where({:user_id => current_user.id}).pluck(:id)[0] %>">
+          <% else %>
+            <form action="/create_like" method="post">
+              <!-- Hidden input for authenticity token to protect from forgery -->
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+              <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+              <input type="hidden" name="user_id" value="<%= current_user.id %>">
+          <% end %>
+
+
+
+            <button class="btn btn-link">
+              <i class="fa fa-heart-o"></i>
+            </button>
+
+
+        <% if photo.fans.count == 0 %>
+          Be the first to like this photo</p>
+
+        <% elsif photo.fans.count == 1 %>
+            <% photo.fans.each do |fan| %>
+              <%= fan.username %> likes this
+            <% end %>
+          </p>
+        <% else %>
+          <% photo.fans.each do |fan| %>
+            <%= fan.username %>,
+          <% end %>
+          like this
+        </p>
+        <% end %>
+
+      </div>
+      </form>
+    </div>
+    <% end %>
   </div>
 </div>
