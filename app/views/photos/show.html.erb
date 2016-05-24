@@ -2,33 +2,39 @@
   <h3>Photo #<%= @photo.id %></h3>
 </div>
 
-<div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
-      <dt>Caption</dt>
-      <dd><%= @photo.caption %></dd>
 
-      <dt>Image</dt>
-      <dd><%= @photo.image %></dd>
+<div class="col-md-8 col-md-offset-2">
 
-      <dt>User</dt>
-      <dd><%= @photo.user_id %></dd>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="/photos/<%=@photo.id%>"><%=@photo.user.username%></a>
+        </h3>
+      </div>
 
-    </dl>
+      <div class="panel-body">
+        <a href="/photos/<%=@photo.id%>">
+          <img src="<%= @photo.image %>" class="img-responsive">
+        </a>
+      </div>
+      </div>
+
+       
+</div>
+
 
     <div class="btn-group btn-group-justified">
       <a href="/photos" class="btn btn-primary">
         Back
       </a>
-      
-    <% if @photo.user_id == current_user.id %>  
+
+    <% if @photo.user_id == current_user.id %>
       <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
         Edit
       </a>
       <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
         Delete
       </a>
-  <%end%>    
+  <%end%>
     </div>
-  </div>
-</div>
+  
