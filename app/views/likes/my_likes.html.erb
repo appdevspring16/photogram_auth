@@ -1,8 +1,5 @@
 <div class="page-header">
-  <h1>
-    Photos
-    <a href="/photos/new" class="btn btn-lg btn-success">New Photo</a>
-  </h1>
+  <h3>My Likes</h3>
 </div>
 
 <div class="row">
@@ -11,11 +8,10 @@
       <tr>
         <th>Caption</th>
         <th>Image</th>
-        <th>User</th>
         <th>Actions</th>
       </tr>
 
-      <% @photos.each do |photo| %>
+      <% @user.liked_photos.each do |photo| %>
       <tr>
         <td><%= photo.caption %></td>
         <td><img src="<%= photo.image %>" height=150px></td>

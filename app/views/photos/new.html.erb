@@ -36,14 +36,8 @@
         <input type="text" id="image" name="image" placeholder="Image" class="form-control" value="<%= @photo.image %>">
       </div>
 
-      <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
-
-        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @photo.user_id %>">
-      </div>
+      <!-- Hidden input for user_id -->
+        <input type="hidden" name="user_id" value="<%= current_user.id %>">
 
       <button class="btn btn-success">
         Create Photo
