@@ -62,6 +62,8 @@ end
 
 puts "There are now #{Comment.count} comments in the database."
 
+photos = Photo.all
+
 photos.each do |photo|
   users.sample(rand(users.count)).each do |user|
     like = photo.likes.build
