@@ -5,6 +5,7 @@ class PhotosController < ApplicationController
   end
 
   def show
+    @a = []
     @photo = Photo.find(params[:id])
   end
 
@@ -37,7 +38,7 @@ class PhotosController < ApplicationController
     @photo.user_id = params[:user_id]
 
     if @photo.save
-      redirect_to "/photos", :notice => "Photo updated successfully."
+      redirect_to "/photos/#{@photo.id}", :notice => "Photo updated successfully."
     else
       render 'edit'
     end

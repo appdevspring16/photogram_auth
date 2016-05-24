@@ -49,7 +49,7 @@ root "photos#index"
 
   # UPDATE
   get "/photos/:id/edit", :controller => "photos", :action => "edit"
-  post "/update_photo/:id", :controller => "photos", :action => "update"
+  get "/update_photo/:id", :controller => "photos", :action => "update"
 
   # DELETE
   get "/delete_photo/:id", :controller => "photos", :action => "destroy"
@@ -58,8 +58,8 @@ root "photos#index"
   devise_for :users
 
     get "/users", :controller => "users", :action => "index"
+get "users/:id", :controller =>"users", :action => "show"
 
-    get "users/:id", :controller =>"users", :action => "show"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -40,20 +40,25 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/comments">Comments</a></li>
+          <li><a href="/users"><i class="fa fa-fw fa-users"></i> All Users</a></li>
+          <li><a href="/photos"> <i class="fa fa-fw fa-file-photo-o"></i> All Posts</a></li>
+          <li><a href="/my_likes"> <i class="fa fa-fw fa-heart"></i> My Likes</a></li>
+
+          <% if current_user.present? %>
+        <li><a href="/users/<%= current_user.id %>"> <i class="fa fa-fw fa-user"></i> My Wall</a></li>
+        <% else  %>
+<% end %>
+          <!-- <li><a href="/comments">Comments</a></li>
           <li><a href="/likes">Likes</a></li>
-          <li><a href="/photos">Photos</a></li>
-          <li><a href="/users">All Users</a></li>
-          <li><a href="/my_likes">My Likes</a></li>
-          <li><a href="/rails/info">Sitemap</a></li>
+          <li><a href="/rails/info">Sitemap</a></li> -->
 
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
 <% if current_user.present? %>
-          <li><a href="/users/edit"><%= current_user.email%></a></li>
+          <li><a href="/users/edit"><i class="fa fa-fw fa-edit"></i><%= current_user.username%></a></li>
 
-          <li><a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="fa fa-sign-out"></i></a></li>
+          <li><a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="fa fa-sign-out"></i> Sign Out</a></li>
         <% else %>
         <li>
           <a href="/users/sign_up">
@@ -61,7 +66,7 @@
           </a>
         </li>
         <li>
-          <a href="/usrs/sign_in">Sign In</a>
+          <a href="/users/sign_in">Sign In</a>
         </li>
         <% end %>
       </ul>
@@ -84,6 +89,7 @@
         <%= alert %>
       </div>
     <% end %>
+<p></p>
 
     <%= yield %>
   </div>

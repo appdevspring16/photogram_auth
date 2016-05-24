@@ -1,6 +1,7 @@
 class LikesController < ApplicationController
 def my_likes
 @user = current_user
+@a = []
 end
 
 
