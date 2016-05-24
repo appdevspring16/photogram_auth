@@ -12,7 +12,7 @@
         <h3 class="panel-title">
           <a href="/users/<%= photo.user_id %>"><%= photo.user.username %></a>
           <small>
-            <%= time_ago_in_words(photo.created_at) %>
+            <%= time_ago_in_words(photo.created_at) %> ago
           </small>
         </h3>
       </div>
@@ -76,7 +76,7 @@
               <h6 class="media-heading">
                 <a href="/users/<%= comment.user_id %>"><%= comment.user.username %></a>
                 <small>
-                  <%= time_ago_in_words(comment.created_at) %>
+                  <%= time_ago_in_words(comment.created_at) %> ago
                 </small>
               </h6>
               <%= comment.body %>
