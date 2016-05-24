@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :liked_photos, :through => :likes, :source => :photo
   has_many :comments
   has_many :likes
+  has_many :photos
+
   # Users have many photos, a photo belongs to a user
   # Users have many comments, a comment belongs to a user
 # Users have many likes, a like belongs to a user

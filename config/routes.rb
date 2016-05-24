@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get "/userinfo", :controller => "userinfo", :action => "index"
+  get "/userinfo/:id", :controller => "userinfo", :action => "details"
+
   # Routes for the Comment resource:
   # CREATE
   get "/comments/new", :controller => "comments", :action => "new"
