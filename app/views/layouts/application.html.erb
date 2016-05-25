@@ -40,33 +40,63 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/userinfo"> <i class="fa fa-fw fa-users"></i> All Users</a></li>
-          <li><a href="/photos"> <i class="fa fa-fw fa-file-photo-o"></i> All Posts</li>
-            <% if user_signed_in? %>
-            <li><a href="/userinfo/<%= current_user.id %>"> <i class="fa fa-fw fa-user"></i> My Wall</a></li>
-            <li><a href="/likes"><i class="fa fa-fw fa-heart"></i> My Likes</a></li>
-            <% else %>
-            <% end %>
-        </ul>
+          <li>
+            <a href="/users">
+              <i class="fa fa-fw fa-users"></i>
+              <span class="hidden-sm">
+                All Users
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/photos">
+              <i class="fa fa-fw fa-file-photo-o"></i>
+              <span class="hidden-sm">
+                All Posts
+              </span>
+            </a>
+          </li>
           <% if user_signed_in? %>
-          <!-- true -->
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/users/edit">
-              <%= current_user.username %>
-            </a></li>
-            <li><a href="/users/sign_out" data-method="delete" rel="nofollow"> Sign Out </a></li>
-          </ul>
-          <% else %>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/users/sign_up">
-              Sign Up
-            </a></li>
-            <li><a href="/users/sign_in">
-              Sign in
-            </a></li>
-
-          </ul>
+          <li>
+            <a href="/users/<%= current_user.id %>">
+              <i class="fa fa-fw fa-user"></i>
+              <span class="hidden-sm">
+                My Wall
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="/likes">
+              <i class="fa fa-fw fa-heart"></i>
+              <span class="hidden-sm">
+                My Likes
+              </span>
+            </a>
+          </li>
           <% end %>
+        </ul>
+        <% if user_signed_in? %>
+        <!-- true -->
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/users/edit">
+            <%= current_user.username %>
+          </a>
+          </li>
+
+          <li><a href="/users/sign_out" data-method="delete" rel="nofollow"> Sign Out </a>
+          </li>
+
+        </ul>
+        <% else %>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/users/sign_up">
+            Sign Up
+          </a></li>
+          <li><a href="/users/sign_in">
+            Sign in
+          </a></li>
+        </ul>
+        <% end %>
 
         </div><!-- /.navbar-collapse -->
       </div>

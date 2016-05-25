@@ -1,20 +1,19 @@
 <div class="page-header">
   <h1>
     Users
-
   </h1>
 </div>
 
 
-<% @users.photos.each do |photo| %>
+<% @user.photos.each do |photo| %>
 
 <div class="row">
    <div class="col-md-8 col-md-offset-2">
      <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <a href="/users/<%= @users.id %>">
-            <%= @users.username %>
+            <a href="/users/<%= photo.user.id %>">
+            <%= photo.user.username %>
             </a>
             <small>
               <%= time_ago_in_words(photo.created_at)   %>
@@ -77,7 +76,9 @@
             <li class="media">
               <div class="media-body">
                 <h6>
+                  <a href="/users/<%= comment.user.id %>">
                   <%=comment.user.username%>
+                  </a>
                   <small>
                     <%= time_ago_in_words(comment.created_at) %>
                   </small>
@@ -110,21 +111,4 @@
   </div>
 
 
-
-
-      <tr>
-        <td>
-
-        <% if current_user.id==@users.id %>
-        <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
-        <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-        <% end %>
-
-        </td>
-      </tr>
-      <tr>
-        <td>
-
-        </td>
-      </tr>
       <% end %>
