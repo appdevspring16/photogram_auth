@@ -48,11 +48,7 @@
               </button>
               </a>
 
-              <% fan_names = [] %>
-              <% photo.fans.each do |fan| %>
-                <% fan_names.push(fan.username) %>
-              <% end %>
-              <%= fan_names.to_sentence %> like this
+              <%= photo.fans.pluck(:username).to_sentence %> like this
 
             <% else %>
               <form action="/create_like" method="post">
@@ -72,11 +68,7 @@
                 </button>
 
                 <% if photo.likes.any? %>
-                  <% fan_names = [] %>
-                  <% photo.fans.each do |fan| %>
-                    <% fan_names.push(fan.username) %>
-                  <% end %>
-                  <%= fan_names.to_sentence %> like this
+                  <%= photo.fans.pluck(:username).to_sentence %> like this
                 <% else %>
                 <small class="text-muted">
                   be the first to like this
