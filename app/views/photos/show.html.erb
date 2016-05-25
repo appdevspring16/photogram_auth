@@ -1,31 +1,35 @@
-<div class="page-header">
-  <h3>Photo #<%= @photo.id %></h3>
-</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= User.find_by(:id => @photo.user_id).username %></h3>
+        </div>
 
-<div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
-      <dt>Caption</dt>
-      <dd><%= @photo.caption %></dd>
+        <div class="panel-body">
+          <dd><img class="img-responsive" src="<%= @photo.image %>"></dd>
+        </div>
 
-      <dt>Image</dt>
-      <dd><%= @photo.image %></dd>
-
-      <dt>User</dt>
-      <dd><%= @photo.user_id %></dd>
-
-    </dl>
-
-    <div class="btn-group btn-group-justified">
-      <a href="/photos" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
+        <% if current_user.username == User.find_by(:id => @photo.user_id).username %>
+        <div class="btn-group btn-group-justified">
+          <a href="/photos" class="btn btn-primary">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+          </a>
+          <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
+            <i class="fa fa-edit" aria-hidden="true"></i>
+          </a>
+          <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+          </a>
+        </div>
+        <% else %>
+        <div class="btn-group btn-group-justified">
+        <a href="/photos" class="btn btn-primary">
+          <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        </a>
+      </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -4,7 +4,8 @@ class LikesController < ApplicationController
   end
 
   def show
-    @like = Like.find(params[:id])
+    @like = Like.all
+    @user = current_user
   end
 
   def new
