@@ -1,4 +1,4 @@
-class Comment < ActiveRecord::
+class Comment < ActiveRecord::Base
   belongs_to :photo
   belongs_to :user
 
@@ -9,6 +9,6 @@ class Comment < ActiveRecord::
   validates :photo_id, :presence => true
 
   # body must be present
-  valideates :body, :presence => true
+  validates :body, :presence => true
 
 end

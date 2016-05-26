@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # Root URL
+  root "photos#index"
+
   # Routes for the Comment resource:
   # CREATE
   get "/comments/new", :controller => "comments", :action => "new"
