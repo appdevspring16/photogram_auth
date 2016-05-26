@@ -7,4 +7,9 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :likes
   has_many :liked_photos, :through => :likes, :source => :photo
+
+  # Validations
+  # username must be present and uniqueness
+  validates :username, :presence => true, :uniqueness => true
+
 end

@@ -3,4 +3,7 @@ class Photo < ActiveRecord::Base
   has_many :comments
   has_many :likes
   has_many :fans, :through => :likes, :source => :user
+
+  # Photo must be present
+  validates :user_id, :presence => true
 end
