@@ -1,2 +1,4 @@
-class Comment < ActiveRecord::Base
+class Comment < ActiveRecord::
+  belongs_to :photo
+  belongs_to :user
 end
