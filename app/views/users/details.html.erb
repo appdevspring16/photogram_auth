@@ -1,8 +1,28 @@
-<div class="page-header">
-  <h1>
-    Users
-  </h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="jumbotron">
+        <h3>
+            <%= @user.username %>
+        </h3>
+      </div>
+    </div>
 </div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+ <a href="/photos/new" class="btn btn-default btn-block">
+   <i class="fa fa-plus"></i>
+ </a>
+
+ <hr>
+</div>
+</div>
+
+
+
+
+  <div class="row">
 
 
 <% @user.photos.each do |photo| %>

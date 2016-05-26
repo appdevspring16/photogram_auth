@@ -44,9 +44,7 @@ class LikesController < ApplicationController
 
   def destroy
     @like = Like.find(params[:id])
-
     @like.destroy
-
     redirect_to :back, :notice => "Like deleted."
   end
 end

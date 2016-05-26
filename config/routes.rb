@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 devise_for :users
   root 'photos#index'
-  
+
   get "/users", :controller => "users", :action => "index"
   get "/users/:id", :controller => "users", :action => "details"
 
@@ -37,7 +37,7 @@ devise_for :users
   post "/update_like/:id", :controller => "likes", :action => "update"
 
   # DELETE
-  get "/delete_like/:id", :controller => "likes", :action => "destroy"
+  post "/delete_like/:id", :controller => "likes", :action => "destroy"
   #------------------------------
 
   # Routes for the Photo resource:
