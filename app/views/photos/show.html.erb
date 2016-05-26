@@ -1,31 +1,50 @@
-<div class="page-header">
-  <h3>Photo #<%= @photo.id %></h3>
-</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class= "panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <a href="/users/<%= @photo.user_id %>"><%= @photo.user.username %></a>
+          </h3>
 
-<div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
-      <dt>Caption</dt>
-      <dd><%= @photo.caption %></dd>
+          <small>
+            <%= time_ago_in_words(@photo.created_at) %>
+          </small>
+        </div>
 
-      <dt>Image</dt>
-      <dd><%= @photo.image %></dd>
+        <div class="panel-body">
+          <a href="/photos/<%= @photo.id %>">
+            <img src="<%= @photo.image %>" class="img-responsive"/>
+          </a>
+        </div>
 
-      <dt>User</dt>
-      <dd><%= @photo.user_id %></dd>
 
-    </dl>
 
-    <div class="btn-group btn-group-justified">
-      <a href="/photos" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <% if current_user.id == @photo.user_id %>
+      <div class="btn-group btn-group-justified">
+        <a href="/photos" class="btn btn-primary">
+          Back
+        </a>
+        <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
+          Edit
+        </a>
+        <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
+          Delete
+        </a>
+      </div>
+      <% else %>
+      <div class="btn-group btn-group-justified">
+        <a href="/photos" class="btn btn-primary">
+          Back
+        </a>
+      </div>
+      <% end %>
     </div>
   </div>
 </div>
