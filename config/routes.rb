@@ -1,8 +1,19 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+
   root "photos#index"
+
+
+  get "/users", :controller => "users", :action => "index"
+
+  # note this needed to be below devise_for :users or it would conflict with website navigation when no one is signed in
+  get "/users/:id", :controller => "users", :action => "show"
+
+
   # Routes for the Comment resource:
   # CREATE
+
   get "/comments/new", :controller => "comments", :action => "new"
   post "/create_comment", :controller => "comments", :action => "create"
 
@@ -52,7 +63,7 @@ Rails.application.routes.draw do
   get "/delete_photo/:id", :controller => "photos", :action => "destroy"
   #------------------------------
 
-  devise_for :users
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

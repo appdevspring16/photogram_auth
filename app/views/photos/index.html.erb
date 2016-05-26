@@ -11,6 +11,7 @@
       <tr>
         <th>Caption</th>
         <th>Image</th>
+        <th>Likes</th>
         <th>User</th>
         <th>Actions</th>
       </tr>
@@ -18,12 +19,17 @@
       <% @photos.each do |photo| %>
       <tr>
         <td><%= photo.caption %></td>
-        <td><%= photo.image %></td>
-        <td><%= photo.user_id %></td>
+        <td> <img class="img" src="<%= photo.image %>"  alt="" /></td>
+        <td><a><i class="fa fa-heart-o" aria-hidden="true"></i></a></td>
+        <td><%= photo.user.username %></td>
         <td>
           <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
+          <% if current_user.id == photo.user_id %>
           <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
           <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
+
+
         </td>
       </tr>
       <% end %>
