@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+
   # Root URL
   root "photos#index"
 
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
 
   # READ
   get "/users", :controller => "users", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
 
   #------------------------------
   # Routes for the Like resource:
@@ -60,7 +62,6 @@ Rails.application.routes.draw do
   get "/delete_photo/:id", :controller => "photos", :action => "destroy"
   #------------------------------
 
-  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
