@@ -1,0 +1,55 @@
+<div class="page-header">
+  <h3>User #<%= @user.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+
+      <dt>Email</dt>
+      <dd><%= @user.email %></dd>
+
+
+      <dt>Username</dt>
+      <dd><%= @user.username %></dd>
+
+
+
+    </dl>
+
+    <div class="row">
+   <% @user.photos.each do |photo| %>
+     <div class="col-md-3">
+       <div class="panel panel-default">
+         <div class="panel-heading">
+           <h3 class="panel-title">
+             <%= photo.caption %>
+           </h3>
+           <h3 class="panel-title">
+             <img src="<%= photo.image %>" alt="" />
+             </h3>
+         </div>
+         <div class="panel-body">
+
+         </div>
+         <div class="panel-footer">
+
+         </div>
+       </div>
+     </div>
+   <% end %>
+ </div>
+
+    <div class="btn-group btn-group-justified">
+
+      <a href="/users" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/users/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_user/<%= @user.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="page-header">
+  <h1>
+    Likes
+
+    <a href="/likes/new" class="btn btn-lg btn-success">New Like</a>
+
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+
+        <th>User</th>
+
+        <th>Photo</th>
+
+        <th>Actions</th>
+      </tr>
+
+      <% @likes.each do |like| %>
+      <tr>
+
+        <td><%= like.user_id %></td>
+
+        <td><%= like.photo_id %></td>
+
+        <td>
+
+          <a href="/likes/<%= like.id %>" class="btn btn-primary">Show</a>
+          <a href="/likes/<%= like.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_like/<%= like.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
