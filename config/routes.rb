@@ -60,6 +60,10 @@ Rails.application.routes.draw do
   # In config/routes.rb
   root 'photos#index'
 
+
+get "/users", :controller => "users", :action => "index"
+get "/users/:id", :controller => "users", :action => "show"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

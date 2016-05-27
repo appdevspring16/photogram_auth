@@ -1,4 +1,8 @@
 class LikesController < ApplicationController
+def my_likes
+  @user = current_user
+end
+
   def index
     @likes = Like.all
   end

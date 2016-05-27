@@ -40,15 +40,22 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+<li><a href="/users"><i class="fa fa-users" aria-hidden="true"></i> All Users</a></li>
+          <li><a href="/photos"><i class="fa fa-file-image-o" aria-hidden="true"></i> All Posts</a></li>
+          <li><a href="/likes"><i class="fa fa-heart" aria-hidden="true"></i> My Likes</a></li>
+          <li><a href="/likes"><i class="fa fa-user" aria-hidden="true"></i> My Wall (Not working)</a></li>
           <li><a href="/comments">Comments</a></li>
-          <li><a href="/likes">Likes</a></li>
-          <li><a href="/photos">Photos</a></li>
           <li><a href="/rails/info">Sitemap</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/users/edit">Dummy Edit Profile Link</a></li>
-          <li><a href="/users/sign_out" data-method="delete" rel="nofollow">Dummy Sign Out Link</a></li>
+          <% if current_user.present? %>
+          <li><a href="/users/edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <%= current_user.email %></a></li>
+          <li><a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
+<% else %>
+  <li><a href="/users/sign_up">Sign Up</a></li>
+  <li><a href="/users/sign_in">Sign In</a></li>
+  <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
