@@ -1,34 +1,37 @@
 <div class="page-header">
-  <h1>
-    Photos
-    <a href="/photos/new" class="btn btn-lg btn-success">New Photo</a>
-  </h1>
+
 </div>
 
 <div class="row">
   <div class="col-md-12">
     <table class="table table-striped table-hover">
-      <tr>
-        <th>Caption</th>
-        <th>Image</th>
-        <th>User</th>
-        <th>Actions</th>
-      </tr>
+      <!-- <tr>
+      <th>Caption</th>
+      <th>Image</th>
+      <th>User</th>
+      <th>Actions</th>
+    </tr> -->
 
-      <% @photos.each do |photo| %>
-      <tr>
-        <td><%= photo.caption %></td>
-        <td><img class="img-responsive" src="<%= photo.image%>" alt="" /></td>
-        <td><%= photo.user_id %></td>
-                <td>
-          <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
-          <% if current_user.id == photo.user_id %>
-          <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </table>
+
+    <% @photos.each do |photo| %>
+    <tr>
+      <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <%= photo.user.username.capitalize %></h3>
+            </div>
+            <div class="panel-body">
+              <a href="/photos/<%= photo.id %>""><img class="img-responsive" src="<%= photo.image%>" alt="" /></a>
+
+            </div>
+            <div class="panel-footer"><%= photo.caption %>
+            
+            </div>
+          </div>
+        </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
 </div>

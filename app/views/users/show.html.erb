@@ -1,30 +1,36 @@
-<div class="page-header">
-  <h3>User <%=@user.username.capitalize %></h3>
+<div class="page-header text-center">
+
+  <h3><%=@user.username.capitalize %></h3>
+  <h4><%= @user.email %></h4>
 </div>
 
 <div class="row">
   <div class="col-md-12">
     <dl class="dl-horizontal">
-      <dt>Name</dt>
-      <dd><%= @user.username.capitalize %></dd>
-
-      <dt>E-mail</dt>
-      <dd><%= @user.email %></dd>
-
-      <dt>Photos</dt>
 
 
-      <div class="col-md-3">
-      <% @user.photos.each do |photo| %>
+
+      <div class="col-md-8 col-md-offset-2">
+        <% @user.photos.each do |photo| %>
         <tr>
-          <td><%= photo.caption %></td>
-          <td><img class="img-responsive" src="<%= photo.image%>" alt="" /></td>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <td><%= photo.caption %></td></h3>
+            </div>
+            <div class="panel-body">
+        <a href="/photos/<%= photo.id %>""><img class="img-responsive" src="<%= photo.image%>" alt="" /></a>
+            </div>
+          </div>
+
+
         </tr>
 
-      <% end %>
-            </div>
+        <% end %>
+      </div>
     </dl>
 
-    </div>
   </div>
+</div>
 </div>
