@@ -1,0 +1,15 @@
+<br/>
+<div class="row col-md-offset-2 col-md-8 padding-top">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">All Users</h3>
+    </div>
+    <table class="table">
+      <% @users.each do |user| %>
+      <tr>
+        <td><a href="/users/<%=user.id%>"><%= user.email %></a></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

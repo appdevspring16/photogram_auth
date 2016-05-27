@@ -1,0 +1,23 @@
+<div>
+  <div class="col-md-8 col-md-offset-2 padding-inside-top-md padding-inside-bottom-md">
+    <h3><%= @user.email %></h3>
+  </div>
+  <div class="col-md-8 col-md-offset-2 padding-inside-top-sm padding-inside-bottom-sm">
+    <a class="btn btn-default btn-group-justified" href="/photos/new" role="button">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+  </div>
+  <hr>
+  <div class="col-md-8 col-md-offset-2 padding-inside-top-sm padding-inside-bottom-sm">
+    <% @user.photos.each do |photo| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%=photo.caption%></h4>
+      </div>
+      <div class="panel-body">
+        <img class="img-responsive" src="<%= photo.image %>">
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
