@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # READ
   get "/users", :controller => "users", :action => "index"
   get "/users/:id", :controller => "users", :action => "show"
+  get "/users/my_likes", :controller => "users", :action => "likes"
 
   # UPDATE
   get "/users/:id/edit", :controller => "users", :action => "edit"
@@ -41,7 +42,7 @@ Rails.application.routes.draw do
   post "/create_like", :controller => "likes", :action => "create"
 
   # READ
-  get "/likes", :controller => "likes", :action => "index"
+  get "/my_likes", :controller => "likes", :action => "index"
   get "/likes/:id", :controller => "likes", :action => "show"
 
   # UPDATE
