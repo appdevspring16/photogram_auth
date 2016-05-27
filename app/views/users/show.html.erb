@@ -1,26 +1,23 @@
-<div class="page-header">
+<div class="container">
+<div class="page-header text-center">
   <h3><%= @user.username %></h3>
 </div>
 
+<% @user.photos.each do |photo| %>
 <div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
 
+      <div class="panel-heading"><%= photo.caption %></div>
 
-      <% @user.photos.each do |photo| %>
-      <dt></dt>
-      <dd><%= photo.caption %></dd>
-
-
-      <dt></dt>
-      <dd><%= photo.image %></dd>
-
+      <div class="panel-body"><img style='height: 100%; width: 100%; object-fit: contain' src="<%= photo.image %>"></div>
 
   <!--    <dt></dt>
       <dd><%= @user.username %></dd> -->
 
-      <% end %>
-    </dl>
+    </div>
 
   </div>
+</div>
+<% end %>
 </div>
