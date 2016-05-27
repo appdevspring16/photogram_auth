@@ -1,23 +1,55 @@
 
 <div class="container">
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <hr>
+  <% @user.likes.each do |like| %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><%= @user.username %></h3>
-          </div>
+          <h3 class="panel-title">
+            <%= @user.username %>
+          </h3>
+          <%# time_ago_in_words(Time.now - Photo.find(like.photo_id).created_at) %>
 
-          <%# @user.likes.each do |like| %>
-            <!-- <div class="panel-body"> -->
-              <!-- <li><%# like.photo_id %>"><img src="<%# Photo.find(like.photo_id).image %>" class="img-responsive"/></a> -->
-          <%# end %>
-
-          <% Like.where(:user_id => @user.id).each do |like| %>
-            <div class="panel-body">
-              <td> <img class="img-responsive" src="<%= Photo.find(like.photo_id).image %>"</td>
-            </div>
-          <% end %>
         </div>
+        <div class="panel-body">
+          <a>
+            <img src="<%= Photo.find(like.photo_id).image %>" class="img-responsive">
+          </a>
+          <p>
+            <a href="delete_like<%= like.photo_id %>">
+              <i class="fa fa-heart">
+              </i>
+            </a>
+            <!-- Users that like the photo -->
+            <%# User.find_by(like.photo_id => @like.photo_id).username %>
+          </p>
+
+          <ul class="media-list">
+            <li class="media">
+              <div class="media-body">
+                <h6 class="media-heading">
+                  <a href="users/<%= @user.id %>"><%= @user.username %></a>
+                </h6>
+              </div>
+            </li>
+            <!-- <li>
+              <form action="/create_comment" method="post">
+                <input type="text" name="body" placeholder="Add a comment..." class="form-control">
+              </form>
+            </li> -->
+          </ul>
+        </div>
+
+      </div>
     </div>
   </div>
+  <% end %>
 </div>
+
+
+<%# Like.where(:user_id => @user.id).each do |like| %>
+<!-- <div class="panel-body"> -->
+<!-- <td> <img class="img-responsive" src="<%# Photo.find(like.photo_id).image %>"</td> -->
+<!-- </div> -->
+<%# end %>
