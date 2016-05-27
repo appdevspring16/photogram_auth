@@ -46,6 +46,7 @@ devise_for :users
   post "/create_photo", :controller => "photos", :action => "create"
 
   # READ
+  get "/", :controller => "photos", :action => "index"
   get "/photos", :controller => "photos", :action => "index"
   get "/photos/:id", :controller => "photos", :action => "show"
 
