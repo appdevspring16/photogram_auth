@@ -4,11 +4,13 @@
   </h1>
 </div>
 <div class="row panel">
-    <ul>
+
       <% @user.photos.each do |user| %>
-      <li>
-        <img src="<%= user.image %>" alt="" />
-      </li>
+<ul>
+  <img class="img-responsive" src="<%= user.image %>" alt="" />
+</ul>
+
+
       <% end %>
-    </ul>
+
 </div>

@@ -9,7 +9,9 @@
       <dd><%= @photo.caption %></dd>
 
       <dt>Image</dt>
-      <dd><%= @photo.image %></dd>
+      <dd>
+  <img class="img-responsive" src="<%= @photo.image %>" alt="" />
+        </dd>
 
       <dt>User</dt>
       <dd><%= @photo.user_id %></dd>
