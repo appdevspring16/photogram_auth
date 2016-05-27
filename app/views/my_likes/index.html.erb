@@ -5,7 +5,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
-          <a href="/photos/<%=my_like.id%>"><%=@user.username%></a>
+          <a href="/photos/<%=my_like.id%>"><%=@user.username%></a> <small><%=time_ago_in_words(Time.now) %></small>
         </h3>
       </div>
 
