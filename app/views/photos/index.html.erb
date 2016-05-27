@@ -10,11 +10,20 @@
     <% @photos.each do |photo| %>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title"><%=photo.caption%></h3>
+        <h3 class="panel-title"><%=photo.user_id%></h3>
       </div>
       <div class="panel-body">
         <a href="/photos/<%=photo.id%>"><img class="img-responsive" src="<%= photo.image %>"></a>
       </div>
+      <div class="panel-body">
+        <a href="/users/<%=photo.user_id%>"><%=photo.user_id%></a><br>
+        <%=photo.caption%>
+      </div>
+      <% photo.comments do |comment| %>
+      <div class="panel-body">
+        <%=comment.body%>
+      </div>
+      <% end %>
     </div>
     <% end %>
   </div>

@@ -4,10 +4,10 @@
     <% current_user.liked_photos.each do |photo| %>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title"><%=photo.caption%></h4>
+        <h3 class="panel-title"><%=photo.user_id%></h4>
       </div>
       <div class="panel-body">
-        <img class="img-responsive" src="<%= photo.image %>">
+        <a href="/photos/<%= photo.id %>"><img class="img-responsive" src="<%= photo.image %>">
       </div>
     </div>
     <% end %>
