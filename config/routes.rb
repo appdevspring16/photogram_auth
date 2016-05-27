@@ -29,7 +29,7 @@ devise_for :users
   post "/create_like", :controller => "likes", :action => "create"
 
   # READ
-  get "/likes", :controller => "likes", :action => "index"
+  get "/my_likes", :controller => "likes", :action => "index"
   get "/likes/:id", :controller => "likes", :action => "show"
 
   # UPDATE
