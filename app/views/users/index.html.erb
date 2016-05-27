@@ -10,7 +10,7 @@
 
       <% @users.each do |user| %>
       <tr>
-        <td><%= user.username %></td>
+        <td><a href="/users/<%= user.id %>"><%= user.username %></a></td>
       </tr>
       <% end %>
     </table>
