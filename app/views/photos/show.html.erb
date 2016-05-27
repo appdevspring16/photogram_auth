@@ -1,31 +1,36 @@
-<div class="page-header">
-  <h3>Photo #<%= @photo.id %></h3>
-</div>
 
-<div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
-      <dt>Caption</dt>
-      <dd><%= @photo.caption %></dd>
-
-      <dt>Image</dt>
-      <dd><%= @photo.image %></dd>
-
-      <dt>User</dt>
-      <dd><%= @photo.user_id %></dd>
-
-    </dl>
-
-    <div class="btn-group btn-group-justified">
-      <a href="/photos" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
+<div>
+  <div class="col-md-8 col-md-offset-2 padding-inside-top-sm padding-inside-bottom-sm">
+    <a class="btn btn-default btn-group-justified" href="/photos/new" role="button">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+  </div>
+  <hr>
+  <div class="col-md-8 col-md-offset-2 padding-inside-top-sm padding-inside-bottom-sm">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @photo.user_id %></h3>
+      </div>
+      <div class="panel-body text-center">
+        <a href="/photos/<%=@photo.id%>"><img class="img-responsive" src="<%= @photo.image %>"></a>
+        <%=@photo.caption%>
+      </div>
     </div>
   </div>
+  <hr>
+  <% if current_user.id == @photo.user_id %>
+    <div class="col-md-8 col-md-offset-2 padding-inside-top-sm padding-inside-bottom-sm">
+      <div class="btn-group btn-group-justified">
+        <a href="/photos" class="btn btn-primary">
+          Back
+        </a>
+        <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
+          Edit
+        </a>
+        <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
+          Delete
+        </a>
+      </div>
+    </div>
+  <% end %>
 </div>
