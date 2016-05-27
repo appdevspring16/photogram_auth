@@ -3,5 +3,5 @@ class Like < ActiveRecord::Base
   validates :photo_id, presence: true
 
   belongs_to :user
-  belongs_to :comment
+  belongs_to :photo
 end

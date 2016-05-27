@@ -1,0 +1,25 @@
+<div class="page-header">
+  <h3><%= @user.username.capitalize%>'s likes</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <div class="col-md-3">
+        <% @user.liked_photos.each do |like| %>
+        <tr>
+            <td><%= like.caption %></td>
+            <td><img class="img-responsive" src="<%= like.image%>" alt="" /></td>
+
+          </td>
+        </tr>
+
+        <% end %>
+      </div>
+
+
+    </dl>
+
+  </div>
+</div>
+</div>
