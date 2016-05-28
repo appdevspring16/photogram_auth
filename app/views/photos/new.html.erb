@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Add Photo</h3>
+  <h4>Add Photo</h4>
 </div>
 
 <div class="row">
@@ -41,11 +41,14 @@
       <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
       </div>
 
-      <button class="btn btn-success">
+      <button class="btn btn-success btn-block">
         Create Photo
       </button>
-      or
-      <a href="/photos">Cancel</a>
+<hr>
+      <button class="btn btn-default btn-block" role="button">
+      <a href="/photos"> Cancel
+      </a></button>
+
     </form>
   </div>
 </div>
