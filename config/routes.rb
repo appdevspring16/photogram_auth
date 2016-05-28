@@ -2,6 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
   root "photos#index"
 
+  # Routes for users
+
+  get "/users", :controler => "users", :action => "index"
+
+  get "users/:id", :controller => "users", :action => "show"
+
   # Routes for the Comment resource:
   # CREATE
   get "/comments/new", :controller => "comments", :action => "new"
