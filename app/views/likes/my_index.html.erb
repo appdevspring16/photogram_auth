@@ -1,0 +1,22 @@
+<div class="page-header text-center">
+  <h3>
+    My Likes
+  </h3>
+</div>
+
+<div class="container">
+
+<% @likes.each do |like| %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default">
+
+      <div class="panel-heading"><%= Photo.find_by({ :id => like.photo_id }).caption %></div>
+
+      <div class="panel-body"><img style='height: 100%; width: 100%; object-fit: contain' src="<%= Photo.find_by({ :id => like.photo_id }).image %>"></div>
+
+    </div>
+  </div>
+</div>
+<% end %>
+</div>

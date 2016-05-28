@@ -33,9 +33,11 @@ Rails.application.routes.draw do
   get "/likes/new", :controller => "likes", :action => "new"
   post "/create_like", :controller => "likes", :action => "create"
 
+
   # READ
   get "/likes", :controller => "likes", :action => "index"
   get "/likes/:id", :controller => "likes", :action => "show"
+  get "/my_likes", :controller => "likes", :action => "my_index"
 
   # UPDATE
   get "/likes/:id/edit", :controller => "likes", :action => "edit"
