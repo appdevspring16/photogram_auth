@@ -13,7 +13,7 @@
 
         <div class="panel-heading"><%= User.find_by({ :id => photo.user_id }).username %></div>
 
-      <div class="panel-body"><img style='height: 100%; width: 100%; object-fit: contain' src="<%= photo.image %>"></div>
+      <div class="panel-body"> <a href="/photos/<%= photo.id %>"><img style='height: 100%; width: 100%; object-fit: contain' src="<%= photo.image %>"></a></div>
 
       <div class="panel-body"><%=  photo.caption %></div>
 
