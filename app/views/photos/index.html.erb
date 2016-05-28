@@ -20,7 +20,7 @@
         <td><%= photo.caption %></td>
         <td><img src="<%= photo.image %>" alt="" width="200px" height="120px"/>
           </td>
-        <td><%= photo.user_id %></td>
+        <td><%= User.find_by({:id => photo.user_id}).username.capitalize %></td>
         <td>
           <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
           <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>

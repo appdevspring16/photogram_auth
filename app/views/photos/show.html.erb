@@ -12,20 +12,28 @@
       <dd><%= @photo.image %></dd>
 
       <dt>User</dt>
-      <dd><%= @photo.user_id %></dd>
+      <dd><%= User.find_by({:id => @photo.user_id}).username.capitalize %></dd>
 
     </dl>
 
-    <div class="btn-group btn-group-justified">
-      <a href="/photos" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
-    </div>
+<% if @photo.id == current_user.id %>
+<div class="btn-group btn-group-justified">
+  <a href="/photos" class="btn btn-primary">
+    Back
+  </a>
+  <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
+    Edit
+  </a>
+  <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
+    Delete
+  </a>
+</div>
+<% else %>
+<div class="btn-group btn-group-justified">
+  <a href="/photos" class="btn btn-primary">
+    Back
+  </a>
+</div>
+<% end %>
   </div>
 </div>

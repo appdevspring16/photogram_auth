@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-has_many :photos, :class_name => "Photo", :foreign_key => "user_id"
+has_many :photos
 has_many :comments
 has_many :likes
 has_many :liked_photos, :through => :likes, :source => :photo
