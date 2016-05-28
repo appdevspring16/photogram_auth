@@ -1,23 +1,62 @@
-<div class="col-md-8 col-md-offset-2 page-header jumbotron">
-  <h2>
-    <%= @user.username %>
-  </h1>
-</div>
+<div class="container">
 
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-      <div class="panel">
+  <div class="col-md-8 col-md-offset-2 page-header jumbotron">
+    <h2>
+      <%= @user.username %>
+    </h1>
+  </div>
+
+  <% @user.photos.each do |photo| %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
         <div class="panel-heading">
-            <h3><%= @user.username %></h3>
-          </div>
+          <h3 class="panel-title">
+            <%= @user.username %>
+          </h3>
+        </div>
 
-          <% @user.photos.each do |photo| %>
-            <div class="panel-body">
-              <a href="<%= photo.image %>"><img src="<%= photo.image %>" class="img-responsive"/></a>
+        <div class="panel-body">
+          <a href="<%= photo.image %>"><img src="<%= photo.image %>" class="img-responsive"/></a>
 
-            </div>
-          <% end %>
+          <form action="/create_like" method="post">
+            <button type="button" class="btn btn-link">
+              <i class="fa fa-heart-o" aria-hidden="true"></i>
+            </button>
+            <small class="text-muted">be the first to like this</small>
+          </form>
 
+          <ul class="media-list">
+            <li class="media">
+              <div class="media-body">
+                <h6 class="media-heading">
+                  <% photo.comments.each do |comment| %>
+                  <a href="/users/<%= comment.user_id %>">
+                    <%= User.find(comment.user_id).username %>
+                  </a>
+                </h6>
+                <p>
+                  <%= comment.body %>
+                </p>
+                <% end %>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="media-body">
+                <form action="/create_comment" method="post">
+                  <div class="form-group">
+                    <input type="text" id="body" name="body" placeholder="Add a comment.." class="form-control">
+                  </div>
+                </form>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
     </div>
   </div>
+  <% end %>
 </div>

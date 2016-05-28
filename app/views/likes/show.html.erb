@@ -9,7 +9,9 @@
           <h3 class="panel-title">
             <%= @user.username %>
           </h3>
-          <%# time_ago_in_words(Time.now - Photo.find(like.photo_id).created_at) %>
+          <small>
+            <%= time_ago_in_words(Time.now - Photo.find(like.photo_id).created_at) %>
+          </small>
 
         </div>
         <div class="panel-body">
@@ -17,7 +19,7 @@
             <img src="<%= Photo.find(like.photo_id).image %>" class="img-responsive">
           </a>
           <p>
-            <a href="delete_like<%= like.photo_id %>">
+            <a href="delete_like/<%= like.photo_id %>">
               <i class="fa fa-heart">
               </i>
             </a>
