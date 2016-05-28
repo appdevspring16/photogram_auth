@@ -11,7 +11,7 @@
      <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
-          <a href="/photos/<%=photo.id%>"><%=photo.user.username%></a> <small><%=time_ago_in_words(Time.now) %></small>
+          <a href="/photos/<%=photo.id%>"><%=photo.user.username%></a> <small><%=time_ago_in_words(photo.created_at) %></small>
         </h3>
       </div>
 
@@ -27,7 +27,7 @@
     <div class="media-body">
       <h6 class="media-heading">
         <a href="/users/<%=comment.user_id%>"><%=comment.user.username%></a>
-        <small><%=time_ago_in_words(Time.now) %></small>
+        <small><%=time_ago_in_words(comment.created_at) %></small>
         <div><%=comment.body%></div>
 
 
@@ -40,8 +40,93 @@
 
 
         <% end%>
+
+
+
+   <form action="/create_comment" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for photo_id -->
+
+        <input type="hidden" name="photo_id"  value="<%= photo.id %>">
+
+
+      <!-- Label and input for body -->
+
+     <label for="body" class="sr-only">
+                    Body
+                  </label>
+
+
+      <div class="form-group">
+        <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+      </div>
+
+      <!-- Label and input for user_id -->
+
+
+        <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+
+     
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <% end %>
 </div>
