@@ -20,6 +20,8 @@
       <a href="/photos" class="btn btn-primary">
         Back
       </a>
+      <% if user_signed_in? == true %>
+      <% then %>
       <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
         Edit
       </a>
@@ -27,5 +29,6 @@
         Delete
       </a>
     </div>
+    <% end %>
   </div>
 </div>
