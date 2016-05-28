@@ -20,6 +20,42 @@
           <img src="<%= photo.image %>" class="img-responsive">
         </a>
 
+
+  <form action="/create_like" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+
+
+        <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+
+      <!-- Label and input for photo_id -->
+
+        <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+
+      <button class="btn">
+      <i class="fa fa-heart-o"></i>
+      </button>
+  <% photo.likes.each do |like|%>
+    <p><%=like.user_id%></p>
+    <%end%>
+
+
+    </form>
+
+
+
+
+
+
+
+
+
+
+
         <% photo.comments.each do |comment|%>
 
         <ul class="media-list">
@@ -69,7 +105,7 @@
         <input type="hidden" name="user_id" value="<%= current_user.id %>">
 
 
-     
+
     </form>
 
 
