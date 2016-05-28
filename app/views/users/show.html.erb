@@ -18,19 +18,38 @@
             <div class="panel-heading">
               <h3 class="panel-title">
                 <td><%= photo.caption %></td></h3>
-            </div>
-            <div class="panel-body">
-        <a href="/photos/<%= photo.id %>""><img class="img-responsive" src="<%= photo.image%>" alt="" /></a>
-            </div>
+              </div>
+              <div class="panel-body">
+                <a href="/photos/<%= photo.id %>""><img class="img-responsive" src="<%= photo.image%>" alt="" /></a>
+              </div>
+              <div class="panel-footer">
+                <ul class="media-list">
+
+
+                  <% photo.comments.each do |comment| %>
+                  <div class="">
+
+                    <li class="media"><a href="/users/<%= comment.user.id %>">    <%= comment.user.username.capitalize %></a>
+                      <div class="media-body">
+                        <%= comment.body %>
+                      </div>
+                      
+
+                    </div>
+
+
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+
+
+            </tr>
+
+            <% end %>
           </div>
+        </dl>
 
-
-        </tr>
-
-        <% end %>
       </div>
-    </dl>
-
+    </div>
   </div>
-</div>
-</div>

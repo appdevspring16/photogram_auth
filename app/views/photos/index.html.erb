@@ -26,7 +26,20 @@
 
             </div>
             <div class="panel-footer"><%= photo.caption %>
-            
+              <hr>
+              <% photo.comments.each do |comment| %>
+              <div class="">
+              <a href="/users/<%= comment.user.id %>">    <%= comment.user.username.capitalize %></a>
+
+
+              <p>
+                  <%= comment.body %>
+              </p>
+
+              </div>
+
+              <hr>
+              <% end %>
             </div>
           </div>
         </tr>
