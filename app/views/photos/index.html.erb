@@ -5,28 +5,32 @@
   </h1>
 </div>
 
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-striped table-hover">
-      <tr>
-        <th>Caption</th>
-        <th>Image</th>
-        <th>User</th>
-        <th>Actions</th>
-      </tr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <a href="/photos/new" class="btn btn-default btn-block">
+        <i class="fa fa-plus"></i>
+      </a>
+    </div>
+  </div>
+
+      <hr>
 
       <% @photos.each do |photo| %>
-      <tr>
-        <td><%= photo.caption %></td>
-        <td><img src="<%= photo.image %>" alt="" /></td>
-        <td><%= photo.user_id %></td>
-        <td>
-          <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
-          <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-        </td>
-      </tr>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= photo.user_id %></h3>
+            </div>
+            <div class="panel-body">
+              <a href="/photos/<%= photo.id %>">
+              <img src="<%= photo.image %>" class="img-responsive" alt="Responsive image">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
       <% end %>
-    </table>
-  </div>
+
 </div>
