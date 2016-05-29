@@ -52,6 +52,16 @@
           <li><a href="/likes">Likes</a></li>
           <li><a href="/photos">Photos</a></li>
           <li><a href="/rails/info">Sitemap</a></li>
+          <% if current_user.present? %>
+            <li>
+              <a href="/users/1">
+                <i class="fa fa-fw fa-user"></i>
+                <span class="hidden-sm">
+                  My Wall
+                </span>
+              </a>
+            </li>
+          <% end %>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
