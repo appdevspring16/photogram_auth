@@ -1,0 +1,24 @@
+<div class="page-header">
+  <h3><%= current_user.username %></h3>
+</div>
+
+<% @liked_photos.each do |photo| %>
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Caption</dt>
+      <dd><%= photo.caption %></dd>
+
+      <dt>Image</dt>
+      <dd><img src="<%= photo.image %>" alt="" /></dd>
+
+      <dt>User</dt>
+      <dd><%= photo.user_id %></dd>
+
+    </dl>
+
+
+  </div>
+</div>
+
+<% end %>
