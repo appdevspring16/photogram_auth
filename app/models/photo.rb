@@ -1,5 +1,7 @@
 class Photo < ActiveRecord::Base
 
+  validates :user_id, :presence => true
+
   belongs_to :user
   has_many :comment
   has_many :likes
