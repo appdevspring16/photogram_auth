@@ -1,34 +1,33 @@
-<div class="page-header col-md-8 col-md-offset-2">
-  <a href="/photos/new" class="btn btn-default btn-block">
-    <i class="fa fa-plus"></i>
-  </a>
-</div>
-
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
 
-    <% @photos.each do |photo| %>
+    <% @user.liked_photos.each do |photo| %>
 
     <div class="panel panel-default">
-      <h3 class="panel-title">
-        <a href="/users/<%= photo.user_id %>"><%= photo.user.username %>
+
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="/users/<%= photo.user_id %>">
+            <%= photo.user.username %>
+          </a>
+
+          <small><%= time_ago_in_words(photo.created_at) %></small>
+        </h3>
+      </div>
+
+      <div class="panel-body">
+        <a href="/photos/<%= photo.id %>">
+          <img src="<%= photo.image %>" class="img-responsive" alt="Responsive image">
         </a>
-        <small>
-          <%= time_ago_in_words(photo.created_at) %> ago
-        </small>
-      </h3>
-    </div>
 
-    <div class="panel-body">
-      <a href="/photos/<%= photo.id %>">
-        <img src="<%= photo.image %>" class="img-responsive">
-      </a>
+        <p></p>
 
-      <p></p>
+        <p>
 
-      <p>
-        <% if photo.likes.pluck(:id).include? (current_user.id) == true %>
-        <form action="/delete_like/<%= photo.likes.where({:user_id => current_user.id}).pluck(:id)[0] %>">
+          <% if current_user.liked_photos.pluck(:id).include? photo.id %>
+          <a href="/delete_like/<%= (Like.find_by(:photo_id => photo.id, :user_id => current_user.id).id) %>" class="btn btn-link">
+            <i class="fa fa-heart"></i>
+          </a>
 
           <% else %>
           <form action="/create_like" method="post">
@@ -70,7 +69,7 @@
           like this
           <% end %>
 
-          <% end %>
+        <% end %>
 
         </form>
 
@@ -110,7 +109,6 @@
             </div>
           </li>
         </ul>
-
       </div>
     </div>
     <% end %>

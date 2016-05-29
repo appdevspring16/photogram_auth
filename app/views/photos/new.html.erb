@@ -14,7 +14,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <form action="/create_photo" method="post">
+    <form action="/create_photo" method="post" enctype="multipart/form-data">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
@@ -33,7 +33,7 @@
           Image
         </label>
 
-        <input type="text" id="image" name="image" placeholder="Image" class="form-control" value="<%= @photo.image %>">
+        <input type="file" id="image" name="image" placeholder="Image" class="form-control" value="<%= @photo.image %>">
       </div>
 
       <!-- Label and input for user_id -->
