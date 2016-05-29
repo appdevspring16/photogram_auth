@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   def index
     @photos = Photo.all
+    
   end
 
   def show
@@ -49,4 +50,9 @@ class PhotosController < ApplicationController
 
     redirect_to "/photos", :notice => "Photo deleted."
   end
+
+  def time_ago_in_words(from_time, options = {})
+    distance_of_time_in_words(from_time, Time.now, options)
+  end
+
 end
