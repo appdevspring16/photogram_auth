@@ -11,7 +11,7 @@
   <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
 
-        <div class="panel-heading"><%= User.find_by({ :id => photo.user_id }).username %></div>
+        <div class="panel-heading"><%= User.find_by({ :id => photo.user_id }).username %> <small><%= time_ago_in_words(photo.created_at) %> ago</small></div>
 
       <div class="panel-body"> <a href="/photos/<%= photo.id %>"><img style='height: 100%; width: 100%; object-fit: contain' src="<%= photo.image %>"></a></div>
 
