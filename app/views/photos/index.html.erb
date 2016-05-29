@@ -1,30 +1,32 @@
-<div class="page-header col-md-8 col-md-offset-2">
-  <a href="/photos/new" class="btn btn-default btn-block">
-    <i class="fa fa-plus"></i>
-  </a>
-</div>
-
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
+    <a href="/photos/new" class="btn btn-default btn-block">
+      <i class="fa fa-plus"></i>
+    </a>
 
-    <% @photos.each do |photo| %>
+    <hr>
+  </div>
+</div>
 
-    <div class="panel panel-default">
-      <h3 class="panel-title">
-        <a href="/users/<%= photo.user_id %>"><%= photo.user.username %>
-        </a>
-        <small>
-          <%= time_ago_in_words(photo.created_at) %> ago
-        </small>
-      </h3>
-    </div>
+<% @photos.each do |photo| %>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <a href="/users/<%= photo.user_id %>"><%= photo.user.username %>
+            </a>
+            <small>
+              <%= time_ago_in_words(photo.created_at) %> ago
+            </small>
+          </h3>
+        </div>
 
     <div class="panel-body">
       <a href="/photos/<%= photo.id %>">
         <img src="<%= photo.image %>" class="img-responsive">
       </a>
-
-      <p></p>
 
       <p>
         <% if photo.likes.pluck(:id).include? (current_user.id) == true %>
@@ -47,7 +49,7 @@
             <% if photo.fans.count == 0 %>
             Be the first to like this photo
             <% elsif photo.fans.count == 1 %>
-            <% photo.fans.pluck(:username)[0] %> likes this
+            <% photo.fans.pluck(:username).to_sentence %> likes this
 
           </p>
 
@@ -59,14 +61,14 @@
           <%= fan %>
           <% end %>
           and
-          <%= photos.fan.pluck(:username)[temp.length] %>
+          <%= photos.fan.pluck(:username).to_sentence %>
           like this
           <% else %>
           <% temp.each do |fan| %>
           <%= fan %>
           <% end %>
           and
-          <%= photo.fans.pluck(:username)[temp.length] %>
+          <%= photo.fans.pluck(:username).to_sentence %>
           like this
           <% end %>
 
@@ -105,7 +107,6 @@
                   <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
 
                 </div>
-
               </form>
             </div>
           </li>
@@ -113,6 +114,7 @@
 
       </div>
     </div>
-    <% end %>
   </div>
 </div>
+
+<% end %>

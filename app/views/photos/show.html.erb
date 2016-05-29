@@ -1,10 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-
-
       <div class="panel panel-default">
-
         <div class="panel-heading">
           <h3 class="panel-title">
             <a href="/users/<%= @photo.user_id %>">
@@ -88,6 +85,7 @@
 
               <li class="media">
                 <div class="media-body">
+                <h6 class="media-heading">
                   <form action="/create_comment" method="post">
                     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
                     <input type="hidden" name="user_id" value="<%= current_user.id %>">
@@ -103,6 +101,7 @@
                     </div>
 
                   </form>
+                </h6>
                 </div>
               </li>
             </ul>

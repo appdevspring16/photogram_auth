@@ -109,21 +109,31 @@
   </nav>
 
   <div class="container">
-    <% if notice.present? %>
-      <div class="alert alert-dismissable alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <%= notice %>
-      </div>
-    <% end %>
+    <div clas="row">
+      <div class="col-md-8 col-md-offset-2">
+        <% if notice.present? %>
+        <div class="alert alert-dismissable alert-success">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <%= notice %>
+        </div>
+        <% end %>
 
-    <% if alert.present? %>
-      <div class="alert alert-dismissable alert-warning">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <%= alert %>
+        <% if alert.present? %>
+          <div class="alert alert-dismissable alert-warning">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <%= alert %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
 
     <%= yield %>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <hr>
+      </div>
+    </div>
   </div>
 </body>
 </html>
