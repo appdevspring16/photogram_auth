@@ -1,32 +1,69 @@
-<div class="page-header">
-  <h1>
-    Photos
-    <a href="/photos/new" class="btn btn-lg btn-success">New Photo</a>
-  </h1>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-striped table-hover">
-      <tr>
-        <th>Caption</th>
-        <th>Image</th>
-        <th>User</th>
-        <th>Actions</th>
-      </tr>
-
-      <% @photos.each do |photo| %>
-      <tr>
-        <td><%= photo.caption %></td>
-        <td><%= photo.image %></td>
-        <td><%= photo.user_id %></td>
-        <td>
-          <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
-          <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <a href="/photos/new" class="btn btn-default btn-block">
+        <i class="fa fa-plus"></i>
+      </a>
+      <hr>
+    </div>
   </div>
+  <% @photos.each do |photo| %>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <a href="/users/<%= photo.user %>"><%= photo.user.username %></a>
+            <small><%= time_ago_in_words(Time.now) %></small>
+          </h3>
+        </div>
+
+        <div class="panel-body">
+          <a href="/photos/<%= photo.id %>">
+            <img src="<%= photo.image %>" class = "img-responsive" alt="" />
+          </a>
+
+          <p>
+            <form action="/create_like" method="post">
+              <input type="hidden" name="photo_id" value="<%= photo.id %>">
+              <input type="hidden" name="user_id" value="<%= current_user.id %>">
+              <button class="btn btn-link">
+                <i class="fa fa-heart-o"></i>
+              </button>
+            </form>
+          </p>
+
+          <ul class="media-list">
+            <li class="media">
+              <div class="media-body">
+                <h6 class="media-heading">
+                  <a href="/users/<%= photo.user.id %>"><%= photo.user.username %></a>
+                  <small><%= time_ago_in_words(Time.now) %></small>
+                </h6>
+                <%= photo.caption %>
+              </div>
+            </li>
+
+            <li class="media">
+              <div class="media-body">
+                <form action="/create_comment" method="post">
+                  <input type="hidden" name="photo_id" value="<% photo.id %>">
+                  <input type="hidden" name="user_id" value="<%= current_user.id %>">
+                  <!-- Label and input for body -->
+                  <div class="form-group">
+                    <label for="body" class="sr-only">
+                      <%= photo.comments %>
+                    </label>
+                    <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+                  </div>
+                </form>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
 </div>
