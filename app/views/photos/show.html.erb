@@ -1,24 +1,21 @@
-<div class="page-header">
-  <h3>Photo #<%= @photo.id %></h3>
-</div>
-
+<div class="container">
 <div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
 
-      <dt>Caption</dt>
-      <dd><%= @photo.caption %></dd>
+      <!-- <dt>Caption</dt>
+      <dd><%= @photo.caption %></dd> -->
+      <div class="panel-heading"><%= User.find_by({ :id => @photo.user_id }).username %> <small><%= time_ago_in_words(@photo.created_at) %> ago</small></div>
 
+      <!-- <dt>Image</dt>
+      <dd><%= @photo.image %></dd> -->
+      <div class="panel-body"><img style='height: 100%; width: 100%; object-fit: contain' src="<%= @photo.image %>"></div>
 
-      <dt>Image</dt>
-      <dd><%= @photo.image %></dd>
+      <!-- <dt>User</dt>
+      <dd><%= @photo.user_id %></dd> -->
+<div class="panel-body"><%= @photo.caption %></div>
 
-
-      <dt>User</dt>
-      <dd><%= @photo.user_id %></dd>
-
-
-    </dl>
+    </div>
 
     <div class="btn-group btn-group-justified">
 
@@ -34,7 +31,7 @@
       </a>
       <% end %>
 
-
     </div>
   </div>
+</div>
 </div>
