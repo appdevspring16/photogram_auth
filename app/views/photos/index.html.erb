@@ -28,7 +28,7 @@
               <img src="<%= photo.image %>" class="img-responsive" alt="Responsive image">
               </a>
               <p>
-                  <% if photo.likes.pluck(:user_id).include? current_user.id %>
+                  <% if current_user.liked_photos.pluck(:id).include? photo.id %>
 
                     <a href="/delete_like/<%= (Like.find_by(:photo_id => photo.id, :user_id => current_user.id).id) %>" class="btn btn-link"><i class="fa fa-heart"></i></a>
                   <% else %>
@@ -41,8 +41,11 @@
                     <button class="btn btn-link">
                       <i class="fa fa-heart-o"></i>
                     </button>
-                  </form>
+
                   <% end %>
+
+
+
 
                   <ul class="media-list">
                    <li class="media">

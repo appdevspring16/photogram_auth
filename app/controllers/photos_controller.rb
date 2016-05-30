@@ -1,10 +1,11 @@
 class PhotosController < ApplicationController
   def index
     @photos = Photo.all
-    
+
   end
 
   def show
+    @all_likes = []
     @photo = Photo.find(params[:id])
   end
 
