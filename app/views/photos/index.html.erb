@@ -25,6 +25,15 @@
           </div>
         <% end %>
         <% end %>
+
+<% @comments.where({ :photo_id => photo.id }).each do |comment| %>
+<div class="panel-body">
+  <a href="users/<%= comment.user_id %>"><%= User.find_by({ :id => comment.user_id}).username %></a>
+  <small class="text-muted"><%= time_ago_in_words(comment.created_at) %> ago</small>
+  <div><%= comment.body %></div>
+</div>
+<% end %>
+
         <form action="/create_comment" method="post" class="form-inline">
           <!-- Hidden input for authenticity token to protect from forgery -->
           <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
@@ -38,7 +47,7 @@
           </div>
 
           <!-- Label and input for body -->
-          <div class="form-group">
+          <div class="form-group col-md-9">
 
             <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" value="<%= @comment.body %>">
 
@@ -57,6 +66,7 @@
           </button>
 
         </form>
+
 
 </div>
 </div>
