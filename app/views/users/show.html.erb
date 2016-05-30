@@ -1,0 +1,24 @@
+<div class="page-header">
+  <h3>User: <%= @user.username.capitalize %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+
+
+        <% @user.photos.each do |photo| %>
+        <ul>
+          <li><%= photo.caption %></li>
+          <li><img src="<%= photo.image %>"</li>
+          <li>
+            <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
+            <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          </li>
+        </ul>
+        <% end %>
+
+    </dl>
+  </div>
+</div>
