@@ -7,15 +7,15 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <%= @user.username %>
+            <%= User.find_by(like.user_id).username %>
           </h3>
-          <small>
-            <%= time_ago_in_words(Time.now - Photo.find(like.photo_id).created_at) %>
+          <small class="text-muted">
+            about <%= time_ago_in_words(Photo.find_by(like.photo_id).created_at) %> ago
           </small>
 
         </div>
         <div class="panel-body">
-          <a>
+          <a href="/photos/<%= like.photo_id %>">
             <img src="<%= Photo.find(like.photo_id).image %>" class="img-responsive">
           </a>
           <p>
@@ -31,7 +31,7 @@
             <li class="media">
               <div class="media-body">
                 <h6 class="media-heading">
-                  <a href="users/<%= @user.id %>"><%= @user.username %></a>
+                  <a href="users/<%= @user.id %>"><%= User.find_by(like.user_id).username %></a>
                 </h6>
               </div>
             </li>

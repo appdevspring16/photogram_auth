@@ -7,4 +7,5 @@ class Like < ActiveRecord::Base
   require 'action_view/helpers'
   include ActionView::Helpers::DateHelper
 
+  # belongs_to :user, :class_name => "Like", :foreign_key => "user_id"
 end

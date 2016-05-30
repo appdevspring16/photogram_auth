@@ -4,6 +4,9 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title"><%= User.find_by(:id => @photo.user_id).username %></h3>
+          <small class="text-muted">
+            about <%= time_ago_in_words(@photo.created_at) %> ago
+          </small>
         </div>
 
         <div class="panel-body">
