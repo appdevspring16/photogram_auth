@@ -15,6 +15,79 @@
       <dd><%= @photo.user_id %></dd> -->
 <div class="panel-body"><%= @photo.caption %></div>
 
+<form action="/create_like" method="post">
+<!-- Hidden input for authenticity token to protect from forgery -->
+<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+<!-- Hidden Label and input for user_id -->
+<div class="form-group">
+  <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+
+</div>
+<!-- Hiden Label and input for photo_id -->
+    <div class="form-group">
+  <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= @photo.id %>">
+
+</div>
+
+<% if @photo.likes.count == 0 %>
+<button class="btn btn-link">
+<i class="fa fa-heart-o"></i>
+</button> <small class="text-muted">Be the first to like this</small>
+<% else %>
+<button href="/delete_like/<%= @photo.user_id %>" class="btn btn-link">
+<i class="fa fa-heart"></i>
+</button>
+<small class="text-muted"><% @likes.where({ :photo_id => @photo.id }).each do |like| %>
+  <%= like.user.username %>
+<% end %>
+like this
+</small>
+<% end %>
+
+</form>
+
+<% @comments.where({ :photo_id => @photo.id }).each do |comment| %>
+<div class="panel-body">
+<a href="users/<%= comment.user_id %>"><%= User.find_by({ :id => comment.user_id}).username %></a>
+<small class="text-muted"><%= time_ago_in_words(comment.created_at) %> ago</small>
+<div><%= comment.body %></div>
+</div>
+<% end %>
+
+<form action="/create_comment" method="post" class="form-inline">
+  <!-- Hidden input for authenticity token to protect from forgery -->
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+  <!-- Hidden Label and input for photo_id -->
+
+  <div class="form-group">
+
+    <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= @photo.id %>">
+
+  </div>
+
+  <!-- Label and input for body -->
+  <div class="form-group col-md-9">
+
+    <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" value="<%= @comment.body %>">
+
+  </div>
+
+  <!-- Label and input for user_id -->
+
+  <div class="form-group">
+
+    <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+
+  </div>
+
+  <button class="btn btn-success">
+    Create Comment
+  </button>
+
+</form>
+
+
     </div>
 
     <div class="btn-group btn-group-justified">
