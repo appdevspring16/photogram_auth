@@ -34,7 +34,7 @@ class LikesController < ApplicationController
     @like.photo_id = params[:photo_id]
 
     if @like.save
-      redirect_to "/likes", :notice => "Like updated successfully."
+      redirect_to "/photos", :notice => "Like updated successfully."
     else
       render 'edit'
     end
@@ -42,14 +42,11 @@ class LikesController < ApplicationController
 
   def destroy
     @like = Like.find(params[:id])
-
     @like.destroy
-
-    redirect_to "/likes", :notice => "Like deleted."
+      redirect_to "/photos", :notice => "Like deleted."
   end
 
   def my_likes
     @user = current_user
-    @all_likes = []
   end
 end
