@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
 validates :username, :presence => true,
             :uniqueness => true
 
@@ -7,4 +8,5 @@ validates :username, :presence => true,
    has_many :comments
 
    has_many :liked_photos, :through => :likes, :source => :photo
+
 end
