@@ -1,0 +1,7 @@
+<h3>Username: <%= @user.username %></h3>
+<h4>Photos: </h4>
+  <div class="">
+    <% @user.photos do |photo|  %>
+    <img src="<%=photo.image%>" alt="Photo"/>
+    <% end %>
+  </div>
