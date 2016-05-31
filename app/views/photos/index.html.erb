@@ -44,9 +44,10 @@
         <i class="fa fa-heart-o"></i>
         </button> <small class="text-muted">Be the first to like this</small>
         <% else %>
-        <button class="btn btn-link">
+        <button href="/delete_like/<%= photo.user_id %>" class="btn btn-link">
         <i class="fa fa-heart"></i>
-        </button> <small class="text-muted"><% @likes.where({ :photo_id => photo.id }).each do |like| %>
+      </button>
+      <small class="text-muted"><% @likes.where({ :photo_id => photo.id }).each do |like| %>
           <%= like.user.username %>
         <% end %>
         like this
