@@ -13,6 +13,7 @@ class LikesController < ApplicationController
 
   def new
     @like = Like.new
+
   end
 
   def create
@@ -25,9 +26,9 @@ class LikesController < ApplicationController
 
 
     if @like.save
-      redirect_to "/likes", :notice => "Like created successfully."
+      redirect_to URI(request.referrer).path, :notice => "Like created successfully."
     else
-      render 'new'
+      redirect_to URI(request.referrer).path
     end
 
   end
