@@ -45,14 +45,14 @@
         <ul class="nav navbar-nav">
 
 
-          <li><a href="/users">All Users</a></li>
+          <li><a href="/users"><i class="fa fa-fw fa-users"></i> All Users</a></li>
 
-          <li><a href="/photos">All Posts</a></li>
+          <li><a href="/photos"><i class="fa fa-fw fa-file-photo-o"></i> All Posts</a></li>
 
-          <li><a href="/my_likes">My Likes</a></li>
+          <li><a href="/my_likes"><i class="fa fa-fw fa-heart"></i> My Likes</a></li>
 
           <% if current_user != nil %>
-          <li><a href="/users/<%= current_user.id %>">My Wall</a></li>
+          <li><a href="/users/<%= current_user.id %>"><i class="fa fa-fw fa-user"></i> My Wall</a></li>
           <% end %>
 
         <!--  <li><a href="/comments">Comments</a></li>
