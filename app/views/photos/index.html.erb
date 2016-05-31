@@ -48,9 +48,9 @@
 
           <small class="text-muted">
             <% if photo.fans.pluck(:username).length > 1 %>
-              <%= photo.fans.pluck(:username).to_sentence %> like this
+            <%= photo.fans.pluck(:username).to_sentence %> like this
             <% else %>
-              <%= photo.fans.pluck(:username).to_sentence %> likes this
+            <%= photo.fans.pluck(:username).to_sentence %> likes this
             <% end %>
           </small>
 
@@ -61,14 +61,53 @@
 
           <small class="text-muted">
             <% if photo.fans.pluck(:username).length > 1 %>
-              <%= photo.fans.pluck(:username).to_sentence %> like this
+            <%= photo.fans.pluck(:username).to_sentence %> like this
             <% else %>
-              <%= photo.fans.pluck(:username).to_sentence %> likes this
+            <%= photo.fans.pluck(:username).to_sentence %> likes this
             <% end %>
           </small>
-          
+
           <% end %>
         </p>
+
+        <ul class="media-list">
+          <% photo.comments.each do |comment| %>
+          <li class="media">
+            <div class="media-body">
+              <h6 class="media-heading">
+                <a href="/users/<%= comment.user %>"><%= comment.user.username %></a>
+                <small>
+                  <%= time_ago_in_words(comment.created_at) %> ago
+                </small>
+              </h6>
+              <%= comment.body %>
+            </div>
+          </li>
+          <% end %>
+
+          <li class="media">
+            <div class="media-body">
+              <form action="/create_comment" method="post">
+                <!-- Hidden input for authenticity token to protect from forgery -->
+                <input name="authenticity_token" type="hidden" value="DDvH2QfLACnDWYOZ2bz3iIPWwDEhwoHKT4uHLdC8Y/UQ+UftEVlrLwidWo9lrcXCZCeVmiPcCyAEhkoWWu5b5w==">
+
+                <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+                <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+                <!-- Label and input for body -->
+                <div class="form-group">
+                  <label for="body" class="sr-only">
+                    Body
+                  </label>
+
+                  <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+                </div>
+              </form>
+            </div>
+          </li>
+        </ul>
+
       </div>
 
 
