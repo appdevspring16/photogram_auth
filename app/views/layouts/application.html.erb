@@ -51,7 +51,9 @@
 
           <li><a href="/my_likes">My Likes</a></li>
 
+          <% if current_user != nil %>
           <li><a href="/users/<%= current_user.id %>">My Wall</a></li>
+          <% end %>
 
         <!--  <li><a href="/comments">Comments</a></li>
 
