@@ -8,9 +8,9 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
 
-      <% @my_likes.each do |like| %>
+      <% current_user.liked_photos.each do |photo| %>
       <tr>
-        <td><img src="<%= like.liked_photos %>"></td>
+        <td><img src="<%= photo.image %>"></td>
       </tr>
       <% end %>
     </table>

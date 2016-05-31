@@ -5,27 +5,78 @@
   </h1>
 </div>
 
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-striped table-hover">
-      <tr>
-        <th>Caption</th>
-        <th>Image</th>
-        <th>User</th>
-        <th>Actions</th>
-      </tr>
-
       <% @photos.each do |photo| %>
-      <tr>
-        <td><%= photo.caption %></td>
-        <td><img src="<%= photo.image %>"></td>
-        <td><%= photo.user_id %></td>
-        <td>
-          <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
-          <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-        </td>
-      </tr>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <a href="/users/<%= photo.user_id %>"><%= User.find_by({:id => photo.user_id}).username %></a>
+                <small>
+                  <%= time_ago_in_words(photo.created_at) %>
+                </small>
+              </h3>
+            </div>
+            <div class="panel-body">
+
+              <a href="/photos/<%= photo.id %>">
+                <img src="<%= photo.image %>" class="img-responsive">
+              </a>
+
+              <p>
+                <a href="/delete_like/<%= photo.user_id %>" class="btn btn-link">
+                  <i class="fa fa-heart"></i>
+                </a>
+                <% photo.fans do |fan| %>
+                <%= fan.username %>
+                like
+                this
+                <% end %>
+              </p>
+
+
+              <ul class="media-list">
+                <% photo.comments.each do |comment| %>
+                <li class="media">
+                  <div class="media-body">
+                    <h6 class="media-heading">
+
+                      <a href="/users/<%= comment.user_id %>"><%= User.find(comment.user_id).username %></a>
+                      <small>
+                        <%= time_ago_in_words(comment.created_at) %>
+                      </small>
+                    </h6>
+                    <%= comment.body %>
+                  </div>
+                </li>
+                <% end %>
+                <li class="media">
+                  <div class="media-body">
+                    <form action="/create_comment" method="post">
+                      <!-- Hidden input for authenticity token to protect from forgery -->
+                      <input name="authenticity_token" type="hidden" value="+kcbGCu20Ros20KpsMYPzxXQEc3SqnJBo+uK29rV6Zvu26Z04HFrBer4L7df4dnyh7wG7AnY+32Cvrajnh5pjg==">
+
+                      <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+                      <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+                      <!-- Label and input for body -->
+                      <div class="form-group">
+                        <label for="body" class="sr-only">
+                          Body
+                        </label>
+
+                        <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+                      </div>
+                    </form>
+                  </div>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
       <% end %>
     </table>
   </div>
