@@ -1,0 +1,73 @@
+<!-- Validation failure messages -->
+<% if @photo.errors.any? %>
+<% @photo.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
+<% end %>
+
+<div>
+  <h3></h3>
+</div>
+
+<div class="container">
+
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <!-- Validation failure messages -->
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            Add Photo
+          </h3>
+        </div>
+
+
+        <div class="panel-body">
+          <form action="/create_photo" method="post">
+            <!-- Hidden input for authenticity token to protect from forgery -->
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+            <!-- Label and input for caption -->
+            <div class="form-group">
+              <label for="caption" class="control-label">
+                Caption
+              </label>
+
+              <input id="caption" name="caption" placeholder="Add a caption..." class="form-control" value="">
+         </div>
+
+            <!-- Label and input for image -->
+            <div class="form-group">
+              <label for="image" class="control-label">
+                Image
+              </label>
+
+              <input type="text" id="image" name="image" placeholder="Add a URL" class="form-control" value="<%= @photo.image %>">
+            </div>
+
+            <!-- Label and input for user_id -->
+            <div class="form-group">
+
+              <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+            </div>
+
+            <button class="btn btn-success btn-block">
+              Create Photo
+            </button>
+
+            <div class="form-group">
+              <a href="/photos" class="btn btn-link btn-block">
+                Cancel
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

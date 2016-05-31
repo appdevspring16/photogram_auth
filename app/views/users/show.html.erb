@@ -1,0 +1,108 @@
+
+<div class="container">
+
+  <div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="jumbotron">
+      <h3><%= @user.username %></h3>
+    </div>
+  </div>
+  </div>
+
+<% Photo.where(:user_id => @user.id).each do |photo| %>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <a href="/users/<%= @user.id %>"><%= @user.username %></a>
+            <small>
+              <%= time_ago_in_words(photo.created_at) %>
+            </small>
+          </h3>
+        </div>
+
+        <div class="panel-body">
+          <a href="/photos/<%= photo.id %>">
+            <img src="<%= photo.image %>" class="img-responsive">
+          </a>
+
+          <p>
+              <!-- <a href="/delete_like/165" class="btn btn-link">
+                <i class="fa fa-heart"></i>
+              </a>
+              alice
+              likes
+              this -->
+          </p>
+
+          <ul class="media-list">
+
+            <li class="media">
+              <div class="media-body">
+                <h6 class="media-heading">
+                  <a href="/users/<%= @user.id %>"><%= @user.username %></a>
+                  <small>
+                    <%= time_ago_in_words(photo.created_at) %>
+                  </small>
+                </h6>
+                <%= photo.caption %>
+              </div>
+            </li>
+
+          <% Comment.where(:photo_id => photo.id).each do |comments| %>
+          <li class="media">
+            <div class="media-body">
+              <h6 class="media-heading">
+                <a href="/users/<%= comments.user_id %>"><%= comments.user.username %></a>
+                <small>
+                  <%= time_ago_in_words(comments.created_at) %>
+                </small>
+              </h6>
+              <%= comments.body %>
+            </div>
+          </li>
+
+
+          <% end %>
+
+          <li class="media">
+            <div class="media-body">
+
+              <form action="/create_comment" method="post">
+                <!-- Hidden input for authenticity token to protect from forgery -->
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+                <!-- input for photo_id -->
+                  <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= photo.id %>">
+
+                <!-- Label and input for body -->
+                <div class="form-group">
+                  <label for="body" class="sr-only">
+                    Body
+                  </label>
+
+                  <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+                </div>
+
+                <!-- Label and input for user_id -->
+                  <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+
+              </form>
+
+
+        </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+<% end %>
+
+</div>
