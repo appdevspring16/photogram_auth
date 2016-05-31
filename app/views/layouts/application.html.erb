@@ -42,7 +42,7 @@
         <ul class="nav navbar-nav">
           <li><a href="/users"><i class="fa fa-users" aria-hidden="true"></i> All Users</a></li>
           <li><a href="/photos"><i class="fa fa-file-image-o" aria-hidden="true"></i> All Posts</a></li>
-          <li><a href="/my_likes/<%= current_user.id %>"><i class="fa fa-heart" aria-hidden="true"></i> My Likes</a></li>
+          <li><a href="/my_likes"><i class="fa fa-heart" aria-hidden="true"></i> My Likes</a></li>
           <% if current_user.present? %>
           <li><a href="/users/<%= current_user.id %>"><i class="fa fa-user" aria-hidden="true"></i> My Wall</a></li>
           <% else %>

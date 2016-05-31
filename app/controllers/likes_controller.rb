@@ -51,4 +51,10 @@ end
 
     redirect_to "/likes", :notice => "Like deleted."
   end
+
+  def my_likes
+    @user = current_user
+    @a = []
+    #code
+  end
 end
