@@ -8,10 +8,10 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
   <style>
-    /* Only necessary if you are using navbar-fixed-top */
-    body {
-      padding-top: 60px;
-    }
+  /* Only necessary if you are using navbar-fixed-top */
+  body {
+    padding-top: 60px;
+  }
   </style>
 
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -47,34 +47,55 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/users/edit">
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-              <%= user.username %>
+          <% if current_user.present? %>
+          <li>
+            <a href="/users/edit">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              <%= current_user.username %>
               <!-- Alice -->
             </a>
           </li>
-          <li><a href="/users/sign_out" data-method="delete" rel="nofollow">Dummy Sign Out Link</a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div>
-  </nav>
+          <li><a href="/users/sign_out" data-method="delete" rel="nofollow">
+            <i class="fa fa-sign-out"></i>
+            Sign Out
+          </a>
+        </li>
 
-  <div class="container">
-    <% if notice.present? %>
-      <div class="alert alert-dismissable alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <%= notice %>
-      </div>
-    <% end %>
+        <% else %>
+        <li>
+          <a href="/users/sign_up">
+            Sign Up
+          </a>
+        </li>
 
-    <% if alert.present? %>
-      <div class="alert alert-dismissable alert-warning">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <%= alert %>
-      </div>
-    <% end %>
+        <li>
+          <a href="/users/sign_in">
+            Sign In
+          </a>
+        </li>
+        <% end %>
 
-    <%= yield %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
   </div>
+</nav>
+
+<div class="container">
+  <% if notice.present? %>
+  <div class="alert alert-dismissable alert-success">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <%= notice %>
+  </div>
+  <% end %>
+
+  <% if alert.present? %>
+  <div class="alert alert-dismissable alert-warning">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <%= alert %>
+  </div>
+  <% end %>
+
+  <%= yield %>
+</div>
 </body>
 </html>
