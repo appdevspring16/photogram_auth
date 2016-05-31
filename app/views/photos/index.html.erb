@@ -59,7 +59,18 @@
 
 
   <% photo.fans.each do |like|%>
-    <p><%=like.username%></p>
+
+        <p><%=like.username%></p>
+<%end%>
+
+        <%if photo.fans.count == 0 %>
+
+    <p>be the first to like this</p>
+        <%elsif photo.fans.count == 1%>
+        <p>likes this</p>
+
+         <%elsif photo.fans.count > 1%>
+        <p>like this</p>
 
 
 
