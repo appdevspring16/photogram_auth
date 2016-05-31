@@ -27,12 +27,12 @@
                   <a href="/photos/<%= photo.id %>""><img class="img-responsive" src="<%= photo.image%>" alt="" /></a>
 
 
-<% if @user.liked_photos.where({:id => photo.id}).id == photo.id %>
-
+                  <% if @likes.where({:photo_id => photo.id}).count > 0 %>
+                  <%  @like = Like.find_by({:photo_id => photo.id})%>
                   <a href="/delete_like/<%= @like.id %>" class="btn btn-link">
                     <i class="fa fa-heart"></i>
                   </a>
-<% else %>
+                  <% else %>
 
 
                   <form action="/create_like" method="post">
@@ -56,7 +56,7 @@
 
                   </form>
 
-<% end %>
+                  <% end %>
 
 
                   <ul class="media-list">
