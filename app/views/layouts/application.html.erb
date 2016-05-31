@@ -8,10 +8,10 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
   <style>
-    /* Only necessary if you are using navbar-fixed-top */
-    body {
-      padding-top: 60px;
-    }
+  /* Only necessary if you are using navbar-fixed-top */
+  body {
+    padding-top: 60px;
+  }
   </style>
 
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -40,22 +40,25 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-<li><a href="/users"><i class="fa fa-users" aria-hidden="true"></i> All Users</a></li>
+          <li><a href="/users"><i class="fa fa-users" aria-hidden="true"></i> All Users</a></li>
           <li><a href="/photos"><i class="fa fa-file-image-o" aria-hidden="true"></i> All Posts</a></li>
-          <li><a href="/likes"><i class="fa fa-heart" aria-hidden="true"></i> My Likes</a></li>
-          <li><a href="/likes"><i class="fa fa-user" aria-hidden="true"></i> My Wall (Not working)</a></li>
-          <li><a href="/comments">Comments</a></li>
-          <li><a href="/rails/info">Sitemap</a></li>
+          <li><a href="/my_likes/<%= current_user.id %>"><i class="fa fa-heart" aria-hidden="true"></i> My Likes</a></li>
+          <% if current_user.present? %>
+          <li><a href="/users/<%= current_user.id %>"><i class="fa fa-user" aria-hidden="true"></i> My Wall</a></li>
+          <% else %>
+          <% end %>
+          <!-- <li><a href="/comments">Comments</a></li>
+          <li><a href="/rails/info">Sitemap</a></li> -->
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
           <% if current_user.present? %>
-          <li><a href="/users/edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <%= current_user.email %></a></li>
+          <li><a href="/users/edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <%= current_user.username %></a></li>
           <li><a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
-<% else %>
-  <li><a href="/users/sign_up">Sign Up</a></li>
-  <li><a href="/users/sign_in">Sign In</a></li>
-  <% end %>
+          <% else %>
+          <li><a href="/users/sign_up">Sign Up</a></li>
+          <li><a href="/users/sign_in">Sign In</a></li>
+          <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
@@ -63,17 +66,17 @@
 
   <div class="container">
     <% if notice.present? %>
-      <div class="alert alert-dismissable alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <%= notice %>
-      </div>
+    <div class="alert alert-dismissable alert-success">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= notice %>
+    </div>
     <% end %>
 
     <% if alert.present? %>
-      <div class="alert alert-dismissable alert-warning">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <%= alert %>
-      </div>
+    <div class="alert alert-dismissable alert-warning">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= alert %>
+    </div>
     <% end %>
 
     <%= yield %>

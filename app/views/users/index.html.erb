@@ -3,11 +3,16 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-heading">
-      <h3 class="panel-title">All Users</h3>
+          <h3 class="panel-title">All Users</h3>
         </div>
         <ul class="list-group">
           <% @users.each do |user| %>
-          <li class="list-group-item"><a href="/users/<%= user.id %><%= user.email %><%= user.id %>"></a></li>
+          <li class="list-group-item">
+            <a href="/users/<%= user.id %>
+              <%= user.email %>
+              <%= user.id %>"></a></li>
+
+          <% end %>
 
         </ul>
       </div>
