@@ -44,6 +44,13 @@
           <li><a href="/likes">Likes</a></li>
           <li><a href="/photos">Photos</a></li>
           <li><a href="/users">Users</a></li>
+          <% if current_user.present? %>
+            <li>
+              <a href="/users/<%=current_user.id%>">
+                <%= current_user.username %>
+              </a>
+            </li>
+          <% end %>
           <li><a href="/rails/info">Sitemap</a></li>
         </ul>
 

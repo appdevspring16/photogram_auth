@@ -40,6 +40,12 @@ class LikesController < ApplicationController
     end
   end
 
+  def my_likes
+    @likes = Like.all
+    render 'my_likes'
+  end
+
+
   def destroy
     @like = Like.find(params[:id])
 
