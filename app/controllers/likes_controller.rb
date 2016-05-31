@@ -5,6 +5,8 @@ class LikesController < ApplicationController
 
   def my_index
     @likes = current_user.likes
+    @comments = Comment.all
+    @comment = Comment.new
   end
 
   def show

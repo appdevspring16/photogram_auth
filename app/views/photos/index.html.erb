@@ -25,8 +25,8 @@
        <% end %>
      <% end %> -->
 
-        <!-- Hidden input for authenticity token to protect from forgery -->
         <form action="/create_like" method="post">
+        <!-- Hidden input for authenticity token to protect from forgery -->
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
         <!-- Hidden Label and input for user_id -->
         <div class="form-group">

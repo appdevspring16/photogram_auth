@@ -23,9 +23,9 @@ class CommentsController < ApplicationController
 
 
     if @comment.save
-      redirect_to "/comments", :notice => "Comment created successfully."
+      redirect_to URI(request.referrer).path, :notice => "Comment created successfully."
     else
-      render 'new'
+      redirect_to URI(request.referrer).path
     end
 
   end
