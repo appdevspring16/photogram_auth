@@ -7,9 +7,6 @@
 <div class="row">
   <div class="col-md-12">
     <dl class="dl-horizontal">
-
-
-
       <div class="col-md-8 col-md-offset-2">
         <% @user.photos.each do |photo| %>
         <tr>
@@ -21,7 +18,8 @@
                   <%= photo.user.username %>   </a>
                   <small>
                     <%= time_ago_in_words(photo.created_at) %> ago
-                  </small></h3>
+                  </small>
+                </h3>
                 </div>
                 <div class="panel-body">
                   <a href="/photos/<%= photo.id %>""><img class="img-responsive" src="<%= photo.image%>" alt="" /></a>
@@ -32,6 +30,7 @@
                   <a href="/delete_like/<%= @like.id %>" class="btn btn-link">
                     <i class="fa fa-heart"></i>
                   </a>
+                  <%= current_user.username %> likes this
                   <% else %>
 
 

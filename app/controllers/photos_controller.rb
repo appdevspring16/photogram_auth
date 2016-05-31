@@ -2,10 +2,15 @@ class PhotosController < ApplicationController
   def index
     @photos = Photo.all
     @comments = Comment.all
+    @user = User.find(current_user[:id])
+    @photo = Photo.where({:user_id => @user.id})
+    @likes = Like.where({:user_id => @user.id})
   end
 
   def show
     @photo = Photo.find(params[:id])
+    @user = User.find(current_user[:id])
+    @likes = Like.where({:user_id => @user.id})
   end
 
   def new
