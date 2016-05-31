@@ -17,20 +17,45 @@
 
       <div class="panel-body"><%=  photo.caption %></div>
 
-<% if photo.likes.count == 0 %>
-<button class="btn btn-link">
-<i class="fa fa-heart-o"></i>
-</button> <small class="text-muted">Be the first to like this</small>
-<% else %>
-<button class="btn btn-link">
-<i class="fa fa-heart"></i>
-</button> <small class="text-muted"><% @likes.where({ :photo_id => photo.id }).each do |like| %>
-  <%= like.user.username %>
-<% end %>
-like this
-</small>
-<% end %>
+      <!-- <% @likes.each do |like| %>
+       <% if like.user_id = current_user.id & like.photo_id = photo.id %>
+       <form action="/delete_like/<%= like.id %>" method="get">
+         <% else %>
+       <form action="/create_like" method="post">
+       <% end %>
+     <% end %> -->
 
+
+
+        <!-- Hidden input for authenticity token to protect from forgery -->
+        <form action="/create_like" method="post">
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+        <!-- Hidden Label and input for user_id -->
+        <div class="form-group">
+          <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+
+        </div>
+        <!-- Hiden Label and input for photo_id -->
+            <div class="form-group">
+          <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= photo.id %>">
+
+        </div>
+
+        <% if photo.likes.count == 0 %>
+        <button class="btn btn-link">
+        <i class="fa fa-heart-o"></i>
+        </button> <small class="text-muted">Be the first to like this</small>
+        <% else %>
+        <button class="btn btn-link">
+        <i class="fa fa-heart"></i>
+        </button> <small class="text-muted"><% @likes.where({ :photo_id => photo.id }).each do |like| %>
+          <%= like.user.username %>
+        <% end %>
+        like this
+        </small>
+        <% end %>
+
+      </form>
 
 <% @comments.where({ :photo_id => photo.id }).each do |comment| %>
 <div class="panel-body">

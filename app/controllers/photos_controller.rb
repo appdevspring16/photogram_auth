@@ -4,6 +4,7 @@ class PhotosController < ApplicationController
     @comment = Comment.new
     @comments = Comment.all
     @likes = Like.all
+    @like = Like.new
   end
 
   def show
