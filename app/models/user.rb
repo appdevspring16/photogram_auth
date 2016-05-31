@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-validates :name, :presence => true,
-            :uniqueness => {:scope => :user_id}
+validates :username, :presence => true,
+            :uniqueness => true
 
    has_many :photos
    has_many :likes
