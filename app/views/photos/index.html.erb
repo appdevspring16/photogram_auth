@@ -24,9 +24,17 @@
               </a>
 
               <p>
+                <% if current_user.id == Like.find(photo.id).user_id %>
+                <% then %>
                 <a href="/delete_like/<%= photo.user_id %>" class="btn btn-link">
                   <i class="fa fa-heart"></i>
                 </a>
+                <% else %>
+                <a href="/create_like/<%= photo.user_id %>" class="btn btn-link">
+                  <i class="fa fa-heart-o"></i>
+                </a>
+                <% end %>
+                
                 <% photo.fans do |fan| %>
                 <%= fan.username %>
                 like
