@@ -1,0 +1,121 @@
+<div class="container">
+
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="jumbotron">
+        <h3>
+          <%= @user.username %>
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Only show if user = current_user -->
+  <% if @user.id == current_user.id %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <a href="/photos/new" class="btn btn-default btn-block">
+        <i class="fa fa-plus"></i>
+      </a>
+
+      <hr>
+    </div>
+  </div>
+  <% end %>
+
+  <!-- The Users Photos -->
+  <% @user.photos.each do |photo| %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <a href="/users/<%= @user.id %>"><%= @user.username %></a>
+            <small>
+              <%= time_ago_in_words(photo.updated_at).to_s %> ago
+            </small>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <a href="/photos/<%= photo.id %>">
+            <img src="<%= photo.image %>" class="img-responsive">
+          </a>
+
+          <p>
+            <% if photo.likes.find_by(:user_id => current_user.id).present? %>
+            <a href="/delete_like/<%= photo.id %>" class="btn btn-link">
+              <i class="fa fa-heart"></i>
+            </a>
+            <%= photo.fans.pluck(:username).to_sentence %>
+            <% if photo.fans.pluck(:username).count == 1 %>
+              likes this
+            <% else %>
+              like this
+            <% end %>
+            <% else %>
+            <form action="/create_like" method="post">
+              <!-- Hidden input for authenticity token to protect from forgery -->
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+              <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+              <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+              <button class="btn btn-link">
+                <i class="fa fa-heart-o"></i>
+              </button>
+              <%= photo.fans.pluck(:username).to_sentence %>
+              <% if photo.fans.pluck(:username).count == 1 %>
+              likes this
+              <% elsif  photo.fans.pluck(:username).count == 0 %>
+              <a class="text-muted">be the first to like this </a>
+              <% else %>
+              like this
+              <% end %>
+            </form>
+            <% end %>
+          </p>
+
+          <ul class="media-list">
+            <% photo.comments.each do |comment| %>
+            <li class="media">
+              <div class="media-body">
+                <h6 class="media-heading">
+                  <a href="/users/<%= comment.user_id %>"><%= comment.user.username %></a>
+                  <small>
+                    <%= time_ago_in_words(comment.updated_at).to_s %> ago
+                  </small>
+                </h6>
+                <%= comment.body %>
+              </div>
+            </li>
+            <% end %>
+            <li class="media">
+              <div class="media-body">
+                <form action="/create_comment" method="post">
+                  <!-- Hidden input for authenticity token to protect from forgery -->
+                  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+                  <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+                  <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+                  <!-- Label and input for body -->
+                  <div class="form-group">
+                    <label for="body" class="sr-only">
+                      Body
+                    </label>
+
+                    <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required="">
+                  </div>
+                </form>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
