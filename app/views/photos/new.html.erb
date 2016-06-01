@@ -1,6 +1,4 @@
-<div class="container">
-  <div class="row">
-<div class="column-md-8 column-md-offset-2">
+
 
 <!-- Validation failure messages -->
 <% if @photo.errors.any? %>
@@ -12,7 +10,7 @@
   <% end %>
 <% end %>
 
-
+<div class="col-md-8 col-md-offset-2">
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Add Photo</h3>
@@ -28,7 +26,7 @@
           Caption
         </label>
 
-        <textarea id="caption" name="caption" placeholder="Add a caption..." class="form-control" rows="3"><%= @photo.caption %></textarea>
+        <input id="caption" name="caption" placeholder="Add a caption..." class="form-control" rows="3"><%= @photo.caption %>
       </div>
 
       <!-- Label and input for image -->
@@ -65,8 +63,7 @@
   </div>
 </div>
 </div>
-    </div>
-</div>
+
 
 
 
