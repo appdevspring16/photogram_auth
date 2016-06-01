@@ -1,4 +1,7 @@
 class Like < ActiveRecord::Base
-end
+
 
 belongs_to :photo
+belongs_to :user
+
+end
