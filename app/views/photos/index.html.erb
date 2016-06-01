@@ -53,8 +53,13 @@
                 </a>
                 Be the first to like this photo.
               </form>
-            <% elsif Like.where(:photo_id => photo.id).count > 0 && like.user_id != current_user.id %>
-              Placeholder
+            <% elsif Like.where(:photo_id => photo.id).each do |like| %>
+              <a href="/delete_like/<%= like.id %>" class="btn btn-link">
+              <i class="fa fa-heart"></i>
+              </a>
+
+              <%= like.user.username %> likes this
+              <% end %>
             <% end %>
           </p>
 
