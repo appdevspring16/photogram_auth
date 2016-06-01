@@ -65,12 +65,11 @@
 
     <div class="btn-group btn-group-justified">
       <% if current_user.id == @photo.user_id %>
+      <a href="/photos" class="btn btn-primary">Back</a>
       <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">Edit</a>
       <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
       <% else %>
       <a href="/photos" class="btn btn-primary">Back</a>
-      <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">Edit</a>
-      <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
       <% end %>
 
     </div>
