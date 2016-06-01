@@ -1,0 +1,45 @@
+<div class="page-header">
+  <h3>User #<%= @user.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Caption</dt>
+      <dd><%= @user.username %></dd>
+
+      <dt>Image</dt>
+      <dd><%= @user.email %></dd>
+
+      <dt>User</dt>
+      <dd><%= @user.id %></dd>
+
+    </dl>
+
+
+
+    <% @photos.each do |photo| %>
+    <tr>
+      <div class="row">
+        <div class="col-md-12">
+          <dl class="dl-horizontal">
+
+
+            <div class="panel panel-default">
+              <div class="panel-heading"><%= photo.caption %></div>
+              <div class="panel-body">
+
+                <dd><a href="/photos/<%= photo.id %>"><img src="<%= photo.image %>" class="img-responsive"></a></dd>
+              </div>
+            </div>
+          </div>
+        </div>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+</div>
+</div>

@@ -1,0 +1,48 @@
+<div class="page-header">
+  <h1>
+    Photos
+    <a href="/photos/new" class="btn btn-lg btn-success">New Photo</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+
+      <% @photos.each do |photo| %>
+      <tr>
+        <div class="row">
+          <div class="col-md-12">
+            <dl class="dl-horizontal">
+
+
+              <div class="panel panel-default">
+                <div class="panel-heading"><%= photo.caption %></div>
+                <div class="panel-body">
+
+              <dd><a href="/photos/<%= photo.id %>"><img src="<%= photo.image %>" class="img-responsive" alt="Responsive image"></a>
+
+                <form action="/create_comment" method="post">
+                  <!-- Hidden input for authenticity token to protect from forgery -->
+                  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+                  <!-- Label and input for photo_id -->
+
+                  <!-- Label and input for body -->
+                  <div class="form-group">
+
+                    <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" rows="3"><%= @comment.body %></textarea>
+                  </div>
+
+                </form>
+
+
+              </dd>
+            </div>
+          </div>
+
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
