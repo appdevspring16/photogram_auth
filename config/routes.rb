@@ -68,7 +68,7 @@ Rails.application.routes.draw do
   # DELETE
   get "/delete_user/:id", :controller => "users", :action => "destroy"
   #------------------------------
-
+  get "/my_likes", :controller => "likes", :action => "show"
 
 
 
