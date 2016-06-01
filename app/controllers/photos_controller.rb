@@ -5,7 +5,6 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @all_likes = []
     @photo = Photo.find(params[:id])
   end
 

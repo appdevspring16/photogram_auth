@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @all_likes = []
     @user_photos = current_user.photos
   end
 
