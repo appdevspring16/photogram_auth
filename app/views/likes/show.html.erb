@@ -7,7 +7,10 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <%= User.find_by(like.user_id).username %>
+            <% p = like.photo_id %>
+            <% prow = Photo.find(p) %>
+            <%= prow.user.username %>
+            <%# User.find(like.user_id).username %>
           </h3>
           <small class="text-muted">
             about <%= time_ago_in_words(Photo.find_by(like.photo_id).created_at) %> ago
@@ -19,30 +22,30 @@
             <img src="<%= Photo.find(like.photo_id).image %>" class="img-responsive">
           </a>
           <p>
-            <a href="delete_like/<%= like.photo_id %>">
+            <a href="delete_like/<%= like.id %>">
               <i class="fa fa-heart">
               </i>
             </a>
             <!-- Users that like the photo -->
             <%# User.find_by(like.photo_id => @like.photo_id).username %>
-          </p>
 
-          <ul class="media-list">
-            <li class="media">
+            <% Like.where(:photo_id => p).each do |user| %>
+              <% u = user.user_id %>
+              <%= User.find(u).username %>
+              <% end %>
+              like this
+            </p>
+
+            <ul class="media-list">
               <div class="media-body">
-                <h6 class="media-heading">
-                  <a href="users/<%= @user.id %>"><%= User.find_by(like.user_id).username %></a>
-                </h6>
+                <form action="/create_comment" method="post">
+                  <div class="form-group">
+                    <input type="text" id="body" name="body" placeholder="Add a comment.." class="form-control">
+                  </div>
+                </form>
               </div>
-            </li>
-            <!-- <li>
-              <form action="/create_comment" method="post">
-                <input type="text" name="body" placeholder="Add a comment..." class="form-control">
-              </form>
-            </li> -->
-          </ul>
+            </ul>
         </div>
-
       </div>
     </div>
   </div>

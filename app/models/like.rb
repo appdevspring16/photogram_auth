@@ -8,4 +8,5 @@ class Like < ActiveRecord::Base
   include ActionView::Helpers::DateHelper
 
   # belongs_to :user, :class_name => "Like", :foreign_key => "user_id"
+  belongs_to :photo, :class_name => "Like", :foreign_key => "photo_id"
 end

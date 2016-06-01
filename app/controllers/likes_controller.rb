@@ -4,8 +4,9 @@ class LikesController < ApplicationController
   end
 
   def show
-    @like = Like.all
+    # @like = Like.all
     @user = current_user
+    @photo = Photo.all
   end
 
   def new
@@ -46,6 +47,6 @@ class LikesController < ApplicationController
 
     @like.destroy
 
-    redirect_to "/likes", :notice => "Like deleted."
+    redirect_to "/my_likes", :notice => "Like deleted."
   end
 end

@@ -6,7 +6,9 @@ class Photo < ActiveRecord::Base
 
   has_many :liked_photos, :through => :likes, :source => :photo
 
-  # has_many :likes, :class_name => "Like", :foreign_key => "photo_id"
+  has_many :likes, :class_name => "Like", :foreign_key => "photo_id"
+
   has_many :comments
+
 
 end
