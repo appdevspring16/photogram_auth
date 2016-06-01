@@ -57,4 +57,11 @@ class PhotosController < ApplicationController
     @users = User.all
   end
 
+  def user_show
+    @user = User.find(params[:id])
+  end
+
+  def my_likes
+    @my_likes = Like.where(user_id: current_user.id).pluck(:photo_id)
+  end
 end

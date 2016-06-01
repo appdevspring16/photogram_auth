@@ -54,9 +54,12 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+#got lazy and used the photos controller instead of creating another one:
   get "/users", :controller => "photos", :action => "show_users"
 
-  get "/users/:id", :controller => "photos", :action => "index"
+  get "/users/:id", :controller => "photos", :action => "user_show"
+
+  get "/my_likes", controller: "photos", action: "my_likes"
 
 
 end
