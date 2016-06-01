@@ -1,16 +1,46 @@
-<div class="page-header">
-  <h1>
-    <%= @user.email %>
-  </h1>
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+ <div class="jumbotron">
+   <h3>
+     <%= @user.username %>
+   </h3>
+ </div>
 </div>
-<div class="row panel">
+</div>
+
+<!-- Add new photo -->
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <a href="/photos/new" class="btn btn-default btn-block">
+      <i class="fa fa-plus"></i>
+    </a>
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+
+
+
 
       <% @user.photos.each do |user| %>
+        <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="/users/<%= user.id %>">
+            <%= user.id %></a>
+
+            <small>
+              <%= time_ago_in_words(user.created_at) %> ago
+            </small>
+          </h3>
+        </div>
 <ul>
   <img class="img-responsive" src="<%= user.image %>" alt="" />
 </ul>
 
-
-      <% end %>
-
+<% end %>
+</div>
+</div>
 </div>

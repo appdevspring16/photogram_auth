@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <a href="/photos/new" class="btn btn-default btn-block"><i class="fa fa-plus"></i></a>
+      <hr>
     </div>
   </div>
 
@@ -19,7 +20,7 @@
               <%= photo.user.username %></a>
 
               <small>
-                <%= photo.created_at %>
+                <%= time_ago_in_words(photo.created_at) %> ago
               </small>
             </h3>
           </div>
@@ -27,6 +28,11 @@
           <div class="panel-body">
 
             <a href="/photos/<%= photo.id %>"><img class="img-responsive" src="<%= photo.image %>" alt="" /></a>
+
+            <!-- Mention of likes -->
+            <% photo.likes.each do |like|  %>
+            <%= like.user.username %>
+            <% end %>
 
             <!-- Form to Like -->
 
@@ -45,17 +51,17 @@
                 <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= photo.id %>">
 
 
-
                 <button class="btn btn-link">
                   <i class="fa fa-fw fa-heart"></i>
                 </button>
+
+
               </form>
             </p>
 
             <p>
               <h6 class="media-heading"><%= photo.caption %></h6>
             </p>
-
 
             <!-- Form to leave comment -->
             <div class="media-body">
@@ -87,10 +93,23 @@
 
             </div>
 
+            <ul class="list-unstyled">
+              <% photo.comments.each do |comment| %>
+              <li><h6><a href="/users/<%= comment.user_id %>"><%= comment.user.username %></a>
+                <small><%= time_ago_in_words(comment.created_at) %> ago</small></h6>
+
+
+              </li>
+              <li> <%= comment.body %></li>
+              <% end %>
+            </ul>
+
           </div>
+          <% end %>
         </div>
+
       </div>
     </div>
 
-    <% end %>
+
   </div>

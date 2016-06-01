@@ -1,14 +1,21 @@
-<div class="page-header">
-  <h1>
-    All Users
-  </h1>
-</div>
-<div class="row panel">
-    <ul>
-      <% User.all.each do |user| %>
-      <li>
-        <a href="/users/<%= user.id %>"><%= user.email %></a>
-      </li>
-      <% end %>
-    </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            All Users
+          </h3>
+        </div>
+        <ul class="list-group">
+          <% User.all.each do |user| %>
+          <li class="list-group-item">
+            <a href="/users/<%= user.id %>"><%= user.username %>
+            </a>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
