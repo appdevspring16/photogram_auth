@@ -1,8 +1,8 @@
-<div class="page-header">
-  <h1>
-    Photos
-    <a href="/photos/new" class="btn btn-lg btn-success">New Photo</a>
-  </h1>
+<div class="col-md-8 col-md-offset-2">
+
+    <a href="/photos/new" class="btn btn-default btn-block"><i class="fa fa-plus"></i></a>
+  <hr>
+
 </div>
 
 <div class="col-md-8 col-md-offset-2">
@@ -53,37 +53,26 @@
 
 
 
+  <% photo.fans.each do |fan|%>
 
-
-
-
-
-  <% photo.fans.each do |like|%>
-
-        <p><%=like.username%></p>
-<%end%>
-
-        <%if photo.fans.count == 0 %>
-
-    <p>be the first to like this</p>
-        <%elsif photo.fans.count == 1%>
-        <p>likes this</p>
-
-         <%elsif photo.fans.count > 1%>
-        <p>like this</p>
-
-
+        <p><%fan.username%></p>
 
 
 <%end%>
 
+  <%if photo.fans.count == 0 %>
+
+    <small class="text-muted">be the first to like this</small>
+        <%elsif photo.fans.count == 1 %>
+        <small class="text-muted"><%=photo.fans.pluck(:username).to_sentence%>likes this</small>
+
+        <%elsif photo.fans.count > 1 %>
+        <small class="text-muted"><%=photo.fans.pluck(:username).to_sentence%> like this</small>
+
+<%end%>
 
 
-
-
-
-
-
+<p></p>
 
 
         <% photo.comments.each do |comment|%>
