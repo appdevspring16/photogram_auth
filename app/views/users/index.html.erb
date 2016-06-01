@@ -10,14 +10,14 @@
         <% @users.each do |user| %>
         <ul class="list-group">
           <li class="list-group-item">
-            <a href="/users/<%= user.id %>"><%= username %> </a>
+            <a href="/users/<%= user.id %>"> <%= user.username %> </a>
           </li>
         </ul>
         <% end %>
       </div>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <hr>

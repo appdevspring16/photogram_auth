@@ -1,6 +1,40 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+
   root "photos#index"
+  # Routes for the Users resource:
+  # CREATE
+  get "/my_likes/new", :controller => "my_likes", :action => "new"
+  post "/create_my_like", :controller => "my_likes", :action => "create"
+
+  # READ
+  get "/my_likes", :controller => "my_likes", :action => "index"
+  get "/my_likes/:id", :controller => "my_likes", :action => "show"
+
+  # UPDATE
+  get "/my_likes/:id/edit", :controller => "my_likes", :action => "edit"
+  post "/update_my_like/:id", :controller => "my_likes", :action => "update"
+
+  # DELETE
+  get "/delete_my_like/:id", :controller => "my_likes", :action => "destroy"
+
+
+  # Routes for the Users resource:
+  # CREATE
+  get "/users/new", :controller => "users", :action => "new"
+  post "/create_user", :controller => "users", :action => "create"
+
+  # READ
+  get "/users", :controller => "users", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
+
+  # UPDATE
+  get "/users/:id/edit", :controller => "users", :action => "edit"
+  post "/update_user/:id", :controller => "users", :action => "update"
+
+  # DELETE
+  get "/delete_user/:id", :controller => "users", :action => "destroy"
 
   # Routes for the Comment resource:
   # CREATE
@@ -17,6 +51,23 @@ Rails.application.routes.draw do
 
   # DELETE
   get "/delete_comment/:id", :controller => "comments", :action => "destroy"
+  #------------------------------
+
+  # Routes for the Like resource:
+  # CREATE
+  get "/likes/new", :controller => "likes", :action => "new"
+  post "/create_like", :controller => "likes", :action => "create"
+
+  # READ
+  get "/likes", :controller => "likes", :action => "index"
+  get "/likes/:id", :controller => "likes", :action => "show"
+
+  # UPDATE
+  get "/likes/:id/edit", :controller => "likes", :action => "edit"
+  post "/update_like/:id", :controller => "likes", :action => "update"
+
+  # DELETE
+  get "/delete_like/:id", :controller => "likes", :action => "destroy"
   #------------------------------
 
   # Routes for the Like resource:
@@ -53,7 +104,6 @@ Rails.application.routes.draw do
   get "/delete_photo/:id", :controller => "photos", :action => "destroy"
   #------------------------------
 
-  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -108,23 +158,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  # Routes for the user resource:
-  # CREATE
-  get "/users/new", :controller => "comments", :action => "new"
-  post "/create_user", :controller => "users", :action => "create"
-
-  # READ
-  get "/users", :controller => "users", :action => "index"
-  get "/users/:id", :controller => "users", :action => "show"
-
-  # UPDATE
-  get "/users/:id/edit", :controller => "users", :action => "edit"
-  post "/update_user/:id", :controller => "users", :action => "update"
-
-  # DELETE
-  get "/delete_user/:id", :controller => "users", :action => "destroy"
-  #------------------------------
 
 
 end

@@ -1,0 +1,89 @@
+
+ <div class="container">
+
+
+   <div class="row">
+ <div class="col-md-8 col-md-offset-2">
+   <div class="panel panel-default">
+     <div class="panel-heading">
+       <h3 class="panel-title">
+         <a href="/users/40">jfcharney</a>
+         <small>
+           about 3 hours ago
+         </small>
+       </h3>
+     </div>
+
+     <div class="panel-body">
+       <a href="/photos/55">
+         <img src= class="img-responsive">
+       </a>
+
+       <p>
+           <a href="/delete_like/209" class="btn btn-link">
+             <i class="fa fa-heart"></i>
+           </a>
+
+       </p>
+
+       <ul class="media-list">
+
+         <li class="media">
+           <div class="media-body">
+             <h6 class="media-heading">
+               <a href="/users/40"></a>
+               <small>
+                 about 3 hours ago
+               </small>
+             </h6>
+             Bunny!
+           </div>
+         </li>
+
+         <li class="media">
+           <div class="media-body">
+             <h6 class="media-heading">
+               <a href="/users/1">alice</a>
+               <small>
+                 about 2 hours ago
+               </small>
+             </h6>
+             Wow!
+           </div>
+         </li>
+
+         <li class="media">
+           <div class="media-body">
+             <form action="/create_comment" method="post">
+               <!-- Hidden input for authenticity token to protect from forgery -->
+               <input name="authenticity_token" type="hidden" value="VAR4Jz4llqDHR0NdoQijpbFAlnynla4umR9UETRRdRqFSc1jT3NqY9bnR82YGDwirS1NYiAM/n/r4WKBXkpElw==">
+
+               <input type="hidden" name="photo_id" value="55">
+
+               <input type="hidden" name="user_id" value="42">
+
+               <!-- Label and input for body -->
+               <div class="form-group">
+                 <label for="body" class="sr-only">
+                   Body
+                 </label>
+
+                 <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+               </div>
+             </form>
+           </div>
+         </li>
+       </ul>
+     </div>
+   </div>
+ </div>
+</div>
+
+
+
+   <div class="row">
+     <div class="col-md-8 col-md-offset-2">
+       <hr>
+     </div>
+   </div>
+ </div>

@@ -10,7 +10,7 @@
   <style>
   /* Only necessary if you are using navbar-fixed-top */
   body {
-    padding-top: 60px;
+    padding-top: 80px;
   }
   </style>
 
@@ -49,7 +49,7 @@
             </a>
           </li>
           <li>
-            <a href="/comments">
+            <a href="/photos">
               <i class="fa fa-fw fa-file-photo-o"></i>
               <span class="hidden-sm">
                 All Posts
@@ -57,7 +57,7 @@
             </a>
           </li>
           <li>
-            <a href="/likes">
+            <a href="/my_likes">
               <i class="fa fa-fw fa-heart"></i>
               <span class="hidden-sm">
                 My Likes
@@ -65,7 +65,7 @@
             </a>
           </li>
           <li>
-            <a href="/photos">
+            <a href="/users/<%= current_user.id %>">
               <i class="fa fa-fw fa-user"></i>
               <span class="hidden-sm">
                 My Wall
