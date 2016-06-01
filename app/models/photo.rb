@@ -6,4 +6,6 @@ class Photo < ActiveRecord::Base
 
   # Photo must be present
   validates :user_id, :presence => true
+
+
 end
