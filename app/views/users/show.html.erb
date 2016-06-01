@@ -40,7 +40,11 @@
                   <a href="/delete_like/<%= @like.id %>" class="btn btn-link">
                     <i class="fa fa-heart"></i>
                   </a>
-                  <%= current_user.username %> likes this
+                  <% if @alllikes.where({:photo_id => photo.id}).count > 0 %>
+                  <% @alllikes.where({:photo_id => photo.id}).each do |alllike| %>
+                  <%= alllike.user.username %>
+                  <% end %> likes this
+                  <% end %>
                   <% else %>
 
 
@@ -61,7 +65,13 @@
 
                     <button class="btn btn-link"><i class="fa fa-heart-o" aria-hidden="true"></i></button>
 
+                    <% if @alllikes.where({:photo_id => photo.id}).count > 0 %>
+                    <% @alllikes.where({:photo_id => photo.id}).each do |alllike| %>
+                    <%= alllike.user.username %>
+                    <% end %> likes this
+                    <% else %>
                     <small class="text-muted">be the first to like this</small>
+                    <% end %>
 
                   </form>
 

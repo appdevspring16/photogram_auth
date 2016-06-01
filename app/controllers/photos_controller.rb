@@ -5,6 +5,7 @@ class PhotosController < ApplicationController
     @user = User.find(current_user[:id])
     @photo = Photo.where({:user_id => @user.id})
     @likes = Like.where({:user_id => @user.id})
+    @alllikes = Like.all
   end
 
   def show
