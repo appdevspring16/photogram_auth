@@ -43,7 +43,9 @@
           <li><a href="/users">All Users</a></li>
           <li><a href="/photos">All Posts</a></li>
           <li><a href="/my_likes">My Likes</a></li>
-          <li><a href="/users/<%= current_user.id %>">My Wall</a></li>
+          <% if current_user.present? %>
+            <li><a href="/users/<%= current_user.id %>">My Wall</a></li>
+          <% end %>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
