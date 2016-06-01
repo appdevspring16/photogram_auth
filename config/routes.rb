@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root "photos#index"
 
   get "/users", :controller => "users", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
+
   get "/comments/new", :controller => "comments", :action => "new"
   post "/create_comment", :controller => "comments", :action => "create"
 
