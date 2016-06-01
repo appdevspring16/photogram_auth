@@ -48,9 +48,8 @@
               </span>
             </a>
           </li>
-          <li><a href="/comments">Comments</a></li>
           <li><a href="/photos"> <i class="fa fa-fw fa-file-photo-o"></i>All Posts</a></li>
-          <% if current_user.present? %>
+
             <li>
               <a href="/my_likes">
                 <i class="fa fa-fw fa-heart"></i>
@@ -59,6 +58,7 @@
                 </span>
               </a>
             </li>
+              <% if current_user.present? %>
             <li>
               <a href="/users/1">
                 <i class="fa fa-fw fa-user"></i>

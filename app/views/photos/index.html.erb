@@ -59,8 +59,7 @@
                   <% end %>
                </p>
                   <% else %>
-                    <%= photo.fans.pluck(:username).to_sentence %>
-                  like this
+                    <%= photo.fans.pluck(:username).to_sentence %> like this
               </p>
             <% end %>
 
