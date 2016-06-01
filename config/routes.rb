@@ -54,6 +54,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  get "/users", :controller => "photos", :action => "show_users"
+
   get "/users/:id", :controller => "photos", :action => "index"
 
 

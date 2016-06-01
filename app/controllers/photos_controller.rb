@@ -1,8 +1,9 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     @photos = Photo.all
+    @likes = Like.all
   end
 
   def show
@@ -51,4 +52,9 @@ class PhotosController < ApplicationController
 
     redirect_to "/photos", :notice => "Photo deleted."
   end
+
+  def show_users
+    @users = User.all
+  end
+
 end
