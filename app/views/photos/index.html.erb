@@ -64,7 +64,7 @@
 
     <small class="text-muted">be the first to like this</small>
         <%elsif photo.fans.count == 1 %>
-        <small class="text-muted"><%=photo.fans.pluck(:username).to_sentence%>likes this</small>
+        <small class="text-muted"><%=photo.fans.pluck(:username).to_sentence%> likes this</small>
 
         <%elsif photo.fans.count > 1 %>
         <small class="text-muted"><%=photo.fans.pluck(:username).to_sentence%> like this</small>
@@ -73,6 +73,22 @@
 
 
 <p></p>
+
+        <ul class="media-list">
+  <li class="media">
+    <div class="media-body">
+      <h6 class="media-heading">
+        <a href="/users/<%=photo.user_id%>"><%=photo.user.username%></a>
+        <small><%=time_ago_in_words(photo.created_at) %></small>
+        <div><%=photo.caption%></div>
+
+
+
+      </h6>
+
+    </div>
+  </li>
+</ul>
 
 
         <% photo.comments.each do |comment|%>
