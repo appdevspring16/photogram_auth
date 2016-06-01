@@ -8,4 +8,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def my_likes
+    @liked_photos= User.find_by( :id => current_user.id  ).likes.all
+  end
 end

@@ -7,6 +7,14 @@ class LikesController < ApplicationController
     @like = Like.find(params[:id])
   end
 
+  def my_likes
+    @liked_photos = User.find_by( :id => current_user.id  ).likes.all
+    # @liked_photos.caption = Photo.caption
+    # @liked_photo.caption = Photo.caption
+    # @photo.image = params[:image]
+    # @photo.user_id = params[:user_id]
+  end
+
   def new
     @like = Like.new
   end
