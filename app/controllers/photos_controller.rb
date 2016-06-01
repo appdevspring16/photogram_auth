@@ -1,4 +1,16 @@
 class PhotosController < ApplicationController
+
+  before_action :authenticate_user, only: [:edit, :update, :destroy]
+
+  def authenticate_user
+    b_user_id = Photo.find(params[:id]).user_id
+
+    if (b_user_id != current_user.id)
+      redirect_to "/", :alert => "You are not authorized to perform this action."
+    end
+  end
+
+
   def index
     @photos = Photo.all
     @photo = Photo.new
