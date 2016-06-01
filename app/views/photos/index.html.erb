@@ -18,6 +18,7 @@
         <div class="panel-body">
           <td><img class="img-responsive" src="<%= photo.image %>"></td>
 
+
           <form action="/create_like/" method="post">
             <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
             <input type="hidden" name="photo_id" value="<%= photo.id %>">
@@ -27,6 +28,7 @@
               </button>
               <small class="text-muted">be the first to like this</small>
             </form>
+
 
           <% photo.comments.each do |comment| %>
           <ul class="media-list">

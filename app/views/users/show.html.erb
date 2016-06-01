@@ -5,12 +5,17 @@
         <h3><%= @users.username %></h3>
       </div>
 
+      <a href="/photos/new" class="btn btn-default btn-block">
+        <i class="fa fa-plus"></i>
+      </a>
+
+
       <% @users.photos.each do |photo| %>
       <div class="panel panel-default">
 
         <div class="panel-heading">
           <h5 class="panel-title"> <a href = "/users/<%= photo.user_id %>"> <%= @users.username %> </a>
-            <small> 7 months ago</small>
+            <small><%= time_ago_in_words(photo.created_at) %></small>
           </h5>
         </div>
 
@@ -21,7 +26,7 @@
           <ul class="media-list">
             <div class="media-body">
               <h5 class="media-heading">
-                <a href = "/users/<%= comment.user.id %>"> <%= comment.user.username %></a> <small> 7 months ago</small>
+                <a href = "/users/<%= comment.user.id %>"> <%= comment.user.username %></a> <small> <%= time_ago_in_words(photo.created_at) %></small>
               </h5>
               <p><small><%= comment.body %></small></p>
             </div>

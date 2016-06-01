@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+  before_action :authenticate_user!
   def index
     @likes = Like.all
   end
@@ -48,5 +49,3 @@ class LikesController < ApplicationController
     redirect_to "/likes", :notice => "Like deleted."
   end
 end
-
-before_action :authenticate_user!

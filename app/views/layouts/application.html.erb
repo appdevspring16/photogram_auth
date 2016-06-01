@@ -40,23 +40,23 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/users"><i class="fa fa-users" aria-hidden="true"></i> Users</a></li>
+          <li><a href="/users"><i class="fa fa-users" aria-hidden="true"></i> All Users</a></li>
+              <li><a href="/photos"><i class="fa fa-file-image-o" aria-hidden="true"></i> All Posts</a></li>
+              <li><a href="/my_likes"><i class="fa fa-heart" aria-hidden="true"></i></i> My likes</a></li>
+
+    <% if current_user.present? %>
           <li>
-            <% if current_user.present? %>
             <a href="/users/<%= current_user.id %>"><i class="fa fa-user" aria-hidden="true"></i></i> My wall</a>
-            <% else %>
-            <% end %>
           </li>
-          <li>
-            <% if current_user.present? %>
-            <a href="/my_likes"><i class="fa fa-heart" aria-hidden="true"></i></i> My likes</a>
-            <% else %>
-            <% end %>
-          </li>
-          <li><a href="/comments">Comments</a></li>
-          <li><a href="/likes">Likes</a></li>
-          <li><a href="/photos">Photos</a></li>
-          <li><a href="/rails/info">Sitemap</a></li>
+
+          <% else %>
+          <% end %>
+
+
+          <!-- <li><a href="/comments">Comments</a></li>
+          <li><a href="/likes">Likes</a></li> -->
+
+          <!-- <li><a href="/rails/info">Sitemap</a></li> -->
         </ul>
 
         <ul class="nav navbar-nav navbar-right">

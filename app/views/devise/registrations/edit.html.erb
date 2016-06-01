@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<!-- <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -36,4 +36,94 @@
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-<%= link_to "Back", :back %>
+<%= link_to "Back", :back %> -->
+
+  <%= devise_error_messages! %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h5 class="panel-title"> Edit Profile</h5>
+        </div>
+
+
+        <form class="form-horizontal" role="form" id="edit_user" action="/users/" accept-charset="UTF-8" method="put">
+          <input name="utf8" type="hidden" value="✓">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="user_email">Email</label>
+            <div class="col-sm-10">
+              <input autofocus="autofocus" class="form-control" type="email" value="<%= current_user.email %>" name="user[email]" id="user_email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="user_username">Username</label>
+            <div class="col-sm-10">
+              <input autofocus="autofocus" class="form-control" type="text" name="user[username]" id="user_username" value="<%= current_user.username %>">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="user_password">Password</label>
+            <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+            <div class="col-sm-10">
+              <input autocomplete="off" class="form-control" type="password" name="user[password]" id="user_password">
+              <p class="help-block">
+                Leave blank if you don't want to change it.</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="user_password_confirmation">Password Confirmation</label>
+            <div class="col-sm-10">
+              <input autocomplete="off" class="form-control" type="password" name="user[password_confirmation]" id="user_passowrd_confirmation">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="user_new_password">New Password</label>
+            <div class="col-sm-10">
+              <input autocomplete="off" class="form-control" type="password" name="user[new_password]" id="user_new_passowrd">
+            </div>
+          </div>
+
+          <div class="actions">
+            <div class="col-sm-offset-2 col-sm-10">
+          <input type="submit" name="commit" value="Update" class="btn btn-success btn-block">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+      <a class="btn btn-link btn-block" href="https://photogram-auth-target.herokuapp.com/">Back</a>
+    </div>
+  </div>
+
+<div class="panel-footer">
+            <div class="form-group">
+                <div class="col-sm-2">
+              Unhappy?
+            </div>
+          <div class="col-sm-10">
+            <a data-confirm="Are you sure?" class="btn btn-danger btn-block" rel="nofollow" data-method="delete" href="/users">Cancel my account</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <hr>
+      </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
