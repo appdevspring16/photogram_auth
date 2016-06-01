@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # CREATE
   root "photos#index"
 
+  get "/users", :controller => "users", :action => "index"
   get "/comments/new", :controller => "comments", :action => "new"
   post "/create_comment", :controller => "comments", :action => "create"
 
