@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_action :authenticate_user!
+  
   def index
     @users = User.all
   end
@@ -19,5 +22,3 @@ class UsersController < ApplicationController
   end
 
 end
-
-before_action :authenticate_user!
