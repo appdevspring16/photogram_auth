@@ -27,7 +27,7 @@ root "photos#index"
   # READ
   get "/likes", :controller => "likes", :action => "index"
   get "/likes/:id", :controller => "likes", :action => "show"
-  get "/my_likes", :controller => "likes", :action => "my_likes"
+
 
   # UPDATE
   get "/likes/:id/edit", :controller => "likes", :action => "edit"
@@ -60,6 +60,7 @@ root "photos#index"
   get "/users", :controller => "users", :action => "index"
   devise_for :users
   get "/users/:id", :controller => "users", :action => "show"
+  get "/my_likes", :controller => "users", :action => "show_likes" 
 
   #------------------------------
 
