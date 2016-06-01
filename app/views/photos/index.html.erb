@@ -22,6 +22,16 @@
 
               <dd><a href="/photos/<%= photo.id %>"><img src="<%= photo.image %>" class="img-responsive" alt="Responsive image"></a>
 
+
+                    <% photo.comments.each do |comment| %>
+
+                      <p><%= photo.user.username %></p><p>
+
+                        <%= comment.body %></p>
+
+                       <% end %>
+
+
                 <form action="/create_comment" method="post">
                   <!-- Hidden input for authenticity token to protect from forgery -->
                   <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
@@ -30,7 +40,7 @@
 
                   <!-- Label and input for body -->
                   <div class="form-group">
-
+    <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= photo.id %>">
                     <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" rows="3"><%= @comment.body %></textarea>
                   </div>
 
