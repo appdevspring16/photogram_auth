@@ -28,6 +28,32 @@
           <img src="<%= photo.image %>" class="img-responsive">
         </a>
 
+        <p>
+          <form action="/create_like" method="post">
+            <!-- Hidden input for authenticity token to protect from forgery -->
+            <input name="authenticity_token" type="hidden" value="071tdEm2heeXFx4+9dyF6NkdR7jOGJXpfZoGtMAg4qfzcqAQExxaSEuUvbrxoQEfDRBgscz8C2WClQu0XSWV6Q==">
+
+            <input type="hidden" name="photo_id" value="<%= photo.id %>">
+            <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+
+            <button class="btn btn-link">
+              <% if current_user.liked_photos.exists?(photo) %>
+              <i class="fa fa-heart"></i>
+              <% else %>
+              <i class="fa fa-heart-o"></i>
+              <% end %>
+            </button>
+
+            <% if photo.likes.count > 0 %>
+            <small class="text-muted"><%= photo.fans.pluck(:username).to_sentence %></small>
+            <% else %>
+            <small class="text-muted">be the first to like this</small>
+            <% end %>
+          </form>
+        </p>
+
+
 
         <!-- all comments for this photo -->
         <% photo.comments.each do |comment| %>

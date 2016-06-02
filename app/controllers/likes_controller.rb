@@ -13,13 +13,21 @@ class LikesController < ApplicationController
 
   def create
     @like = Like.new
-    @like.user_id = params[:user_id]
+    @like.user_id =  params[:user_id]
     @like.photo_id = params[:photo_id]
 
-    if @like.save
-      redirect_to "/likes", :notice => "Like created successfully."
+    user = User.find(params[:user_id])
+    # SG: if the like association already exists then remove it
+    if ( user.liked_photos.exists?(Photo.find(params[:photo_id])))
+      old_like = user.likes.find_by( {:photo_id => params[:photo_id]})
+      old_like.destroy
+      redirect_to "/my_likes", :notice => "Like destroyed successfully."
     else
-      render 'new'
+      if @like.save
+        redirect_to "/my_likes", :notice => "Like created successfully."
+      else
+        render 'new'
+      end
     end
   end
 
