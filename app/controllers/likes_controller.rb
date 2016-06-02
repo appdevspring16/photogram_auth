@@ -7,12 +7,12 @@ class LikesController < ApplicationController
     @like = Like.find(params[:id])
   end
 
-def my_likes
-    @user = User.find(current_user.id)
-  end
-
   def new
     @like = Like.new
+  end
+
+def my_likes
+    @user = User.find(current_user.id)
   end
 
   def create

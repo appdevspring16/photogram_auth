@@ -7,7 +7,6 @@
      </div>
    </div>
  </div>
- 
  <div class="row">
    <div class="col-md-8 col-md-offset-2">
      <% @user.photos.each do |photo| %>
@@ -20,29 +19,22 @@
            </small>
          </h3>
        </div>
- 
        <div class="panel-body">
          <a href="/photos/<%= photo.id %>">
            <img src="<%= photo.image %>" class="img-responsive">
          </a>
- 
-         <p></p>
- 
          <p>
            <% if photo.likes.pluck(:user_id).include?(current_user.id) == true %>
            <form action="/delete_like/<%= photo.likes.where({:user_id => current_user.id}).pluck(:id)[0] %>">
              <% else %>
              <form action="/create_like" method="post">
-               <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
- 
+               <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
                <input type="hidden" name="photo_id" value="<%= photo.id %>">
- 
                <input type="hidden" name="user_id" value="<%= current_user.id %>">
                <% end %>
                <button class="btn btn-link">
                  <i class="fa fa-heart-o"></i>
                </button>
- 
                <% if photo.fans.count == 0 %>
                Be the first to like this photo</p>
                <% elsif photo.fans.count == 1 %>
@@ -68,9 +60,7 @@
              <% end %>
            </p>
            <% end %>
- 
          </form>
- 
          <ul class="media-list">
            <% photo.comments.each do |comment| %>
  
@@ -86,23 +76,16 @@
              </div>
            </li>
            <% end %>
- 
            <li class="media">
              <div class="media-body">
                <form action="/create_comment" method="post">
-                 <!-- Hidden input for authenticity token to protect from forgery -->
                  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
- 
                  <input type="hidden" name="photo_id" value="<%= photo.id %>">
- 
                  <input type="hidden" name="user_id" value="<%= current_user.id %>">
- 
-                 <!-- Label and input for body -->
                  <div class="form-group">
                    <label for="body" class="sr-only">
                      Body
                    </label>
- 
                    <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
                  </div>
                </form>

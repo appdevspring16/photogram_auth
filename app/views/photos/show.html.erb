@@ -1,21 +1,16 @@
 <div class="page-header">
   <h3>Photo #<%= @photo.id %></h3>
 </div>
-
 <div class="row">
   <div class="col-md-12">
     <dl class="dl-horizontal">
       <dt>Caption</dt>
       <dd><%= @photo.caption %></dd>
-
       <dt>Image</dt>
       <dd><%= @photo.image %></dd>
-
       <dt>User</dt>
       <dd><%= @photo.user_id %></dd>
-
     </dl>
-
     <div class="btn-group btn-group-justified">
       <a href="/photos" class="btn btn-primary">
         Back
