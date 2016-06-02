@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <% @user.liked_photos.each do |photo| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="/users/<%= photo.user_id %>"><%= photo.user.username %></a>
+          <small>
+            <%= time_ago_in_words(photo.created_at) %> ago
+          </small>
+        </h3>
+      </div>
+
+      <div class="panel-body">
+        <a href="/photos/<%= photo.id %>">
+          <img src="<%= photo.image %>" class="img-responsive">
+        </a>
+
+        <p></p>
+
+        <p>
+          <% if photo.likes.pluck(:user_id).include?(current_user.id) == true %>
+          <form action="/delete_like/<%= photo.likes.where({:user_id => current_user.id}).pluck(:id)[0] %>">
+            <% else %>
+            <form action="/create_like" method="post">
+              <!-- Hidden input for authenticity token to protect from forgery -->
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+              <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+              <input type="hidden" name="user_id" value="<%= current_user.id %>">
+              <% end %>
+              <button class="btn btn-link">
+                <i class="fa fa-heart-o"></i>
+              </button>
+
+              <% if photo.fans.count == 0 %>
+              Be the first to like this photo</p>
+              <% elsif photo.fans.count == 1 %>
+              <%= photo.fans.pluck(:username)[0] %> likes this
+            </p>
+            <% else %>
+            <% temp = Array.new %>
+            <% temp = photo.fans.pluck(:username).first(photo.fans.pluck(:username).length-1) %>
+            <% if temp.length == 1 %>
+            <% temp.each do |fan| %>
+            <%= fan %>
+            <% end %>
+            and
+            <%= photo.fans.pluck(:username)[temp.length] %>
+            like this
+            <% else %>
+            <% temp.each do |fan| %>
+            <%= fan %>,
+            <% end %>
+            and
+            <%= photo.fans.pluck(:username)[temp.length] %>
+            like this
+            <% end %>
+          </p>
+          <% end %>
+
+        </form>
+
+        <ul class="media-list">
+          <% photo.comments.each do |comment| %>
+
+          <li class="media">
+            <div class="media-body">
+              <h6 class="media-heading">
+                <a href="/users/<%= comment.user_id %>"><%= comment.user.username %></a>
+                <small>
+                  <%= time_ago_in_words(comment.created_at) %> ago
+                </small>
+              </h6>
+              <%= comment.body %>
+            </div>
+          </li>
+          <% end %>
+
+          <li class="media">
+            <div class="media-body">
+              <form action="/create_comment" method="post">
+                <!-- Hidden input for authenticity token to protect from forgery -->
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+                <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+                <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+                <!-- Label and input for body -->
+                <div class="form-group">
+                  <label for="body" class="sr-only">
+                    Body
+                  </label>
+
+                  <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+                </div>
+              </form>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
