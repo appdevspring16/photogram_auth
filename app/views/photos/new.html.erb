@@ -24,7 +24,7 @@
           Caption
         </label>
 
-        <textarea id="caption" name="caption" placeholder="Caption" class="form-control" rows="3"><%= @photo.caption %></textarea>
+        <textarea id="caption" name="caption" placeholder="Add a Caption" class="form-control" rows="3"><%= @photo.caption %></textarea>
       </div>
 
       <!-- Label and input for image -->
@@ -38,11 +38,7 @@
 
       <!-- Label and input for user_id -->
       <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
-
-        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @photo.user_id %>">
+        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
       </div>
 
       <button class="btn btn-success">
