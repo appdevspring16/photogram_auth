@@ -1,34 +1,50 @@
 <div class="page-header">
-  <h1>
-    Photos
-    <a href="/photos/new" class="btn btn-lg btn-success">New Photo</a>
-  </h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <a href="/photos/new" class="btn btn-default btn-block">
+          <i class="fa fa-plus"></i>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
+
 <% @photos.each do |photo| %>
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= User.find(photo.user_id).username %></h3>
+        <h3 class="panel-title"><%= User.find(photo.user_id).username %>
+        </h3>
       </div>
       <div class="panel-body">
         <img src="<%= photo.image %>" class="img-responsive" alt="" />
         <!-- form for likes -->
-        <form action="/create_like" method="post">
-          <!-- Hidden input for authenticity token to protect from forgery -->
-          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-          <!-- Label and input for user_id -->
-          <div class="form-group">
-            <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
-          </div>
-          <!-- Label and input for photo_id -->
-          <div class="form-group">
-            <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= photo.id %>">
-          </div>
+        <% if Like.where({:user_id => current_user.id, :photo_id => photo.id}).count > 0 %>
+        <a href="/delete_like/<%= Like.where({:user_id => current_user.id, :photo_id => photo.id}).first.id %>" class="" rel="nofollow">
+        </a>
 
+          <!-- true -->
+          <button class="btn btn-link">
+            <i class="fa fa-heart"></i>
+          </button>
+          <% else %>
+          <form action="/create_like" method="post">
+            <!-- Hidden input for authenticity token to protect from forgery -->
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+            <!-- Label and input for user_id -->
+            <div class="form-group">
+              <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+            </div>
+            <!-- Label and input for photo_id -->
+            <div class="form-group">
+              <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= photo.id %>">
+            </div>
           <button class="btn btn-link">
             <i class="fa fa-heart-o"></i>
           </button>
+          <% end %>
         </form>
 
         <ul class="media-list">
@@ -73,11 +89,6 @@
             Create Comment
           </button>
         </form>
-
-
-
-
-
       </div>
     </div>
   </div>
