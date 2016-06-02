@@ -1,31 +1,65 @@
-<div class="page-header">
-  <h3>Photo #<%= @photo.id %></h3>
-</div>
+
 
 <div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
-      <dt>Caption</dt>
-      <dd><%= @photo.caption %></dd>
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="/users/<%= @photo.user_id %>"> <%= @photo.user.username %> </a>
+          <small>
+            <%= time_ago_in_words(@photo.updated_at) %>
+          </small>
+        </h3>
+      </div>
 
-      <dt>Image</dt>
-      <dd><%= @photo.image %></dd>
+      <div class="panel-body">
+        <a href="/photos/<%= @photo.id %>">
+          <img src="<%= @photo.image %>" class="img-responsive">
+        </a>
 
-      <dt>User</dt>
-      <dd><%= @photo.user_id %></dd>
 
-    </dl>
+        <!-- all comments for this photo -->
+        <% @photo.comments.each do |comment| %>
+        <ul class="media-list">
+
+          <li class="media">
+            <div class="media-body">
+              <h6 class="media-heading">
+                <a href="/users/<%= comment.user_id %>"> <%= comment.user.username %> </a>
+                <small>
+                  <%=   time_ago_in_words(comment.updated_at) %>
+                </small>
+              </h6>
+              comment.body
+            </div>
+          </li>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
 
     <div class="btn-group btn-group-justified">
       <a href="/photos" class="btn btn-primary">
         Back
       </a>
+
+      <!-- SG: show edit and delete only for my photos -->
+  <% if current_user == @photo.user %>
       <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
         Edit
       </a>
       <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
         Delete
       </a>
+      <% end %>
     </div>
   </div>
 </div>
