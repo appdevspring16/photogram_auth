@@ -1,35 +1,55 @@
+<div class="page-header">
+  <h3>
+    <%= @user.username %>
+  </h3>
 
+  <div class="btn-group">
+    <a href="/users" class="btn btn-default btn-sm">
+      <i class="fa fa-chevron-left"></i>
+    </a>
+    <% if current_user.id == @user.id %>
+      <a href="/users/<%= @user.id %>/edit" class="btn btn-default btn-sm">
+        <i class="fa fa-edit fa-fw"></i>
+      </a>
+      <!-- <a href="/delete_user/<%= @user.id %>" class="btn btn-default btn-sm" rel="nofollow">
+        <i class="fa fa-trash-o fa-fw"></i> -->
+      </a>
+    <% end %>
+  </div>
+</div>
+
+<% @user.likes.each do |like| %>
 
 <div class="row">
    <div class="col-md-8 col-md-offset-2">
      <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <a href="/users/<%= @photo.user.id %>">
-            <%= @photo.user.username %>
+            <a href="/users/<%= like.user.id %>">
+            <%= like.user.username %>
             </a>
             <small>
-              <%= time_ago_in_words(@photo.created_at)   %>
+              <%= time_ago_in_words(like.created_at)   %>
             </small>
           </h3>
         </div>
 
         <div class="panel-body">
 
-          <a href="/photos/<%= @photo.id %>"
-            ><img src="<%= @photo.image %>" class="img-responsive">
+          <a href="/photos/<%= like.id %>"
+            ><img src="<%= photo.image %>" class="img-responsive">
           </a>
 
 
           <div class="row">
             <div class="col-md-12">
 
-            <% if @photo.likes.pluck(:user_id).include?(current_user.id) %>
-            <form action="/delete_like/<%= @photo.likes.where({:user_id => current_user.id}).pluck(:id)[0] %>" method="post">
+            <% if photo.likes.pluck(:user_id).include?(current_user.id) %>
+            <form action="/delete_like/<%= photo.likes.where({:user_id => current_user.id}).pluck(:id)[0] %>" method="post">
               <!-- Hidden input for authenticity token to protect from forgery -->
               <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
               <input type="hidden" name="user_id" value="<%= current_user.id %>" >
-              <input type="hidden" name="photo_id" value="<%= @photo.id %>" >
+              <input type="hidden" name="photo_id" value="<%= photo.id %>" >
               <button class="btn btn-link">
                   <i class="fa fa-heart"></i>
               </button>
@@ -40,16 +60,16 @@
               <form action="/create_like" method="post">
                 <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
                 <input type="hidden" name="user_id" value="<%= current_user.id %>" >
-                <input type="hidden" name="photo_id" value="<%= @photo.id %>" >
+                <input type="hidden" name="photo_id" value="<%= photo.id %>" >
                 <button class="btn btn-link">
                     <i class="fa fa-heart-o"></i>
                 </button>
 
             <% end %>
 
-            <% if @photo.likes.count!=0 %>
+            <% if photo.likes.count!=0 %>
 
-              <% @photo.likes.each do |like| %>
+              <% photo.likes.each do |like| %>
                 <%= like.user.username%>,
               <% end %>
             <% else %>
@@ -65,7 +85,7 @@
 
 
           <ul class="media-list">
-            <% @photo.comments.each do |comment| %>
+            <% photo.comments.each do |comment| %>
             <li class="media">
               <div class="media-body">
                 <h6>
@@ -89,7 +109,7 @@
 
             <!-- Label and input for photo_id -->
             <div class="form-group">
-              <input type="hidden" name="photo_id" value="<%= @photo.id %>">
+              <input type="hidden" name="photo_id" value="<%= photo.id %>">
               <input type="hidden" name="user_id" value="<%= current_user.id %>" >
 
               <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required></textarea>
@@ -104,13 +124,4 @@
   </div>
 
 
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-
-      <div class="btn-group btn-group-justified">
-        <a href="/photos" class="btn btn-primary">
-          <i class="fa fa-chevron-left"></i>
-        </a>
-      </div>
-    </div>
-  </div>
+      <% end %>
