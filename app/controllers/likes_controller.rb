@@ -4,7 +4,7 @@ class LikesController < ApplicationController
   end
 
   def show
-
+@my_likes = User.all
   end
 
   def new
