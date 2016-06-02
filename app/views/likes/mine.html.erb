@@ -18,25 +18,25 @@
   </div>
 </div>
 
-<% @user.photos.each do |photo| %>
+<% @user.likes.each do |like| %>
 
 <div class="row">
    <div class="col-md-8 col-md-offset-2">
      <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <a href="/users/<%= photo.user.id %>">
-            <%= photo.user.username %>
+            <a href="/users/<%= like.user.id %>">
+            <%= like.user.username %>
             </a>
             <small>
-              <%= time_ago_in_words(photo.created_at)   %>
+              <%= time_ago_in_words(like.created_at)   %>
             </small>
           </h3>
         </div>
 
         <div class="panel-body">
 
-          <a href="/photos/<%= photo.id %>"
+          <a href="/photos/<%= like.id %>"
             ><img src="<%= photo.image %>" class="img-responsive">
           </a>
 

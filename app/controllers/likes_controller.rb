@@ -47,4 +47,10 @@ class LikesController < ApplicationController
 
     redirect_to "/likes", :notice => "Like deleted."
   end
+
+  def mine
+    # @user = User.find(params[:id])
+    @user = current_user
+    @like = Like.find(current_user.id)
+  end
 end
