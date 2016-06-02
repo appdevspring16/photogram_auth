@@ -42,7 +42,10 @@
         <ul class="nav navbar-nav">
           <% if current_user != nil %>
           <li><a href="/users"><i class="fa fa-users" aria-hidden="true"></i> All Users</a></li>
+          <li><a href="/users/<%= current_user.id %>"><i class="fa fa-heart" aria-hidden="true"></i> My Likes</a></li>
           <li><a href="/users/<%= current_user.id %>"><i class="fa fa-user" aria-hidden="true"></i> My Wall</a></li>
+
+          <
           <% elsif current_user == nil %>
           <li><a href="/users"><i class="fa fa-users" aria-hidden="true"></i> All Users</a></li>
           <% end %>
