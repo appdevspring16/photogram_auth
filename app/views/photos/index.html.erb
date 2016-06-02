@@ -1,8 +1,10 @@
 <div class="page-header">
-  <h1>
-    Photos
-    <a href="/photos/new" class="btn btn-lg btn-success">New Photo</a>
-  </h1>
+  <a href="/photos/new">
+    <i class="fa fa-plus fa-lg" aria-hidden="true">Photos</i>
+  </a>
+
+  <!-- <a href="/photos/new" class="btn btn-lg btn-success">New Photo</a> -->
+
 </div>
 
 <div class="row">
@@ -27,20 +29,20 @@
             </form>
           </div>
 
-          </td>
-          <td><a><i class="fa fa-heart-o" aria-hidden="true"></i></a></td>
-          <td><%= photo.user.username %></td>
-          <td>
-            <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
-            <% if current_user.id == photo.user_id %>
-            <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
-            <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-            <% end %>
+        </td>
+        <td><a><i class="fa fa-heart-o" aria-hidden="true"></i></a></td>
+        <td><%= photo.user.username %></td>
+        <td>
+          <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
+          <% if current_user.id == photo.user_id %>
+          <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
 
 
-          </td>
-        </tr>
-        <% end %>
-      </table>
-    </div>
+        </td>
+      </tr>
+      <% end %>
+    </table>
   </div>
+</div>
