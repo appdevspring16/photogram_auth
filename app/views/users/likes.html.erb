@@ -30,11 +30,38 @@
                   <%=   time_ago_in_words(comment.updated_at) %>
                 </small>
               </h6>
-              comment.body
+            <%=   comment.body %>
             </div>
           </li>
+          <% end %>
         </ul>
-        <% end %>
+
+
+        <li class="media">
+          <div class="media-body">
+            <form action="/create_comment" method="post">
+              <!-- Hidden input for authenticity token to protect from forgery -->
+              <input name="authenticity_token" type="hidden" value="oORdCcXQD4J1Qvd9k5EfKjJe25ou3IXib3BdCFyYBjSAK5Btn3rQLanBVPmX7Jvd5lP8kyw4G26Qf1AIwZ1xeg==">
+
+              <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+              <input type="hidden" name="user_id" value= "<%= photo.user_id %>">
+
+              <!-- Label and input for body -->
+              <div class="form-group">
+                <label for="body" class="sr-only">
+                  Body
+                </label>
+
+                <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+              </div>
+            </form>
+          </div>
+        </li>
+
+
+
+
       </div>
     </div>
   </div>
