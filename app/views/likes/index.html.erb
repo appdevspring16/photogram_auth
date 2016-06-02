@@ -14,7 +14,9 @@
         <th>Actions</th>
       </tr>
 
+
       <% @likes.each do |like| %>
+      <% if current_user.id == like.user.id %>
       <tr>
         <td><%= like.user_id %></td>
         <td><%= like.photo_id %></td>
@@ -24,6 +26,7 @@
           <a href="/delete_like/<%= like.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
         </td>
       </tr>
+      <% end %>
       <% end %>
     </table>
   </div>

@@ -19,20 +19,28 @@
       <% @photos.each do |photo| %>
       <tr>
         <td><%= photo.caption %></td>
-        <td> <img class="img" src="<%= photo.image %>"  alt="" /></td>
-        <td><a><i class="fa fa-heart-o" aria-hidden="true"></i></a></td>
-        <td><%= photo.user.username %></td>
-        <td>
-          <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
-          <% if current_user.id == photo.user_id %>
-          <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-          <% end %>
+        <td> <img class="img" src="<%= photo.image %>"  alt="" />
+          <div class="panel panel-default">
+            <div class="panel-heading">Comment</div>
+            <form>
+              <input type="text" name="comment" value="">
+            </form>
+          </div>
+
+          </td>
+          <td><a><i class="fa fa-heart-o" aria-hidden="true"></i></a></td>
+          <td><%= photo.user.username %></td>
+          <td>
+            <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
+            <% if current_user.id == photo.user_id %>
+            <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+            <% end %>
 
 
-        </td>
-      </tr>
-      <% end %>
-    </table>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
-</div>
