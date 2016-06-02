@@ -1,0 +1,30 @@
+<div class="page-header">
+
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+    All Users
+      </div>
+      <div class="panel-body">
+        <% @users.each do |user| %>
+        <tr>
+                  <div class="">
+                      <a href="/users/<%= user.id %>"><%= user.username.capitalize %> (<%= user.email %>)</a>
+                  </div>
+                  <hr>
+
+
+
+
+        </tr>
+        <% end %>
+
+      </div>
+  </div>
+</div>
+
+
+</div>

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  # Routes for the Comment resource:
 
   root "photos#index"
+
+  # Routes for the Comment resource:
 
   # CREATE
   get "/comments/new", :controller => "comments", :action => "new"
@@ -54,6 +55,9 @@ Rails.application.routes.draw do
   #------------------------------
 
   devise_for :users
+  get "/users", :controller => "users", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
+  get "/my_likes", :controller => "users", :action => "likes"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
