@@ -24,7 +24,7 @@
 
   <div class="form-group">
     <%= f.label :username %>
-    <%= f.email_field :username, autofocus: true %>
+    <%= f.username_field :username, autofocus: true %>
   </div>
 
   <div class="form-group">
@@ -41,8 +41,8 @@
   </div>
 
 <div class="form-group">
-  <button class="btn btn-success btn-block" <%= f.submit "Sign up" %>
-    Sign up
+  <button class="btn btn-success btn-block">
+    <%= f.submit "Sign up" %>
   </button>
 </div>
 
