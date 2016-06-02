@@ -40,11 +40,13 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/users">Users</a></li>
-          <li><a href="/comments">Comments</a></li>
-          <li><a href="/likes">Likes</a></li>
-          <li><a href="/photos">Photos</a></li>
-          <li><a href="/rails/info">Sitemap</a></li>
+          <li><a href="/users">All Users</a></li>
+          <li><a href="/post">All Posts</a></li>
+
+          <li><a href="/my_likes">My Likes</a></li>
+          <% if user_signed_in? %>
+          <li><a href="/users/<%= current_user.id %>">My Wall</a></li>
+          <% end %>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">

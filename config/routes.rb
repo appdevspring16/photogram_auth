@@ -3,12 +3,6 @@ Rails.application.routes.draw do
   # index page
   root "photos#index"
 
-  # user stuff
-  get "/users", :controller => "users", :action => "index"
-
-  get "/users/:id", :controller => "users", :action => "show"
-
-
   # Routes for the Comment resource:
   # CREATE
   get "/users/new", :controller => "comments", :action => "new"
@@ -60,7 +54,19 @@ Rails.application.routes.draw do
   get "/delete_photo/:id", :controller => "photos", :action => "destroy"
   #------------------------------
 
+  #  SG: This devise like needs to be above the users/:id page, else it will redirect indefinitely for the My Wall in application layout and error
   devise_for :users
+
+
+  #  SG: This  needs to be below the devise_for : users , else it will redirect indefinitely for the My Wall in application layout and error
+  # user stuff
+  get "/users", :controller => "users", :action => "index"
+
+  get "/users/:id", :controller => "users", :action => "show"
+  get "/my_likes", :controller => "users", :action => "likes"
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
