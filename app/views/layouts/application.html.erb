@@ -40,10 +40,12 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+          <% if current_user != nil %>
           <li><a href="/users"><i class="fa fa-users" aria-hidden="true"></i> All Users</a></li>
-          <li><a href="/likes">Likes</a></li>
-          <li><a href="/photos">Photos</a></li>
-          <li><a href="/rails/info">Sitemap</a></li>
+          <li><a href="/users/<%= current_user.id %>"><i class="fa fa-user" aria-hidden="true"></i> My Wall</a></li>
+          <% elsif current_user == nil %>
+          <li><a href="/users"><i class="fa fa-users" aria-hidden="true"></i> All Users</a></li>
+          <% end %>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
