@@ -6,7 +6,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">
-          <a href="/photos/<%=@photo.id%>"><%=@photo.user.username%></a> <small><%=time_ago_in_words(Time.now) %></small>
+          <a href="/photos/<%=@photo.id%>"><%=@photo.user.username%></a> <small><%=time_ago_in_words(@photo.created_at) %></small>
         </h3>
       </div>
 
@@ -14,10 +14,177 @@
         <a href="/photos/<%=@photo.id%>">
           <img src="<%= @photo.image %>" class="img-responsive">
         </a>
+
+
+    <% if current_user.liked_photos.pluck(:id).include? @photo.id %>
+     <a href="/delete_like/<%= (Like.find_by(:photo_id => @photo.id, :user_id => current_user.id).id) %>" class="btn btn-link">
+       <i class="fa fa-heart"></i></a>
+ <% else %>
+
+        <form action="/create_like" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+
+
+        <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+
+      <!-- Label and input for photo_id -->
+
+        <input type="hidden" name="photo_id" value="<%= @photo.id %>">
+
+
+      <button class="btn btn-link">
+      <i class="fa fa-heart-o"></i>
+      </button>
+
+
+      </form>
+
+ <% end %>
+
+
+
+  <% @photo.fans.each do |fan|%>
+
+        <p><%fan.username%></p>
+
+
+<%end%>
+
+  <%if @photo.fans.count == 0 %>
+
+    <small class="text-muted">be the first to like this</small>
+        <%elsif @photo.fans.count == 1 %>
+        <small class="text-muted"><%=@photo.fans.pluck(:username).to_sentence%> likes this</small>
+
+        <%elsif @photo.fans.count > 1 %>
+        <small class="text-muted"><%=@photo.fans.pluck(:username).to_sentence%> like this</small>
+
+<%end%>
+
+
+<p></p>
+
+        <ul class="media-list">
+  <li class="media">
+    <div class="media-body">
+      <h6 class="media-heading">
+        <a href="/users/<%=@photo.user_id%>"><%=@photo.user.username%></a>
+        <small><%=time_ago_in_words(@photo.created_at) %></small>
+        <div><%=@photo.caption%></div>
+
+
+
+      </h6>
+
+    </div>
+  </li>
+</ul>
+
+
+        <% @photo.comments.each do |comment|%>
+
+        <ul class="media-list">
+  <li class="media">
+    <div class="media-body">
+      <h6 class="media-heading">
+        <a href="/users/<%=comment.user_id%>"><%=comment.user.username%></a>
+        <small><%=time_ago_in_words(comment.created_at) %></small>
+        <div><%=comment.body%></div>
+
+
+
+      </h6>
+
+    </div>
+  </li>
+</ul>
+
+
+        <% end%>
+
+
+
+   <form action="/create_comment" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for photo_id -->
+
+        <input type="hidden" name="photo_id"  value="<%= @photo.id %>">
+
+
+      <!-- Label and input for body -->
+
+     <label for="body" class="sr-only">
+                    Body
+                  </label>
+
+
+      <div class="form-group">
+        <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+      </div>
+
+      <!-- Label and input for user_id -->
+
+
+        <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+
+
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
       </div>
 
-       
+
+
+
+
+
+
+
+
 </div>
 
 
@@ -35,4 +202,4 @@
       </a>
   <%end%>
     </div>
-  
+
