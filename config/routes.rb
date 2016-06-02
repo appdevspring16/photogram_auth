@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   post "/create_like", :controller => "likes", :action => "create"
 
   # READ
-  get "/likes", :controller => "likes", :action => "index"
+  get "/my_likes", :controller => "likes", :action => "index"
   get "/likes/:id", :controller => "likes", :action => "show"
 
   # UPDATE
@@ -53,7 +53,14 @@ Rails.application.routes.draw do
   get "/delete_photo/:id", :controller => "photos", :action => "destroy"
   #------------------------------
 
+  # Routes for the User resource:
+
   devise_for :users
+
+  # READ
+  get "/users", :controller => "users", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

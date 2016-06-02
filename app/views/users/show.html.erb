@@ -1,0 +1,5 @@
+<h1><%= current_user.username %></h1>
+
+<% current_user.photos.each do |photo| %>
+  <img class="img-responsive" src="<%= photo.image %>" />
+<% end %>
