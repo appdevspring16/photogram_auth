@@ -17,9 +17,11 @@ Rails.application.routes.draw do
   get "/delete_comment/:id", :controller => "comments", :action => "destroy"
   #------------------------------
 
-  # Routes for the User resource:
+  # Routes for the Additional resources:
   # READ
   get "/users", :controller => "users", :action => "index"
+  # MY LIKES
+  get "/my_likes", :controller => "likes", :action => "index"
 
   #------------------------------
 
