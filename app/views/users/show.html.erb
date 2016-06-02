@@ -1,0 +1,27 @@
+<div class="page-header">
+  <h3>User #<%= @user.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>User</dt>
+      <dd><%= @user.username %></dd>
+
+      <dt>Email</dt>
+      <dd><%= @user.email %></dd>
+    </dl>
+
+    <ul>
+      <% Photo.where(:user_id=>@user.id).each do |photo| %>
+        <li><a href="/photos/<%=photo.id%>"><img height=240px width=240px src="<%= photo.image %>"></a></li>
+      <% end %>
+    </ul>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/photos" class="btn btn-primary">
+        Back
+      </a>
+    </div>
+  </div>
+</div>
