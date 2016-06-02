@@ -8,7 +8,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def likes
-    @likes = current_user.likes
+  def my_likes
+    @my_likes = current_user.liked_photos
+
+    render("likes.html.erb")
   end
 end
