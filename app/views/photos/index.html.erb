@@ -1,32 +1,19 @@
-<div class="page-header">
-  <h1>
-    Photos
-    <a href="/photos/new" class="btn btn-lg btn-success">New Photo</a>
-  </h1>
+<div class="container">
+<div class="page-header col-md-8 col-md-offset-2">
+    <a href="/photos/new" class="btn btn-default btn-block">
+          <i class="fa fa-plus"></i>
+        </a>
 </div>
 
+<% @photos.each do |photo| %>
 <div class="row">
-  <div class="col-md-12">
-    <table class="table table-striped table-hover">
-      <tr>
-        <th>Caption</th>
-        <th>Image</th>
-        <th>User</th>
-        <th>Actions</th>
-      </tr>
-
-      <% @photos.each do |photo| %>
-      <tr>
-        <td><%= photo.caption %></td>
-        <td><%= photo.image %></td>
-        <td><%= photo.user_id %></td>
-        <td>
-          <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
-          <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
+  <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+          <div class="panel-heading"><%= User.find_by({ :id => photo.user_id }).username %> <small><%= time_ago_in_words(photo.created_at) %> ago</small></div>
+          <div class="panel-body"> <a href="/photos/<%= photo.id %>"><img style='height: 100%; width: 100%; object-fit: contain' src="<%= photo.image %>"></a></div>
+          <div class="panel-body"><%=  photo.caption %></div>
+        </div>
+        </div>
+        </div>
+<% end %>
 </div>
