@@ -1,0 +1,125 @@
+<div class="container">
+
+
+  <div class="row">
+<div class="col-md-8 col-md-offset-2">
+  <div class="jumbotron">
+    <h3>
+      <%= @user.username %>
+    </h3>
+  </div>
+</div>
+</div>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+
+
+  <% Photo.where(:user_id => @user.id).each do |photo| %>
+
+  <div class="panel panel-default">
+
+  <div class="panel-heading">
+    <h3 class="panel-title"><a href="/users/<%= photo.user_id %>"><%= photo.user.username %></a>
+
+      <small><%= time_ago_in_words(photo.created_at) %> ago</small></h3>
+  </div>
+
+  <!-- shows the image -->
+  <div class="panel-body">
+  <a href="/photos/<%= photo.id %>"><img src="<%= photo.image %>" class="img-responsive" alt="Responsive image" ></a>
+
+  <!-- show the likes -->
+
+
+  <p>
+
+  <% if current_user.liked_photos.pluck(:id).include? photo.id %>
+      <a href="/delete_like/<%= (Like.find_by(:photo_id => photo.id, :user_id => current_user.id).id) %>" class="btn btn-link">
+        <i class="fa fa-heart"></i></a>
+  <% else %>
+  <form action="/create_like">
+    <input type="hidden" name="user_id" value="<%=current_user.id  %>">
+    <input type="hidden" name="photo_id" value="<%=photo.id  %>">
+      <button class="btn btn-link">
+  <i class="fa fa-heart-o"></i></button>
+
+  <% end %>
+
+
+
+
+  <% photo.fans.each do |fan| %>
+  <% @a << fan.username %>
+  <% end %>
+
+  <% if (@a.count==0 ) %>
+  <a class="text-muted">be the first to like this</a>
+  <%elsif (@a.count==1)  %>
+  <%= @a.to_sentence %> likes this
+  <% @a=[]%>
+  <%else %>
+  <%= @a.to_sentence %> like this
+  <% @a=[]%>
+  <% end %>
+  </p>
+      </form>
+
+  <!-- show the comments  -->
+
+  <ul class="media-list">
+
+    <li class="media">
+      <div class="media-body">
+    <h6 class="media-heading">
+      <a href="/users/<%= photo.user.id %>"><%= photo.user.username %></a><small> <%= time_ago_in_words(photo.created_at) %> ago</small></h6>
+      <p><%= photo.caption %></p>
+  </div>
+    </li>
+
+  <% photo.comments.each do |comment|  %>
+    <li class="media">
+      <div class="media-body">
+
+        <% if (comment.user.id==current_user.id) %>
+
+        <h6 class="media-heading">
+          <a href="/users/<%= comment.user.id %>"><%= comment.user.username %></a><small> <%= time_ago_in_words(comment.created_at) %> ago<a href="/delete_comment/<%=comment.id%>"> <i class="fa fa-trash fa-small" style="color:blue"></i></a> </small> </h6>
+
+            <% else %>
+
+
+    <h6 class="media-heading">
+
+      <a href="/users/<%= comment.user.id %>"><%= comment.user.username %></a><small> <%= time_ago_in_words(comment.created_at) %> ago</h6></small>
+      <% end %>
+
+  <p><%= comment.body %></p>
+
+  </div>
+    </li>
+  <% end %>
+  <li class="media">
+    <div class="media-body">
+       <form action="/create_comment">
+
+  <input type="hidden" name="photo_id" value="<%= photo.id %>">
+  <input type="hidden" name="user_id" value="<%= current_user.id %>">
+  <input type="text" name="body" placeholder="Add a comment..." class="form-control">
+      </form>
+
+  </div>
+  </li>
+
+  </ul>
+
+
+
+  </div>
+
+  </div>
+  <% end %>
+
+  </div>
+  </div>
+  </div>
