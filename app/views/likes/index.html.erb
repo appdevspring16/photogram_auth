@@ -19,7 +19,7 @@
       <% if current_user.id == like.user.id %>
       <tr>
         <td><%= like.user_id %></td>
-        <td><%= like.photo_id %></td>
+        <td> <img src="<%= like.photo.image %>" alt="" /> </td>
         <td>
           <a href="/likes/<%= like.id %>" class="btn btn-primary">Show</a>
           <a href="/likes/<%= like.id %>/edit" class="btn btn-warning">Edit</a>
