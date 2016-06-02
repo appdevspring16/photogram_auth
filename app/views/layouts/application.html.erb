@@ -41,25 +41,36 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li><a href="/comments">Comments</a></li>
-          <li><a href="/photos"><i class="fa fa-file-image-o" aria-hidden="true"></i> All Posts</a></li>
-          <li><a href="/my_likes"><i class="fa fa-heart" aria-hidden="true"></i> My Likes</a></li>
+          <li><a href="/photos"><i class="fa fa-file-image-o" aria-hidden="true"></i></a></li>
+          <li><a href="/my_likes"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
 
           <% if current_user.present? %>
-          <li><a href="/users">Users</a></li>
+          <li>
+            <a href="/users">
+              <i class="fa fa-users" aria-hidden="true"></i>
+            </a>
+          </li>
           <% end %>
-          <li><a href="/rails/info">Sitemap</a></li>
+          <li><a href="/rails/info"></a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
           <% if current_user.present? %>
-          <li><a href="/users/edit"><%= @username %></a></li>
+          <li>
+            <a href="/users/edit">
+              <i class="fa fa-sign-in fa-lg" aria-hidden="true"><%= @username %></i>
+            </a>
+          </li>
           <li>
             <a href="/users/sign_out" data-method="delete" rel="nofollow">
               <i class="fa fa-sign-out fa-lg" aria-hidden="true">Sign Out</i>
             </a>
           </li>
           <% else %>
-          <li><a href="/users/sign_in">Sign In</a></li>
+          <li>
+            <a href="/users/sign_in"><i class="fa fa-sign-in fa-lg" aria-hidden="true">Sign In
+            </a>
+          </li>
           <li><a href="/users/sign_up">Sign Up</a></li>
 
           <% end %>
