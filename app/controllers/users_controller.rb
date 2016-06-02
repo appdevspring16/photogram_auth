@@ -8,6 +8,8 @@ class UsersController < ApplicationController
     @photo = Photo.where({:user_id => @user.id})
     @likes = Like.where({:user_id => @user.id})
     @alllikes = Like.all
+    @comments = Comment.all
+    @comment = Comment.new
   end
 
 

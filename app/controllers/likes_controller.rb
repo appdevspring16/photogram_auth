@@ -5,6 +5,8 @@ class LikesController < ApplicationController
 
   def show
     @like = Like.find(params[:id])
+    @comments = Comment.all
+    @comment = Comment.new
   end
 
   def new
@@ -17,9 +19,10 @@ class LikesController < ApplicationController
     @like.photo_id = params[:photo_id]
 
     if @like.save
-      redirect_to "/likes", :notice => "Like created successfully."
+      redirect_to URI(request.referrer).path, :notice => "Like created successfully."
     else
-      render 'new'
+      redirect_to URI(request.referrer).path
+      # render 'new'
     end
   end
 

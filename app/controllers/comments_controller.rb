@@ -18,9 +18,10 @@ class CommentsController < ApplicationController
     @comment.user_id = params[:user_id]
 
     if @comment.save
-      redirect_to "/comments", :notice => "Comment created successfully."
+      redirect_to URI(request.referrer).path, :notice => "Comment created successfully."
     else
-      render 'new'
+      redirect_to URI(request.referrer).path
+      # render 'new'
     end
   end
 
