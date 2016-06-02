@@ -14,7 +14,7 @@
         <ul class="list-group">
           <% @users.each do |user| %>
           <li class="list-group-item">
-            <a href="/users/user.id">
+            <a href="/users/<%= user.id %>">
               <%= user.username %>
             </a>
           </li>
