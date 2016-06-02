@@ -34,7 +34,7 @@
               <% end %>
             </button>
 
-        
+            
             <% if @photo.likes.count > 0 %>
             <small class="text-muted"><%= @photo.fans.pluck(:username).to_sentence %></small>
             <% else %>
@@ -57,7 +57,7 @@
                   <%=   time_ago_in_words(comment.updated_at) %>
                 </small>
               </h6>
-            <%=   comment.body %>
+              <%=   comment.body %>
             </div>
           </li>
 
