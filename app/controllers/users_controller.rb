@@ -6,9 +6,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @comment = Comment.new
     @photo = Photo.new
     @photos = Photo.all
+    @comment = Comment.new
+    
   end
 
   def edit

@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   def index
-    @comments = Comment.all 
+    @comments = Comment.all
   end
 
   def show
@@ -18,11 +18,12 @@ class CommentsController < ApplicationController
     @comment.user_id = params[:user_id]
 
     if @comment.save
-      redirect_to "/comments", :notice => "Comment created successfully."
+      redirect_to :back, :notice => "Comment created successfully."
     else
       render 'new'
     end
   end
+
 
   def edit
     @comment = Comment.find(params[:id])
@@ -47,6 +48,6 @@ class CommentsController < ApplicationController
 
     @comment.destroy
 
-    redirect_to "/comments", :notice => "Comment deleted."
+    redirect_to :back, :notice => "Comment deleted."
   end
 end

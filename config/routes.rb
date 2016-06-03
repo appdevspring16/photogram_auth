@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   # CREATE
   get "/comments/new", :controller => "comments", :action => "new"
   post "/create_comment", :controller => "comments", :action => "create"
-  
 
   # READ
   get "/comments", :controller => "comments", :action => "index"

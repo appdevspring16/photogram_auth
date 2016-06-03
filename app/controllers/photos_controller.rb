@@ -1,13 +1,7 @@
 class PhotosController < ApplicationController
   def index
     @photos = Photo.all
-    @like = Like.new
-
-    @comment = Comment.new
-    @comment.body = params[:body]
-    if @comment.save
-      redirect_to "/photos", :notice => "Comment created successfully"
-    end
+    @likes = Like.all
 
   end
 

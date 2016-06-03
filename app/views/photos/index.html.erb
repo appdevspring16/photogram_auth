@@ -1,4 +1,6 @@
 <div class="container">
+
+  <!-- Add new photo -->
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <a href="/photos/new" class="btn btn-default btn-block"><i class="fa fa-plus"></i></a>
@@ -7,13 +9,16 @@
   </div>
 
 
+  <!-- Panel -->
 
+
+
+  <% @photos.each do |photo| %>
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-
       <div class="panel panel-default">
 
-        <% @photos.each do |photo| %>
+
         <div class="panel-heading">
           <h3 class="panel-title">
             <a href="/users/<%= photo.user_id %>">
@@ -49,13 +54,21 @@
                 <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= photo.id %>">
               </div>
 
-              <button><i class="fa fa-heart-o"></i>  </button>
+              <button type="submit"><i class="fa fa-heart-o"></i></button>
+
               <small>be the first to like this</small>
             </form>
             <% else %>
-            <a href="/delete_like/<%= Like.where({:photo_id => photo.id}) %>"><i class="fa fa-heart"></i></a>
 
-            <% end  %>
+
+            <% photo.likes.each do |like| %>
+            <% if like.photo_id == photo.id %>
+            <a href="/delete_like/<%= like.id  %>" class="btn btn-link">
+              <i class="fa fa-heart"></i>
+            </a>
+            <% end %>
+            <% end %>
+            <% end %>
 
             <%= photo.fans.pluck(:username).to_sentence %>
             <% if photo.likes.count > 1 %>
@@ -121,11 +134,14 @@
             </div>
 
           </div>
-          <% end %>
+
         </div>
 
       </div>
+
     </div>
+    <% end %>
+
 
 
   </div>

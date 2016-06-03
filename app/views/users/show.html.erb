@@ -21,11 +21,12 @@
   </div>
 </div>
 
+<% @user.photos.each do |user| %>
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
 
-      <% @user.photos.each do |user| %>
+
       <% if @user.id == user.user_id %>
       <div class="panel-heading">
         <h3 class="panel-title">
@@ -39,8 +40,47 @@
         </div>
         <div class="panel-body">
           <ul>
-            <img class="img-responsive" src="<%= user.image %>" alt="" />
+            <a href="/photos/<%= user.id %>"><img class="img-responsive" src="<%= user.image %>" alt="" /></a>
+
           </ul>
+
+          <!-- Form to Like -->
+          <% if user.likes.count == 0 %>
+
+          <form action="/create_like" method="post">
+            <!-- Hidden input for authenticity token to protect from forgery -->
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+            <!-- Label and input for user_id -->
+            <div class="form-group">
+
+              <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+            </div>
+
+            <!-- Label and input for photo_id -->
+            <div class="form-group">
+
+              <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= user.id %>">
+            </div>
+
+            <button type="submit"><i class="fa fa-heart-o"></i></button>
+
+            <small>be the first to like this</small>
+          </form>
+      
+
+          <% end %>
+          <% end %>
+
+          <%= @photo.fans.pluck(:username).to_sentence %>
+          <% if @photo.likes.count > 1 %>
+          <small>like this</small>
+          <% else  %>
+          <% if @photo.likes.count == 1  %>
+          <small>likes this</small>
+          <% else %>
+          <% end %>
+          <% end %>
 
           <ul class="list-unstyled">
             <li><h6>
@@ -92,8 +132,7 @@
           </form>
 
         </div>
-        <% end  %>
-        <% end %>
+
 
       </div>
 
@@ -103,3 +142,4 @@
 
 
   </div>
+  <% end %>
