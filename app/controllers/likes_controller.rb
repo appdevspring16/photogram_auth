@@ -1,11 +1,6 @@
 class LikesController < ApplicationController
-  def my_likes
-   @user = current_user
-   @a = []
-  end
-
   def index
-    @likes = Like.all
+    @likes = current_user.likes
   end
 
   def show
@@ -22,7 +17,7 @@ class LikesController < ApplicationController
     @like.photo_id = params[:photo_id]
 
     if @like.save
-      redirect_to "/likes", :notice => "Like created successfully."
+      redirect_to :back, :notice => "Like created successfully."
     else
       render 'new'
     end

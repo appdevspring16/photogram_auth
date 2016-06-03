@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
 
-devise_for :users
-
 root "photos#index"
 
-  get "my_likes", :controller => "likes", :action=> "my_likes"
+get "/users", :controller => "users", :action => "index"
+
   # Routes for the Like resource:
   # CREATE
   get "/likes/new", :controller => "likes", :action => "new"
@@ -56,8 +55,10 @@ root "photos#index"
   get "/delete_photo/:id", :controller => "photos", :action => "destroy"
   #------------------------------
 
-  get "/users", :controller => "users", :action => "index"
-  get "users/:id", :controller =>"users", :action => "show"
+  devise_for :users
+  
+  get "/my_likes", :controller => "likes", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
