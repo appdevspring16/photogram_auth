@@ -36,7 +36,9 @@
               <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= @photo.id %>">
             </div>
 
-            <button><i class="fa fa-heart-o"></i>  </button>
+            <button class="btn btn-link">
+              <i class="fa fa-heart-o"></i>
+            </button>
             <small>be the first to like this</small>
           </form>
           <% else %>
@@ -92,13 +94,13 @@
 
               <!-- Label and input for body -->
               <div class="form-group">
-                <textarea id="body" name="body" placeholder="Add a comment..." class="form-control" rows="3"><%=  %></textarea>
+                <textarea id="body" name="body" placeholder="Add a comment..." class="form-control" rows="3"></textarea>
               </div>
 
               <!-- Label and input for user_id -->
 
 
-              <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @photo.user_id %>">
+              <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
 
 
               <button class="btn btn-success">
