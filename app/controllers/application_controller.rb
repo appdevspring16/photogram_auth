@@ -15,5 +15,5 @@ class ApplicationController < ActionController::Base
 
     devise_parameter_sanitizer.for(:account_update) << :avatar_url
   end
-  
+
 end

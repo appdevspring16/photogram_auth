@@ -1,19 +1,22 @@
 <div class="row">
-<div class="col-md-8 col-md-offset-2">
- <div class="jumbotron">
-   <h3>
-     <%= @user.username %>
-   </h3>
- </div>
-</div>
+  <div class="col-md-8 col-md-offset-2">
+    <div class="jumbotron">
+      <h3>
+        <%= @user.username %>
+      </h3>
+    </div>
+  </div>
 </div>
 
 <!-- Add new photo -->
+
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
+    <% if current_user.id == @user.id %>
     <a href="/photos/new" class="btn btn-default btn-block">
       <i class="fa fa-plus"></i>
     </a>
+    <% end  %>
     <hr>
   </div>
 </div>
@@ -22,25 +25,81 @@
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
 
-
-
-
       <% @user.photos.each do |user| %>
-        <div class="panel-heading">
+      <% if @user.id == user.user_id %>
+      <div class="panel-heading">
         <h3 class="panel-title">
-          <a href="/users/<%= user.id %>">
-            <%= user.id %></a>
+          <a href="/users/<%= user.user_id %>">
+            <%= user.user.username %></a>
 
             <small>
               <%= time_ago_in_words(user.created_at) %> ago
             </small>
           </h3>
         </div>
-<ul>
-  <img class="img-responsive" src="<%= user.image %>" alt="" />
-</ul>
+        <div class="panel-body">
+          <ul>
+            <img class="img-responsive" src="<%= user.image %>" alt="" />
+          </ul>
 
-<% end %>
-</div>
-</div>
-</div>
+          <ul class="list-unstyled">
+            <li><h6>
+              <a href="/users/<%= user.user_id %>"><%= user.user.username %></a>
+              <small><%= time_ago_in_words(user.created_at) %> ago</small>
+            </h6></li>
+            <li><%= user.caption %></li>
+          </ul>
+
+          <!-- All Comments -->
+          <ul class="list-unstyled">
+            <% user.comments.each do |comment| %>
+            <li><h6><a href="/users/<%= comment.user_id %>"><%= comment.user.username %></a>
+              <small><%= time_ago_in_words(comment.created_at) %> ago</small></h6>
+
+
+            </li>
+            <li> <%= comment.body %></li>
+            <% end %>
+          </ul>
+
+          <!-- Form to leave comment -->
+          <div class="form-group">
+            <form action="/create_comment" method="post">
+              <!-- Hidden input for authenticity token to protect from forgery -->
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+              <!-- Label and input for photo_id -->
+              <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= user.id %>">
+            </div>
+
+
+            <!-- Label and input for body -->
+            <div class="form-group">
+              <textarea id="body" name="body" placeholder="Add a comment..." class="form-control" rows="3"></textarea>
+            </div>
+
+            <!-- Label and input for user_id -->
+
+
+            <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+
+
+            <button class="btn btn-success">
+              Post Comment
+            </button>
+            or
+            <a href="/comments">Cancel</a>
+          </form>
+
+        </div>
+        <% end  %>
+        <% end %>
+
+      </div>
+
+
+
+    </div>
+
+
+  </div>

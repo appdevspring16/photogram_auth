@@ -1,35 +1,101 @@
-<div class="page-header">
-  <h3>Photo #<%= @photo.id %></h3>
-</div>
-
 <div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
-      <dt>Caption</dt>
-      <dd><%= @photo.caption %></dd>
+  <div class="col-md-8 col-md-offset-2">
 
-      <dt>Image</dt>
-      <dd>
-  <img class="img-responsive" src="<%= @photo.image %>" alt="" />
-        </dd>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="/users/<%= @photo.user_id %>">
+            <%= @photo.user.username %></a>
 
-      <dt>User</dt>
-      <dd><%= @photo.user_id %></dd>
+            <small>
+              <%= time_ago_in_words(@photo.created_at) %> ago
+            </small>
+          </h3>
+        </div>
 
-    </dl>
+        <div class="panel-body">
+
+          <a href="/photos/<%= @photo.id %>"><img class="img-responsive" src="<%= @photo.image %>" alt="" /></a>
+
+
+
+          <!-- Form to Like -->
+
+          <!-- Mention of likes -->
+
+
+          <ul class="list-unstyled">
+            <li><h6>
+              <a href="/users/<%= @photo.user_id %>"><%= @photo.user.username %></a>
+              <small><%= time_ago_in_words(@photo.created_at) %> ago</small>
+            </h6></li>
+            <li><%= @photo.caption %></li>
+          </ul>
+
+
+
+          <ul class="list-unstyled">
+            <% @photo.comments.each do |comment| %>
+            <li><h6><a href="/users/<%= comment.user_id %>"><%= comment.user.username %></a>
+              <small><%= time_ago_in_words(comment.created_at) %> ago</small></h6>
+
+
+            </li>
+            <li> <%= comment.body %></li>
+            <% end %>
+          </ul>
+          <!-- Form to leave comment -->
+          <div class="media-body">
+            <form action="/create_comment" method="post">
+              <!-- Hidden input for authenticity token to protect from forgery -->
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+              <!-- Label and input for photo_id -->
+              <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= @photo.id  %>">
+
+
+              <!-- Label and input for body -->
+              <div class="form-group">
+                <textarea id="body" name="body" placeholder="Add a comment..." class="form-control" rows="3"><%=  %></textarea>
+              </div>
+
+              <!-- Label and input for user_id -->
+
+
+              <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @photo.user_id %>">
+
+
+              <button class="btn btn-success">
+                Post Comment
+              </button>
+              or
+              <a href="/comments">Cancel</a>
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-md-8 col-md-offset-2">
+
 
     <div class="btn-group btn-group-justified">
+
       <a href="/photos" class="btn btn-primary">
-        Back
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
       </a>
       <% if current_user.id == @photo.user_id %>
       <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
-        Edit
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
       </a>
       <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
+        <i class="fa fa-trash" aria-hidden="true"></i>
       </a>
       <% end %>
     </div>
+    <hr>
   </div>
-</div>

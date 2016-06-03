@@ -29,39 +29,66 @@
 
             <a href="/photos/<%= photo.id %>"><img class="img-responsive" src="<%= photo.image %>" alt="" /></a>
 
-            <!-- Mention of likes -->
-            <% photo.likes.each do |like|  %>
-            <%= like.user.username %>
-            <% end %>
+
 
             <!-- Form to Like -->
+            <% if photo.likes.count == 0 %>
+            <form action="/create_like" method="post">
+              <!-- Hidden input for authenticity token to protect from forgery -->
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-            <p>
-              <form action="/create_like" method="post">
-                <!-- Hidden input for authenticity token to protect from forgery -->
-                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+              <!-- Label and input for user_id -->
+              <div class="form-group">
 
-                <!-- Label and input for user_id -->
+                <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+              </div>
 
-                <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= photo.user_id %>">
-
-
-                <!-- Label and input for photo_id -->
+              <!-- Label and input for photo_id -->
+              <div class="form-group">
 
                 <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= photo.id %>">
+              </div>
+
+              <button><i class="fa fa-heart-o"></i>  </button>
+              <small>be the first to like this</small>
+            </form>
+            <% else %>
+            <a href="/delete_like/<%= Like.where({:photo_id => photo.id}) %>"><i class="fa fa-heart"></i></a>
+
+            <% end  %>
+
+            <%= photo.fans.pluck(:username).to_sentence %>
+            <% if photo.likes.count > 1 %>
+            <small>like this</small>
+            <% else  %>
+            <% if photo.likes.count == 1  %>
+            <small>likes this</small>
+            <% else  %>
+            <% end %>
+            <% end  %>
 
 
-                <button class="btn btn-link">
-                  <i class="fa fa-fw fa-heart"></i>
-                </button>
+            <ul class="list-unstyled">
+              <li><h6>
+                <a href="/users/<%= photo.user_id %>"><%= photo.user.username %></a>
+                <small><%= time_ago_in_words(photo.created_at) %> ago</small>
+              </h6></li>
+              <li><%= photo.caption %></li>
+            </ul>
 
 
-              </form>
-            </p>
 
-            <p>
-              <h6 class="media-heading"><%= photo.caption %></h6>
-            </p>
+            <ul class="list-unstyled">
+              <% photo.comments.each do |comment| %>
+              <li><h6><a href="/users/<%= comment.user_id %>"><%= comment.user.username %></a>
+                <small><%= time_ago_in_words(comment.created_at) %> ago</small></h6>
+
+
+              </li>
+              <li> <%= comment.body %></li>
+              <% end %>
+            </ul>
+
 
             <!-- Form to leave comment -->
             <div class="media-body">
@@ -81,7 +108,7 @@
                 <!-- Label and input for user_id -->
 
 
-                <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= photo.user_id %>">
+                <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
 
 
                 <button class="btn btn-success">
@@ -92,17 +119,6 @@
               </form>
 
             </div>
-
-            <ul class="list-unstyled">
-              <% photo.comments.each do |comment| %>
-              <li><h6><a href="/users/<%= comment.user_id %>"><%= comment.user.username %></a>
-                <small><%= time_ago_in_words(comment.created_at) %> ago</small></h6>
-
-
-              </li>
-              <li> <%= comment.body %></li>
-              <% end %>
-            </ul>
 
           </div>
           <% end %>
