@@ -4,11 +4,11 @@ class UsersController < ApplicationController
   end
 
   def show
-  @user=User.find(params[:id])
+  @photos=current_user.photos
   end
 
   def my_likes
-
+  @photos=current_user.liked_photos
   end
 
 end
