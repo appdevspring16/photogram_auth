@@ -1,0 +1,85 @@
+<% @likes.order("created_at desc").each do |like| %>
+<% if like.user_id == current_user.id %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+
+        <h3 class="panel-title">
+          <a href="/users/<%= like.user_id %>"><%= User.find_by({ :id => like.user_id }).username %></a>
+          <small>
+            <%= time_ago_in_words(Photo.find_by({ :id => like.photo_id }).created_at) %> ago
+          </small>
+        </h3>
+
+      </div>
+      <div class="panel-body">
+        <img src="<%= Photo.find_by({ :id => like.photo_id }).image %>" class="img-responsive"/>
+
+        <% if like.id != nil %>
+
+        <a href="/delete_like/<%= like.id %> %>" class="btn btn-link">
+          <i class="fa fa-heart"></i>
+        </a>
+
+        <% else %>
+
+        <form action="/create_like" method="post">
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <input type="hidden" name="photo_id" value= "<%= like.photo_id %>" >
+          <input type="hidden" name="user_id" value= "<%= current_user.id %>">
+
+          <button class="btn btn-link">
+            <i class="fa fa-heart-o"></i>
+          </button>
+          <% end %>
+
+
+          <% if like.id != nil %>
+          <%= User.where({ :id => like.user_id}).to_sentence %> likes this
+
+          <% else %>
+          <small class="text-muted">be the first to like this</small>
+          <% end %>
+        </form>
+
+        <div class="media-body">
+
+          <% Comment.where({ :photo_id => like.photo_id }).each do |comment| %>
+          <div class="media-body">
+            <h6 class="media-heading">
+              <a href="/users/<%= comment.user_id %>"><%= User.find_by({ :id => comment.user_id }).username %></a>
+              <small>
+                <%= time_ago_in_words(comment.created_at) %>
+              </small>
+            </h6>
+            <%= comment.body %>
+          </div>
+
+          <% end %>
+
+          <form action="/create_comment" method="post">
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="photo_id" value= "<%= like.photo_id %>" >
+            <input type="hidden" name="user_id" value= "<%= current_user.id %>">
+
+            <div class="form-group">
+              <label for="body" class="sr-only">
+                Body
+              </label>
+
+              <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<% else %>
+
+<% end %>
+<% end %>
