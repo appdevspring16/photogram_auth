@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <%= link_to photo.user.username, "/users/#{photo.user.id}" %>
+          <small>
+            <%= time_ago_in_words(photo.created_at) %> ago
+          </small>
+        </h3>
+      </div>
+
+      <div class="panel-body">
+        <a href="/photos/<%= photo.id %>">
+          <img src="<%= photo.image %>" class="img-responsive">
+        </a>
+
+        <p>
+          <% like = Like.find_by(:photo_id => photo.id, :user_id => current_user.id) %>
+          <% if like.present? %>
+            <a href="/delete_like/<%= like.id %>" class="btn btn-link">
+              <i class="fa fa-heart"></i>
+            </a>
+            <% if photo.fans.any? %>
+            <%= photo.fans.pluck(:username).to_sentence %>
+            <%= photo.fans.many? ? "like" : "likes" %>
+            this
+            <% end %>
+          <% else %>
+            <form action="/create_like" method="post">
+              <!-- Hidden input for authenticity token to protect from forgery -->
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+              <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+              <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+              <button class="btn btn-link">
+                <i class="fa fa-heart-o"></i>
+              </button>
+
+              <% if photo.fans.any? %>
+              <%= photo.fans.pluck(:username).to_sentence %>
+              <%= photo.fans.many? ? "like" : "likes" %>
+              this
+              <% else %>
+              <small class="text-muted">be the first to like this</small>
+              <% end %>
+            </form>
+          <% end %>
+        </p>
+
+        <ul class="media-list">
+
+          <% if photo.caption.present? %>
+          <li class="media">
+            <div class="media-body">
+              <h6 class="media-heading">
+                <%= link_to photo.user.username, "/users/#{photo.user.id}" %>
+                <small>
+                  <%= time_ago_in_words(photo.created_at) %> ago
+                </small>
+              </h6>
+              <%= photo.caption %>
+            </div>
+          </li>
+          <% end %>
+
+          <% photo.comments.each do |comment| %>
+          <li class="media">
+            <div class="media-body">
+              <h6 class="media-heading">
+                <%= link_to comment.user.username, "/users/#{comment.user.id}" %>
+                <small>
+                  <%= time_ago_in_words(comment.created_at) %> ago
+                  <% if comment.user == current_user %>
+                    <a href="/delete_comment/<%= comment.id %>">
+                      <i class="fa fa-trash"></i>
+                    </a>
+                  <% end %>
+                </small>
+              </h6>
+              <%= comment.body %>
+            </div>
+          </li>
+          <% end %>
+
+          <li class="media">
+            <div class="media-body">
+              <form action="/create_comment" method="post">
+                <!-- Hidden input for authenticity token to protect from forgery -->
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+                <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+                <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+                <!-- Label and input for body -->
+                <div class="form-group">
+                  <label for="body" class="sr-only">
+                    Body
+                  </label>
+
+                  <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+                </div>
+              </form>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

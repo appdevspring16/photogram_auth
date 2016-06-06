@@ -9,4 +9,9 @@ def show
   @photos = Photo.where(params[:user_id=>@user])
 end
 
+def show_likes
+  @user = current_user.id
+
+end
+
 end

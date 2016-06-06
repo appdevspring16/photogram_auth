@@ -1,31 +1,20 @@
-<div class="page-header">
-  <h3>Photo #<%= @photo.id %></h3>
-</div>
+<%= render @photo %>
 
 <div class="row">
-  <div class="col-md-12">
-    <dl class="dl-horizontal">
-      <dt>Caption</dt>
-      <dd><%= @photo.caption %></dd>
-
-      <dt>Image</dt>
-      <dd><%= @photo.image %></dd>
-
-      <dt>User</dt>
-      <dd><%= @photo.user_id %></dd>
-
-    </dl>
+<div class="col-md-8 col-md-offset-2">
 
     <div class="btn-group btn-group-justified">
       <a href="/photos" class="btn btn-primary">
-        Back
+      <i class="fa fa-chevron-left"></i>
       </a>
+      <% if current_user.id == @photo.user_id %>
       <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
-        Edit
+        <i class="fa fa-edit"></i>
       </a>
       <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
+        <i class="fa fa-trash-o"></i>
       </a>
+      <% end %>
     </div>
   </div>
 </div>

@@ -17,7 +17,7 @@ class LikesController < ApplicationController
     @like.photo_id = params[:photo_id]
 
     if @like.save
-      redirect_to "/likes", :notice => "Like created successfully."
+      redirect_to :back, :notice => "Like created successfully."
     else
       render 'new'
     end
@@ -45,6 +45,6 @@ class LikesController < ApplicationController
 
     @like.destroy
 
-    redirect_to "/likes", :notice => "Like deleted."
+    redirect_to :back, :notice => "Like deleted."
   end
 end

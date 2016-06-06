@@ -1,0 +1,82 @@
+<h1>Hi!</h1>
+
+<% current_user.liked_photos.each do |photo| %>
+<ul>
+  <li><%= photo.caption %></li>
+  <li><img src="<%= photo.image %>"></li>
+  <li>
+    <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
+    <% if current_user.id == photo.user_id then %>
+    <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
+    <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+    <% end %>
+  </li>
+</ul>
+<% end %>
+
+
+<!-- <div class="container"> -->
+
+  <!-- <div class="row">
+<div class="col-md-8 col-md-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <a href="/users/1">alice</a>
+        <small>
+          7 months ago
+        </small>
+      </h3>
+    </div>
+
+    <div class="panel-body">
+      <a href="/photos/2">
+        <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Lanzarote_5_Luc_Viatour.jpg/1280px-Lanzarote_5_Luc_Viatour.jpg" class="img-responsive">
+      </a>
+
+      <p>
+          <a href="/delete_like/107" class="btn btn-link">
+            <i class="fa fa-heart"></i>
+          </a>
+          carol and alice
+          like
+          this
+      </p>
+
+      <ul class="media-list">
+
+        <li class="media">
+          <div class="media-body">
+            <h6 class="media-heading">
+              <a href="/users/1">alice</a>
+              <small>
+                7 months ago
+              </small>
+            </h6>
+            Unodue tre
+          </div>
+        </li>
+
+
+        <li class="media">
+  <div class="media-body">
+    <h6 class="media-heading">
+      <a href="/users/3">carol</a>
+      <small>
+        7 months ago
+      </small>
+    </h6>
+    Try to hack the RAM matrix, maybe it will generate the neural microchip!
+  </div>
+</li>
+<li class="media">
+  <div class="media-body">
+    <h6 class="media-heading">
+      <a href="/users/1">alice</a>
+      <small>
+        4 days ago
+      </small>
+    </h6>
+    ABCD
+  </div>
+</li> -->
