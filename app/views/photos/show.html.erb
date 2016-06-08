@@ -8,7 +8,7 @@
 
 
       <div class="panel panel-default">
-<div class="panel-heading"><%= @photo.caption %>&nbsp;&nbsp;&nbsp;<%= @photo.user.username %></a><small>&nbsp;&nbsp;&nbsp;<%= time_ago_in_words(@photo.created_at) %></small></div>
+<div class="panel-heading"><<%= @photo.user.username %></a><small>&nbsp;&nbsp;&nbsp;<%= time_ago_in_words(@photo.created_at) %></small></div>
         <div class="panel-body">
 
       <dd><img src="<%= @photo.image %>" class="img-responsive">
@@ -41,7 +41,7 @@
 
             <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" rows="3"><%= @comment.body %></textarea>
           </div>
-          
+
         </form>
 
       </dd>
