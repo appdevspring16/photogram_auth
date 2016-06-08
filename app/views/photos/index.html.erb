@@ -22,7 +22,7 @@
 
 
               <div class="panel panel-default">
-                <div class="panel-heading">&nbsp;&nbsp;&nbsp;<%= photo.user.username %></a><small>&nbsp;&nbsp;&nbsp;<%= time_ago_in_words(photo.created_at) %></small></div>
+                <div class="panel-heading"><%= photo.user.username %></a><small><%= time_ago_in_words(photo.created_at) %></small></div>
                 <div class="panel-body">
 
                   <dd><a href="/photos/<%= photo.id %>"><img src="<%= photo.image %>" class="img-responsive" alt="Responsive image"></a>
