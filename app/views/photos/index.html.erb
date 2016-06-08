@@ -22,9 +22,9 @@
 
 
               <div class="panel panel-default">
-                <div class="panel-heading"><%= photo.user.username %></a><small><%= time_ago_in_words(photo.created_at) %></small></div>
+                <div class="panel-heading"></small></div>
                 <div class="panel-body">
-
+<%= photo.user.username %></a><small><%= time_ago_in_words(photo.created_at) %>
                   <dd><a href="/photos/<%= photo.id %>"><img src="<%= photo.image %>" class="img-responsive" alt="Responsive image"></a>
 
                     <form action="/create_like" method="post">
@@ -35,7 +35,7 @@
                         <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= photo.id %>">
 
 
-
+                      <% if current_user.id ==  %>
                       <button class="btn btn-link">
                       <i class="fa fa-heart-o"></i>
                       </button>
