@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  
+  root "photos#index"
+
   # Routes for the Like resource:
   # CREATE
   get "/likes/new", :controller => "likes", :action => "new"
