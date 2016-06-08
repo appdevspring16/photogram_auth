@@ -74,7 +74,21 @@
                         </div>
 
                       </form>
-
+                      <% if current_user.username == photo.user.username %>
+                         <div class="btn-group btn-group-justified">
+                           <a href="/photos" class="btn btn-primary">
+                             Back
+                           </a>
+                           <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">
+                             Edit
+                           </a>
+                           <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">
+                             Delete
+                           </a>
+                         </div>
+                       </div>
+                     </div>          <% else %>
+                     <% end %>
 
                     </dd>
                   </div>
