@@ -6,6 +6,7 @@ class PhotosController < ApplicationController
         @user = User.all
 
 
+
   end
 
   def show

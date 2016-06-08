@@ -34,11 +34,19 @@
                         <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
                         <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= photo.id %>">
 
+                        <% like = Like.find_by({ :photo_id => photo.id }) %>
 
-                      <% if current_user.id ==  %>
+                      <% if current_user.id == like %>
                       <button class="btn btn-link">
-                      <i class="fa fa-heart-o"></i>
+                      <i class="fa fa-heart"></i>
                       </button>
+<% else %>
+<% end %>
+
+<button class="btn btn-link">
+<i class="fa fa-heart-o"></i>
+</button>
+
 
                     </form>
 
