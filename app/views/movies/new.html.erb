@@ -1,4 +1,3 @@
-<!-- Validation failure messages -->
 <% if @movie.errors.any? %>
   <% @movie.errors.full_messages.each do |message| %>
     <div class="alert alert-dismissable alert-danger">
@@ -15,7 +14,6 @@
 <div class="row">
   <div class="col-md-12">
     <form action="/create_movie" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
       <!-- Label and input for ranking -->
