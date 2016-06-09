@@ -1,17 +1,19 @@
 class PhotosController < ApplicationController
   def index
     @photos = Photo.all
-        @comment = Comment.new
-        @comments = Comment.all
-        @user = User.all
-
-
-
+    @comment = Comment.new
+    @comments = Comment.all
+    @user = User.all
   end
 
+
+  def my_likes
+    @photos = current_user.liked_photos
+  end
+  
   def show
     @photo = Photo.find(params[:id])
-            @comment = Comment.new
+    @comment = Comment.new
   end
 
   def new
