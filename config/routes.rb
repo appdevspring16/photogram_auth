@@ -1,7 +1,19 @@
 Rails.application.routes.draw do
 
-  
   root "photos#index"
+
+  devise_for :users
+
+  get "/users", :controller => "users", :action => "index"
+  get "/users/:id", :controller => "users", :action => "show"
+
+  # Routes to show only the likes that the user has made.
+  # It can be either photo-related action or user-related action and you are free to choose either of them.
+  # Better choose photo-related.
+
+  get "/my_likes", :controller => "photos", :action => "my_likes"
+
+
 
   # Routes for the Like resource:
   # CREATE
@@ -54,7 +66,6 @@ Rails.application.routes.draw do
   get "/delete_photo/:id", :controller => "photos", :action => "destroy"
   #------------------------------
 
-  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

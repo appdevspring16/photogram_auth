@@ -1,4 +1,16 @@
 class LikesController < ApplicationController
+
+  before_action :current_user_must_be_owner, :only => [:edit, :update, :destroy]
+  skip_before_action :authenticate_user!, :only => [:index]
+
+  def current_user_must_be_owner
+    @likes = Like.find(params[:id])
+
+    if current_user != @likes.user
+      redirect_to "/likes", :alert => "Not authorized."
+    end
+  end
+
   def index
     @likes = Like.all
   end

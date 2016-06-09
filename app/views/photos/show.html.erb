@@ -9,23 +9,84 @@
       <dd><%= @photo.caption %></dd>
 
       <dt>Image</dt>
-      <dd><%= @photo.image %></dd>
+      <dd>
+        <img src="<%= @photo.image %>" width="250">
+      </dd>
 
       <dt>User</dt>
       <dd><%= @photo.user_id %></dd>
 
+      <!-- we show people who favored this photo -->
+      <dt>Favorited by</dt>
+      <dd>
+
+        <!-- we use from our model the method :fans from the has_many association specified in the model  -->
+        <%= @photo.fans.pluck(:username).to_sentence %>
+
+        <% if @photo.fans.count == 0 %>
+        be the first to like this photo
+        <% elsif @photo.fans.count > 1  %>
+        like
+        <% else %>
+        likes
+        <% end %>
+        this photo
+      </dd>
+
+      <dt> Comments </dt>
+      <dd>
+        <ul>
+          <% @photo.comments.each do |comment| %>
+          <li>
+            <h6> <%= comment.user.username %> </h6>
+            <small>
+              <%= time_ago_in_words(comment.created_at) %> ago
+            </small>
+            <p> <%= comment.body %>  </p>
+          </li>
+          <% end %>
+        </ul>
+        </dd>
+
+        <form action="/create_comment" method="post">
+
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+          <input type="hidden" id="photo_id" name="photo_id" value="<%= @photo.id %>">
+
+          <div class="form-group">
+            <label for="body" class="sr-only">
+              Body
+            </label>
+
+            <input type="text" id="body" name="body" placeholder="Add a comment" class="form-control">
+          </div>
+
+          <button class="btn btn-success">
+            Create Comment
+          </button>
+
+          or
+
+          <a href="/comments">
+            Cancel
+          </a>
+        </form>
     </dl>
 
     <div class="btn-group btn-group-justified">
       <a href="/photos" class="btn btn-primary">
         Back
       </a>
+
+      <% if current_user == @photo.user %>
       <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
         Edit
       </a>
       <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
         Delete
       </a>
+      <% end %>
+
     </div>
   </div>
 </div>

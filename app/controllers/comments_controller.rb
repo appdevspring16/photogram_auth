@@ -1,4 +1,16 @@
 class CommentsController < ApplicationController
+
+  before_action :current_user_must_be_owner, :only => [:edit, :update, :destroy]
+  skip_before_action :authenticate_user!, :only => [:index]
+
+  def current_user_must_be_owner
+    @comments = Comment.find(params[:id])
+
+    if current_user != @comments.user
+      redirect_to "/comments", :alert => "Not authorized."
+    end
+  end
+
   def index
     @comments = Comment.all
   end
@@ -25,10 +37,12 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    current_user_must_be_owner
     @comment = Comment.find(params[:id])
   end
 
   def update
+    current_user_must_be_owner
     @comment = Comment.find(params[:id])
 
     @comment.photo_id = params[:photo_id]
@@ -43,6 +57,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    current_user_must_be_owner
     @comment = Comment.find(params[:id])
 
     @comment.destroy
