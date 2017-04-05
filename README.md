@@ -166,3 +166,5 @@ Below I suggest a plan of attack. Try to imagine, as you go through it, how each
 [Here is a target for the optional parts of the assignment](https://photogram-final-target.herokuapp.com/) (file uploads, social network).
 
 ## Good luck! Ask lots of questions!
+
+.
