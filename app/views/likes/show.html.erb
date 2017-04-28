@@ -1,0 +1,33 @@
+<div class="page-header">
+  <h3>Like #<%= @like.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+
+      <dt>User</dt>
+      <dd><%= @like.user_id %></dd>
+
+
+      <dt>Photo</dt>
+      <dd><%= @like.photo_id %></dd>
+
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+
+      <a href="/likes" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/likes/<%= @like.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_like/<%= @like.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+
+    </div>
+  </div>
+</div>
