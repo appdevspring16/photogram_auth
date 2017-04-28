@@ -1,0 +1,25 @@
+<div class="page-header">
+  <h3>Show page for <%= @user.email %></h3>
+</div>
+
+<div>
+  <td>User ID: <%= @user.id %></td>
+</div>
+
+<div>
+
+  <td>Username: <%= @user.username %></td>
+
+</div>
+
+<table>
+  <p>
+    Photo
+  </p>
+
+  <% @user.photos.each do |photo| %>
+  <div >
+    <img src="<%= photo.image %>" height="400" width="400"/>
+  </div>
+  <% end %>
+</table>

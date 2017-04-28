@@ -1,0 +1,41 @@
+<div class="row">
+  <div>
+    <table>
+      <tr>
+        <th>
+          Caption
+        </th>
+        <th>
+          Image
+        </th>
+        <th>
+          User
+        </th>
+        <th>
+          Actions
+        </th>
+      </tr>
+
+      <% @photos.each do |photo| %>
+      <tr>
+        <td><%= photo.caption %></td>
+        <td><img src="<%= photo.image %>" height="200" width="200"></td>
+        <td><%= photo.user_id %></td>
+        <td><a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
+          <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+
+
+      <% end %>
+
+
+
+
+
+    </table>
+
+  </div>
+
+</div>
