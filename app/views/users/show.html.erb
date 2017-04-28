@@ -1,0 +1,111 @@
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="jumbotron">
+      <h3>
+        <%= @user.username %>
+      </h3>
+    </div>
+  </div>
+</div>
+
+<% if @user.id == current_user.id %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <a href="/photos/new" class="btn btn-default btn-block">
+      <i class="fa fa-plus"></i>
+    </a>
+
+    <hr>
+  </div>
+</div>
+
+<% end %>
+
+
+<% @user.photos.order("created_at desc").each do |photo| %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+
+        <h3 class="panel-title">
+          <a href="/users/<%= photo.user_id %>"><%= User.find_by({ :id => photo.user_id }).username %></a>
+          <small>
+            <%= time_ago_in_words(photo.created_at) %> ago
+          </small>
+        </h3>
+
+      </div>
+      <div class="panel-body">
+        <img src="<%= photo.image %>" class="img-responsive"/>
+
+        <% if (Like.find_by({ :photo_id => photo.id, :user_id => current_user.id  })) != nil %>
+
+        <a href="/delete_like/<%= Like.find_by({ :photo_id => photo.id, :user_id => current_user.id }).id %>" class="btn btn-link">
+          <i class="fa fa-heart"></i>
+        </a>
+
+        <% else %>
+
+        <form action="/create_like" method="post">
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <input type="hidden" name="photo_id" value= "<%= photo.id %>" >
+          <input type="hidden" name="user_id" value= "<%= current_user.id %>">
+
+          <button class="btn btn-link">
+            <i class="fa fa-heart-o"></i>
+          </button>
+          <% end %>
+
+
+            <% if (Like.find_by({ :photo_id => photo.id })) != nil %>
+            <%= Like.where({ :photo_id => photo.id}).to_sentence %> likes this
+
+            <% else %>
+            <small class="text-muted">be the first to like this</small>
+            <% end %>
+
+
+        </form>
+
+        <div class="media-body">
+
+          <% Comment.where({ :photo_id => photo.id }).each do |comment| %>
+          <div class="media-body">
+            <h6 class="media-heading">
+              <a href="/users/<%= comment.user_id %>"><%= User.find_by({ :id => comment.user_id }).username %></a>
+              <small>
+                <%= time_ago_in_words(comment.created_at) %>
+              </small>
+            </h6>
+            <%= comment.body %>
+          </div>
+
+          <% end %>
+
+          <form action="/create_comment" method="post">
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="photo_id" value= "<%= photo.id %>" >
+            <input type="hidden" name="user_id" value= "<%= current_user.id %>">
+
+            <div class="form-group">
+              <label for="body" class="sr-only">
+                Body
+              </label>
+
+              <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<% end %>
