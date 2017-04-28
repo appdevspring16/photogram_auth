@@ -1,0 +1,15 @@
+<h1>Show page</h1>
+
+<%= @user.email %>
+
+<table>
+  <p>
+    Photo
+  </p>
+  <% @user.photos.each do |photo| %>
+
+  <div >
+    <img src="<%= photo.image %>" height="300" width="300"/>
+  </div>
+  <% end %>
+</table>
