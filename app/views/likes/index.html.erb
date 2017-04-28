@@ -1,0 +1,103 @@
+<div class="page-header">
+  <h1>
+    Likes
+    <a href="/likes/new" class="btn btn-lg btn-success">New Like</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>User</th>
+        <th>Photo</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @likes.each do |like| %>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="panel panel-default">
+            <div class="panel-heading"><%= like.user_id %> <small><%= time_ago_in_words(like.created_at) %> ago</small></div>
+            <div class="panel-body"><a href="/photos/<%= like.photo_id %>"><img style='height: 100%; width: 100%; object-fit: contain' src="<%= Photo.find_by({ :id => like.photo_id }).image %>"></div>
+            <div class="panel-body"><%= like.photo_id %></div>
+            <!-- <td>
+            <a href="/likes/<%= like.id %>" class="btn btn-primary">Show</a>
+            <a href="/likes/<%= like.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_like/<%= like.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          </td> -->
+
+          <form action="/create_like" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+      <!-- Hidden Label and input for user_id -->
+      <div class="form-group">
+        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+
+      </div>
+      <!-- Hiden Label and input for photo_id -->
+          <div class="form-group">
+        <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= like.photo_id %>">
+
+      </div>
+
+      <button class="btn btn-link">
+      <i class="fa fa-heart"></i>
+    </button> <small class="text-muted"><% @likes.where({ :photo_id => like.photo_id }).each do |like| %>
+        <%= like.user.username %>
+      <% end %>
+      like this
+      </small>
+
+
+    </form>
+
+<% @comments.where({ :photo_id => like.photo_id }).each do |comment| %>
+<div class="panel-body">
+<a href="users/<%= comment.user_id %>"><%= User.find_by({ :id => comment.user_id}).username %></a>
+<small class="text-muted"><%= time_ago_in_words(comment.created_at) %> ago</small>
+<div><%= comment.body %></div>
+</div>
+<% end %>
+
+      <form action="/create_comment" method="post" class="form-inline">
+        <!-- Hidden input for authenticity token to protect from forgery -->
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+        <!-- Hidden Label and input for photo_id -->
+
+        <div class="form-group">
+          <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= like.photo_id %>">
+
+        </div>
+
+        <!-- Label and input for body -->
+        <div class="form-group col-md-9">
+
+          <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" value="<%= @comment.body %>">
+
+        </div>
+
+        <!-- Label and input for user_id -->
+
+        <div class="form-group">
+
+          <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+
+        </div>
+
+        <button class="btn btn-success">
+          Create Comment
+        </button>
+
+      </form>
+
+
+
+        </div>
+      </div>
+    </div>
+    <% end %>
+    </table>
+  </div>
+</div>
