@@ -1,0 +1,45 @@
+<h1>User info</h1>
+
+<div class="page-header">
+  <h3>About you</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Name</dt>
+      <dd><%= @users.username %></dd>
+
+      <dt>Email</dt>
+      <dd><%= @users.email %></dd>
+
+      <dt>Signed in </dt>
+      <dd><%= @users.sign_in_count %> - times</dd>
+
+      <dt>Image url</dt>
+      <dd><%# = @actor.image_url %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/users" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/users/<%= @users.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <!-- <a href="/delete_actor/<%#= @actor.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a> -->
+    </div>
+  </div>
+</div>
+
+<!--
+<ul>
+  <%# @actor.characters.each do |character| %>
+  <li>
+    <%# = character.name %>
+  </li>
+  <%# end %>
+</ul> -->

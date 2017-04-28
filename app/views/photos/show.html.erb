@@ -1,0 +1,79 @@
+<div class="page-header">
+  <h3>Photo #<%= @photo.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Caption</dt>
+      <dd><%= @photo.caption %></dd>
+
+      <dt>Image</dt>
+      <dd>
+        <img src="<%= @photo.image %>" width="450">
+      </dd>
+
+      <dt>User</dt>
+      <%# = @photo.user_id %>
+      <dd><%= @photo.user.username %></dd>
+
+      <!-- 18.	Make the form to quick-add a comment directly below a photo work. -->
+      <dt>Comments</dt>
+        <dd>
+          <ul>
+            <% @photo.comments.each do |comment| %>
+            <li>
+              <h4> <%= comment.user.username %> </h4>
+              <p> <%= comment.body %> </p>
+            </li>
+            <% end %>
+          </ul>
+
+            <li>
+              <form action="/create_comment" method="post">
+                <!-- Hidden input for authenticity token to protect from forgery -->
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+                <!-- prepopulate Label and input for photo_id and hide them-->
+                  <input type="hidden" name="photo_id" placeholder="Photo" value="<%= @photo.id %>">
+                  <input type="hidden" name="user_id" placeholder="User" value="<%= current_user.id %>">
+
+                <!-- no need to see Label and input for body, so make its class only visible to screen readers  -->
+                <div class="form-group">
+                  <label for="body" class="sr-only">
+                    Body
+                  </label>
+
+                  <input id="body" name="body" placeholder="Add a comment" class="form-control">
+                </div>
+
+                <button class="btn btn-success">
+                  Create Comment
+                </button>
+                or
+                <a href="/comments">Cancel</a>
+              </form>
+            </li>
+
+        </dd>
+
+
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/photos" class="btn btn-primary">
+        Back
+      </a>
+      <% if current_user == @photo.user %>
+        <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
+          Edit
+        </a>
+        <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
+          Delete
+        </a>
+      <% end %>
+
+    </div>
+  </div>
+</div>
