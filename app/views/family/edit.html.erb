@@ -1,0 +1,89 @@
+<% if @movie.errors.any? %>
+  <% @movie.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Movie #<%= @movie.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_movie/<%= @movie.id %>" method="post">
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for ranking -->
+      <div class="form-group">
+        <label for="ranking" class="control-label">
+          Ranking
+        </label>
+
+        <input type="text" id="ranking" name="ranking" placeholder="Ranking" class="form-control" value="<%= @movie.ranking %>">
+      </div>
+
+      <!-- Label and input for title -->
+      <div class="form-group">
+        <label for="title" class="control-label">
+          Title
+        </label>
+
+        <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="<%= @movie.title %>">
+      </div>
+
+      <!-- Label and input for year -->
+      <div class="form-group">
+        <label for="year" class="control-label">
+          Year
+        </label>
+
+        <input type="text" id="year" name="year" placeholder="Year" class="form-control" value="<%= @movie.year %>">
+      </div>
+
+      <!-- Label and input for duration -->
+      <div class="form-group">
+        <label for="duration" class="control-label">
+          Duration
+        </label>
+
+        <input type="text" id="duration" name="duration" placeholder="Duration" class="form-control" value="<%= @movie.duration %>">
+      </div>
+
+      <!-- Label and input for description -->
+      <div class="form-group">
+        <label for="description" class="control-label">
+          Description
+        </label>
+
+        <textarea id="description" name="description" placeholder="Description" class="form-control" rows="3"><%= @movie.description %></textarea>
+      </div>
+
+      <!-- Label and input for image_url -->
+      <div class="form-group">
+        <label for="image_url" class="control-label">
+          Image url
+        </label>
+
+        <input type="text" id="image_url" name="image_url" placeholder="Image url" class="form-control" value="<%= @movie.image_url %>">
+      </div>
+
+      <!-- Label and input for genre -->
+      <div class="form-group">
+        <label for="genre" class="control-label">
+          Genre
+        </label>
+
+        <input type="text" id="genre" name="genre" placeholder="Genre" class="form-control" value="<%= @movie.genre %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Movie
+      </button>
+      or
+      <a href="/movies/<%= @movie.id %>">Cancel</a>
+    </form>
+  </div>
+</div>
