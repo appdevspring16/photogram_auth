@@ -1,0 +1,19 @@
+<div class="page-header">
+  <h3><%= @user.username %></h3>
+</div>
+
+<% Photo.where(:user_id => @user.id).each do |photo| %>
+<div class="col-md-8 col-md-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <a href="/users/<%= photo.user_id %>"><%= @user.username %></a>
+        <%= time_ago_in_words(photo.created_at) %>
+      </h3>
+    </div>
+  <div class="panel-body">
+    <a href="/photos/<%= photo.id %>"><img src="<%= photo.image %>" class="img-responsive"></a>
+  </div>
+  </div>
+</div>
+<% end %>
