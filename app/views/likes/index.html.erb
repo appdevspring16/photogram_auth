@@ -1,0 +1,16 @@
+<div class="page-header">
+  <h1>
+    Likes
+    <a href="/likes/new" class="btn btn-lg btn-success">New Like</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+      <% @likes.each do |like| %>
+        <%= like.photo.user.username %>
+        <img class="responsive-img" src="<%= like.photo.image %>" />
+        <a href="/delete_like/<%= like.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+      <% end %>
+  </div>
+</div>
