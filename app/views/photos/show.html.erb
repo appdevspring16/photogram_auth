@@ -1,0 +1,75 @@
+<div class="page-header">
+  <h3>Photo #<%= @photo.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Caption</dt>
+      <dd><%= @photo.caption %></dd>
+
+      <dt>Image</dt>
+      <dd><%= @photo.image %></dd>
+
+      <dt>User</dt>
+      <dd><%= @photo.user_id %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/photos" class="btn btn-primary">
+        Back
+      </a>
+      <% if current_user.id == @photo.user_id %>
+      <a href="/photos/<%= @photo.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_photo/<%= @photo.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+      <% end %>
+    </div>
+
+    <form action="/create_like" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+          <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+      </div>
+
+      <!-- Label and input for photo_id -->
+      <div class="form-group">
+          <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= @photo.id %>">
+      </div>
+
+      <button class="btn btn-success">
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+      </button>
+    </form>
+
+    <form action="/create_comment" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for photo_id -->
+      <div class="form-group">
+        <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= @photo.id %>">
+      </div>
+
+      <!-- Label and input for body -->
+      <div class="form-group">
+        <textarea id="body" name="body" placeholder="Add a comment..." class="form-control" rows="3"></textarea>
+      </div>
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+      </div>
+      <button class="btn btn-success">
+        Create Comment
+      </button>
+    </form>
+  </div>
+</div>
