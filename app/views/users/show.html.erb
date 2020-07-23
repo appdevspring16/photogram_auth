@@ -1,0 +1,104 @@
+<div class="container">
+<div class="row">
+ <div class="col-md-8 col-md-offset-2">
+   <div class="jumbotron">
+     <h3>
+       <%=current_user.username%>
+     </h3>
+   </div>
+    <a href="/photos/new" class="btn btn-default btn-block">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </a>
+<hr>
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+      <% @photos.each do |photo| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <a href="users/<%=photo.user.id%>"><%=photo.user.username%>
+              <small><%=time_ago_in_words(photo.created_at)%></small>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <a href="/photos/<%= photo.id %>">
+            <img src="<%= photo.image %>" alt="" class="img-responsive"/>
+
+
+      <p>
+        <%if current_user.liked_photos.include?(photo)%>
+        <a href="/delete_like/<%= current_user.likes.find_by(:photo_id=>photo.id).id %>" class="btn btn-link">
+        <i class="fa fa-heart" aria-hidden="true"></i></a>
+        <%else%>
+        <form action="/create_like" method="post">
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+         <input type="hidden" id="user_id" name="user_id" class="form-control" value="<%= current_user.id %>">
+            <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= photo.id %>">
+            <button class="btn btn-link">
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+          </button>
+
+        <%end%>
+
+
+        <%@names=Array[]%>
+        <%photo.likes.each do |like|%>
+        <%@names.push(like.user.username)%>
+        <%end%>
+        <%=@names.to_sentence%>
+        <%if photo.likes.count>1%><small>like this</small>
+        <%elsif photo.likes.count==1%><small>likes this</small>
+        <%elsif photo.likes.count==0%><small class="text-muted">be the first to like this</small>
+        <%end%>
+          </form>
+      </p>
+
+
+
+      <ul class="media-list">
+      <%photo.comments.each do |comment|%>
+    <li class="media">
+      <div class="media-body">
+        <h6 class="media-heading">
+        <a href="/users/<%=comment.user.id%>"><%=comment.user.username%></a>
+        <small><%=time_ago_in_words(comment.created_at)%></small>
+        </h6>
+        <%=comment.body%>
+        <img class="media-object" src="" alt="">
+        </div>
+        <%end%>
+    </div>
+  </li>
+    </ul>
+
+    <div class="row">
+      <div class="col-md-12">
+        <form action="/create_comment" method="post">
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+          <div class="form-group">
+            <input type="hidden" id="photo_id" name="photo_id" placeholder="Photo" class="form-control" value="<%= photo.id %>">
+          </div>
+          <div>
+
+            <input type="text" id="body" name="body" placeholder="Add a comment" class="form-control">
+          </div>
+          <div class="form-group">
+          <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%=current_user.id%>">
+          </div>
+          <div>
+          <button class="hide keyboard">Create Comment
+          </button>
+            </div>
+        </form>
+        </div>
+    </div>
+
+
+  </div>
+  <% end %>
+
+  </div>
+</div>
