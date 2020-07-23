@@ -24,6 +24,11 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+#devise
+gem "devise"
+
+#starter_generators
+gem "starter_generators", :git => "http://github.com/raghubetina/starter_generators.git"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
