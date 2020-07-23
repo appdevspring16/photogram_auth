@@ -1,0 +1,19 @@
+<hr>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">All users</h3>
+  </div>
+    <table class="table">
+    <% @users.each do |user| %>
+    <tr>
+      <td>
+
+        <a href="/users/<%= user.id %>"> <%= user.username %></a>
+
+      </td>
+    </tr>
+    <% end %>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="page-header">
+  <h3><%= @user.username %></h3>
+</div>
+
+
+<% @user.photos.each do |photo| %>
+<div class="col-md-8 col-md-offset-md-2">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= photo.caption %></h3>
+  </div>
+    <table class="table">
+      <td><img src="<%= photo.image %>" height="300" alt="Photo not found"></img></td>
+    </table>
+    </tr>
+    <hr>
+  </div>
+</div>
+<% end %>
