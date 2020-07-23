@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="jumbotron">
+        <h3><%= @users.username %></h3>
+      </div>
+
+      <a href="/photos/new" class="btn btn-default btn-block">
+        <i class="fa fa-plus"></i>
+      </a>
+
+
+      <% current_user.photos.each do |photo| %>
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <h5 class="panel-title"> <a href = "/users/<%= photo.user_id %>"> <%= @users.username %> </a>
+            <small><%= time_ago_in_words(photo.created_at) %></small>
+          </h5>
+        </div>
+
+        <div class="panel-body">
+          <td><img class="img-responsive" src="<%= photo.image %>"></td>
+
+
+          <ul class="media-list">
+
+            <li class="media">
+            <div class="media-body">
+              <h5 class="media-heading">
+                <a href = "/users/<%= photo.user.id %>"> <%= photo.user.username %></a> <small> <%= time_ago_in_words(photo.created_at) %></small>
+              </h5>
+              <p><small><%= photo.caption %></small></p>
+            </div>
+          </li>
+  <% photo.comments.each do |comment| %>
+                <li class="media">
+                <div class="media-body">
+                  <h5 class="media-heading">
+                <a href = "/users/<%= comment.user.id %>"> <%= comment.user.username %></a> <small> <%= time_ago_in_words(photo.created_at) %></small>
+              </h5>
+              <p><small><%= comment.body %></small></p>
+            </div>
+          </li>
+          </ul>
+          <% end %>
+        </div>
+
+        <div class="panel-footer">
+          <form action="/create_comment/" method="post">
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+            <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required="">
+            <% photo.comments.each do |comment| %>
+            <input type="hidden" name="photo_id" value="<%= comment.photo_id %>">
+            <input type="hidden" name="user_id" value="<%= @users.id %>">
+            <% end %>
+          </form>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
