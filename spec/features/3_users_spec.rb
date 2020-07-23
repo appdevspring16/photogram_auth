@@ -5,7 +5,7 @@ do_not_show_tests_in_browser = false
 
 feature "Users:", js: do_not_show_tests_in_browser do
 
-  scenario "for new photo form, user ID prepopulated or in hidden field", points: 2 do
+  scenario "in /photos/new, user ID prepopulated or in hidden field", points: 2 do
     user = FactoryGirl.create(:user)
     login_as(user, :scope => :user)
 
@@ -19,7 +19,7 @@ feature "Users:", js: do_not_show_tests_in_browser do
     end
   end
 
-  scenario "RCAV set for /users", points: 1 do
+  scenario "/users RCAV works", points: 1 do
     user = FactoryGirl.create(:user)
     login_as(user, :scope => :user)
 
@@ -50,7 +50,7 @@ feature "Users:", js: do_not_show_tests_in_browser do
     }
   end
 
-  scenario "RCAV set for /users/:id", points: 1 do
+  scenario "/users/:id RCAV works", points: 1 do
     user = FactoryGirl.create(:user)
     login_as(user, :scope => :user)
 

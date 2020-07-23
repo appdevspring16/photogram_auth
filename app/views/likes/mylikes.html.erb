@@ -1,0 +1,6 @@
+<br>
+<ul>
+  <% @photos.each do |photo| %>
+    <li><img src="<%= photo.image %>"><br><%= photo.caption %></li>
+  <% end %>
+</ul>

@@ -1,0 +1,67 @@
+<div class="page-header">
+  <h1>
+    <a href="/photos/new" class="btn btn-lg btn-success"><i class="fa fa-plus"></i></a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Caption</th>
+        <th>Image</th>
+        <th>User</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @photos.each do |photo| %>
+      <tr class="panel">
+        <td>
+          <%= photo.caption %>
+          <% if @likes.where(:photo_id => photo.id, :user_id => current_user.id).count > 0%>
+            <a href="/delete_like/<%= @likes.where(:photo_id => photo.id, :user_id => current_user.id).first.id %>"><i class="fa fa-heart"></i></a>
+            <br>Liked by: <%= who_l = []; @likes.where(:photo_id => photo.id).each do |like|; who_l.push like.user.username; end; who_l %>
+          <% else %>
+            <form action="/create_like" method="post">
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+              <input name="user_id" type="hidden" value="<%= current_user.id %>">
+              <input name="photo_id" type="hidden" value="<%= photo.id %>">
+              <button class="btn btn-link">
+                <i class="fa fa-heart-o"></i>
+              </button>
+            </form>
+            <% if @likes.where(:photo_id => photo.id).count > 0%>
+              <br>Liked by: <%= who_l = []; @likes.where(:photo_id => photo.id).each do |like|; who_l.push like.user.username; end; who_l %>
+            <% end %>
+          <% end %>
+          <% if photo.comments.count > 0 %>
+            <ul>
+              <% photo.comments.each do |comment| %>
+                <li><%= comment.body %> -- <%= comment.user.username %></li>
+              <% end %>
+            </ul>
+          <% end %>
+          <form action="/create_comment" method="post">
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+            <div class="form-group">
+              <label for="body" class="control-label"></label>
+              <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control">
+            </div>
+            <input name="user_id" type="hidden" value="<%= current_user.id %>">
+            <input name="photo_id" type="hidden" value="<%= photo.id %>">
+          </form>
+        </td>
+        <td><%= photo.image %><img src="<%= photo.image %>"></td>
+        <td><%= photo.user_id %>, <%= photo.user.username %>, added <%= time_ago_in_words(photo.created_at)%> ago</td>
+        <td>
+          <a href="/photos/<%= photo.id %>" class="btn btn-primary">Show</a>
+          <% if photo.user_id == current_user.id %>
+            <a href="/photos/<%= photo.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_photo/<%= photo.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
