@@ -1,0 +1,102 @@
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="jumbotron">
+      <h3>
+        <%= @user.username %>
+      </h3>
+    </div>
+  </div>
+</div>
+
+<% @user.photos.each do |photo| %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a href="/users/<%= @user.id %>"> <%= @user.username %> </a>
+          <small>
+            <%= time_ago_in_words(photo.updated_at) %>
+          </small>
+        </h3>
+      </div>
+
+      <div class="panel-body">
+        <a href="/photos/<%= photo.id %>">
+          <img src="<%= photo.image %>" class="img-responsive">
+        </a>
+
+        <p>
+          <form action="/create_like" method="post">
+            <!-- Hidden input for authenticity token to protect from forgery -->
+            <input name="authenticity_token" type="hidden" value="071tdEm2heeXFx4+9dyF6NkdR7jOGJXpfZoGtMAg4qfzcqAQExxaSEuUvbrxoQEfDRBgscz8C2WClQu0XSWV6Q==">
+
+            <input type="hidden" name="photo_id" value="<%= photo.id %>">
+            <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+
+            <button class="btn btn-link">
+              <% if current_user.liked_photos.exists?(photo) %>
+              <i class="fa fa-heart"></i>
+              <% else %>
+              <i class="fa fa-heart-o"></i>
+              <% end %>
+            </button>
+
+            <% if photo.likes.count > 0 %>
+            <small class="text-muted"><%= photo.fans.pluck(:username).to_sentence %></small>
+            <% else %>
+            <small class="text-muted">be the first to like this</small>
+            <% end %>
+          </form>
+        </p>
+
+
+
+        <!-- all comments for this photo -->
+        <% photo.comments.each do |comment| %>
+        <ul class="media-list">
+
+          <li class="media">
+            <div class="media-body">
+              <h6 class="media-heading">
+                <a href="/users/<%= comment.user_id %>"> <%= comment.user.username %> </a>
+                <small>
+                  <%=   time_ago_in_words(comment.updated_at) %>
+                </small>
+              </h6>
+              <%= comment.body %>
+            </div>
+          </li>
+          <% end %>
+
+          <li class="media">
+            <div class="media-body">
+              <form action="/create_comment" method="post">
+                <!-- Hidden input for authenticity token to protect from forgery -->
+                <input name="authenticity_token" type="hidden" value="oORdCcXQD4J1Qvd9k5EfKjJe25ou3IXib3BdCFyYBjSAK5Btn3rQLanBVPmX7Jvd5lP8kyw4G26Qf1AIwZ1xeg==">
+
+                <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+                <input type="hidden" name="user_id" value= "<%= photo.user_id %>">
+
+                <!-- Label and input for body -->
+                <div class="form-group">
+                  <label for="body" class="sr-only">
+                    Body
+                  </label>
+
+                  <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+                </div>
+              </form>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
