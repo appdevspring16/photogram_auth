@@ -1,0 +1,24 @@
+
+
+<div class="container">
+   <div class="row">
+     <div class="col-md-8 col-md-offset-2">
+       <div class="panel panel-default">
+         <div class="panel-heading">
+           <h3 class="panel-title">
+             All Users
+           </h3>
+         </div>
+
+
+         <ul class="list-group">
+           <% @users.each do |user| %>
+           <li class="list-group-item">
+             <a href="/users/<%= user.id %>"><%= user.username %></a>
+            </li>
+         <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
