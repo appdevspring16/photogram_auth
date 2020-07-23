@@ -1,0 +1,139 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="jumbotron">
+      <h3>
+        <%= @user.username %>
+      </h3>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <a href="/photos/new" class="btn btn-default btn-block">
+      <i class="fa fa-plus"></i>
+    </a>
+
+    <hr>
+  </div>
+</div>
+
+
+<% @photos.each do |photo| %>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <a href="/users/<%= @user.id %>"><%= @user.username %></a>
+            <small>
+              <%= time_ago_in_words(photo.created_at) %>
+            </small>
+          </h3>
+        </div>
+
+        <div class="panel-body">
+          <a href="/photos/<%= photo.id %>">
+            <% if photo.image.to_s.include? "http" %>
+
+              <% imgsrc1 = photo.image.to_s %>
+
+              <% imgsrc2 = "http://" + imgsrc1.sub!("/uploads/photo/image/" + photo.id.to_s + "/http%3A/", "") %>
+            <% else %>
+              <% imgsrc2 = photo.image %>
+            <% end %>
+
+            <img src="<%= imgsrc2 %>" class="img-responsive">
+          </a>
+
+          <p>
+            <% if photo.fans.include? current_user %>
+
+              <a href="/delete_like/<%= @likes.where('user_id = ? AND photo_id = ?', current_user.id, photo.id).first.id %>">
+              <button class="btn btn-link">
+                <% if photo.fans.include? current_user %>
+                  <i class="fa fa-heart"></i>
+                <% else %>
+                  <i class="fa fa-heart-o"></i>
+                <% end %>
+              </button>
+              </a>
+
+              <%= photo.fans.pluck(:username).to_sentence %> like this
+
+            <% else %>
+              <form action="/create_like" method="post">
+                <!-- Hidden input for authenticity token to protect from forgery -->
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+                <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+                <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+                <button class="btn btn-link">
+                  <% if photo.fans.include? current_user %>
+                    <i class="fa fa-heart"></i>
+                  <% else %>
+                    <i class="fa fa-heart-o"></i>
+                  <% end %>
+                </button>
+
+                <% if photo.likes.any? %>
+                  <%= photo.fans.pluck(:username).to_sentence %> like this
+                <% else %>
+                <small class="text-muted">
+                  be the first to like this
+                </small>
+                <% end %>
+
+              </form>
+            <% end %>
+
+          </p>
+
+          <ul class="media-list">
+
+            <% photo.comments.each do |comment| %>
+            <li class="media">
+              <div class="media-body">
+                <h6 class="media-heading">
+                  <a href="/users/<%= comment.user_id %>"><%= comment.user.username %></a>
+                  <small>
+                    <%= time_ago_in_words(comment.created_at) %>
+                  </small>
+                </h6>
+                <%= comment.body %>
+              </div>
+            </li>
+            <% end %>
+
+
+            <li class="media">
+              <div class="media-body">
+                <form action="/create_comment" method="post">
+                  <!-- Hidden input for authenticity token to protect from forgery -->
+                  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+                  <input type="hidden" name="photo_id" value="<%= photo.id %>">
+
+                  <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+                  <!-- Label and input for body -->
+                  <div class="form-group">
+                    <label for="body" class="sr-only">
+                      Body
+                    </label>
+
+                    <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control" required>
+                  </div>
+                </form>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
